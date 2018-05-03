@@ -14,6 +14,13 @@ DESIGNED & DEVELOPED by FREEHTML5.CO
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Unica One';
+  src: url("../Unica_One.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   font-family: "Lato", sans-serif;
   font-size: 16px;
@@ -1307,5 +1314,10 @@ body {
 @-webkit-keyframes fontfix {
     from { opacity: 1; }
     to   { opacity: 1; }
+}
+
+.profile-pic {
+  height: 410px;
+  border-radius: 20px;
 }
 /*# sourceMappingURL=style.css.map */
