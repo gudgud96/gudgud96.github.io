@@ -13,12 +13,7 @@ DESIGNED & DEVELOPED by FREEHTML5.CO
   font-weight: normal;
   font-style: normal;
 }
-@font-face {
-  font-family: 'Unica One';
-  src: url("../Unica_One.ttf");
-  font-weight: normal;
-  font-style: normal;
-}
+
 body {
   font-family: "Lato", sans-serif;
   font-size: 16px;
@@ -79,7 +74,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 }
 
 h1, .h1 {
-  font-family: "Unica One", sans-serif;
+  font-family: "Georgia", sans-serif;
   font-size: 60px;
   line-height: 50px;
 }
@@ -236,7 +231,7 @@ ul ul, ul ol, ol ul, ol ol {
 
 .fh5co-section-title .fh5co-title,
 .fh5co-page-title .fh5co-title {
-  font-family: "Unica One", sans-serif;
+  font-family: "Georgia", sans-serif;
   text-transform: uppercase;
   border-bottom: 2px solid #2e2e2e;
   font-size: 40px;
@@ -965,7 +960,7 @@ ul ul, ul ol, ol ul, ol ol {
 .fh5co-call-to-action .fh5co-call-to-action-text {
   font-size: 50px;
   line-height: 60px;
-  font-family: "Unica One", sans-serif;
+  font-family: "Georgia", sans-serif;
   text-transform: uppercase;
 }
 .fh5co-call-to-action .btn {
