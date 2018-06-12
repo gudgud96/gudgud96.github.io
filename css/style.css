@@ -22,7 +22,7 @@ DESIGNED & DEVELOPED by FREEHTML5.CO
 }
 
 body {
-  font-family: "Lato", sans-serif;
+  font-family: "Arial", sans-serif;
   font-size: 16px;
   line-height: 26px;
   color: #2e2e2e;
@@ -76,7 +76,7 @@ figure.fh5co-with-caption figcaption {
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   margin: 0 0 20px 0;
   padding: 0;
-  font-family: "Lato", sans-serif;
+  font-family: "Arial", sans-serif;
   font-weight: 400;
 }
 
@@ -758,7 +758,7 @@ ul ul, ul ol, ol ul, ol ol {
 
 /* Buttons */
 .btn {
-  font-family: "Lato", sans-serif;
+  font-family: "Arial", sans-serif;
   border-bottom: none !important;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -1165,7 +1165,7 @@ a > img.fh5co-align-center {
 }
 
 .resp-tabs-list li {
-  font-family: "Lato", sans-serif;
+  font-family: "Arial", sans-serif;
 }
 
 .resp-content-active, .resp-accordion-active {
@@ -1186,7 +1186,7 @@ a > img.fh5co-align-center {
 
 /* Pricing Tables */
 .fh5co-pricing-table-1 {
-  font-family: "Lato", sans-serif;
+  font-family: "Arial", sans-serif;
 }
 @media screen and (max-width: 992px) {
   .fh5co-pricing-table-1 .fh5co-pricing-table-item {
@@ -1262,7 +1262,7 @@ a > img.fh5co-align-center {
 }
 
 .fh5co-link {
-  font-family: "Lato", sans-serif;
+  font-family: "Arial", sans-serif;
 }
 .fh5co-link > i {
   margin-right: 5px;
