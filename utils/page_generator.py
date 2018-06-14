@@ -14,14 +14,14 @@ def main(argv, path):
   with open(path + "temp.html", "r+") as contentfile:
     content = contentfile.read()
   with open(path + argv[1], "w+") as output:
-    output.write(template.replace("{content}", content).replace("img", 'img class="in-text"'))
+    output.write(template.replace("{content}", content).replace("img", 'img class="in-text"').replace("{title}", argv[-1]))
     # add "in-text" class to all images in content
   os.remove(path + "temp.html")
   print("Successfully generated.")
 
 
 if __name__ == "__main__":
-  print("Usage: python page_generator.py -<projects/thoughts> <.md file name> <.html file name>")
+  print("Usage: python page_generator.py -<projects/thoughts> <.md file name> <.html file name> <title>")
   if sys.argv[1][1:] == "projects":
     main(sys.argv[2:], PROJECT_PATH)
   else:
