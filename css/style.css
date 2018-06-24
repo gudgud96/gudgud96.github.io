@@ -1327,7 +1327,7 @@ img.in-text {
   margin-right: auto;
   margin-top: auto;
   margin-bottom: auto;
-  max-width: 750px;
+  max-width: 100%;
 }
 
 code {
