@@ -30,6 +30,8 @@ And just like a chef that doesn't really need to use cool techniques to smoke-gr
 
 The key is ***how you tell things*** - in this case, which ***attributes*** are you choosing.
 
+![data](../images/storytelling.png)
+
 So these are the attributes that I come up with, which are pretty basic and easy-to-understand:
 
 - **Ranking of the team**
