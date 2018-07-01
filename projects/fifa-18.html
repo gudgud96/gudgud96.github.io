@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Projects - by gudgud96</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
+  <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
+  <meta name="author" content="FREEHTML5.CO" />
+
+    <!-- Facebook and Twitter integration -->
+  <meta property="og:title" content=""/>
+  <meta property="og:image" content=""/>
+  <meta property="og:url" content=""/>
+  <meta property="og:site_name" content=""/>
+  <meta property="og:description" content=""/>
+  <meta name="twitter:title" content="" />
+  <meta name="twitter:image" content="" />
+  <meta name="twitter:url" content="" />
+  <meta name="twitter:card" content="" />
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <link rel="shortcut icon" href="favicon.ico">
+
+  <!-- Google Webfont -->
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,300,700|Unica+One' rel='stylesheet' type='text/css'>
+  <!-- Themify Icons -->
+  <link rel="stylesheet" href="../css/themify-icons.css">
+  <!-- Icomoon Icons -->
+  <link rel="stylesheet" href="../css/icomoon-icons.css">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="../css/bootstrap.css">
+  <!-- Owl Carousel -->
+  <link rel="stylesheet" href="../css/owl.carousel.min.css">
+  <link rel="stylesheet" href="../css/owl.theme.default.min.css">
+  <!-- Magnific Popup -->
+  <link rel="stylesheet" href="../css/magnific-popup.css">
+  <!-- Easy Responsive Tabs -->
+  <link rel="stylesheet" href="../css/easy-responsive-tabs.css">
+  <!-- Theme Style -->
+  <link rel="stylesheet" href="../css/style.css">
+
+  
+  <!-- FOR IE9 below -->
+  <!--[if lt IE 9]>
+  <script src="js/modernizr-2.6.2.min.js"></script>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+
+  </head>
+  <body>
+
+    <!-- Header -->
+    <header id="fh5co-header" role="banner">
+      <!-- Main Nav -->
+      <div id="fh5co-main-nav">
+        <nav id="fh5co-nav" role="navigation">
+          <ul>
+            <li>
+              <a href="../index.html">Home</a>
+            </li>
+            <li class="active">
+              <a href="../projects.html">Projects</a>
+            </li>
+            <li>
+              <a href="../thoughts.html">Thoughts</a>
+            </li>
+            <li>
+              <a href="../resume.pdf">Resume</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
+    </header>
+    
+    <!-- Main -->
+    <main role="main">
+
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <div class="fh5co-page-title text-center">
+                <h1 class="fh5co-title">FIFA World Cup 2018 Predictions using ML techniques</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="fh5co-spacer fh5co-spacer-sm"></div> -->
+
+        <div class="container"> 
+        <p><center> See <a href="https://github.com/gudgud96/FIFA-2018-Match-Predictor">GitHub Repo</a>. </center></p>
+<p>My predictions? Belgium will be the champion. </p>
+<p>But it seems like a lot of my friends, <strong>including both my linear regressor and neural network model</strong>, favours Brazil.</p>
+<p><img class="in-text" alt="Brazil" src="../images/brazil.png" /></p>
+<p>I am in the midst of self-learning machine learning models for the summer holidays, and FIFA World Cup is right under our foot now! So I am thinking: why not do a small hands-on project on predicting the world cup results using ML models?</p>
+<p>And my 3-day-long journey for the prediction task begins!</p>
+<h2><strong>Day 1: Playing with datasets</strong></h2>
+<p>The dataset that actually sparked my interest on starting up this project is actually this <a href="https://www.kaggle.com/abecklas/fifa-world-cup">Kaggle's dataset</a> (well, it just appeared in my email if you subscribed to Kaggle). This dataset contains all matches, players and titles won for FIFA World Cup since 1930. I even got inspired to build a model with an attribute on which player is playing for the match, since the players contribute significantly to the victory of the game, and we have access to this piece of information in this dataset. </p>
+<p>But in the end, I personally feel that this dataset is too messy and it was packed with too much unnecessary data. Then I came across <a href="https://www.kaggle.com/martj42/international-football-results-from-1872-to-2017/data">this dataset</a> which has information on all international football matches. It was referred in <a href="https://blog.goodaudience.com/predicting-fifa-world-cup-2018-using-machine-learning-dc07ad8dd576">this Medium article</a> that also talks about ML result predictions, though, the model in the article used a logistic regressor. I personally prefer this dataset, because:</p>
+<ul>
+<li>it has only 1 csv sheet (haha!)</li>
+<li>we should be looking at not only World Cup matches, but also other international matches when we make predictions</li>
+<li>by using data on all international matches, we should have a bigger training data size that should, by right, improve our prediction performance</li>
+</ul>
+<p>Basically, the dataset contains the <em>year</em> and the <em>date</em> of a match, <em>name of two teams</em>, <em>both teams' scoring</em>, <em>tournament type</em>, <em>city</em>, <em>country</em>, and <em>neutrality</em> of the match (whether the match is held in either one team's own location). So I would say this dataset is relatively cleaner, concise, and straight-to-the-point.</p>
+<h2><strong>Setting up attributes, and data preprocessing</strong></h2>
+<p>One big lesson that I learnt from this part is that <em>data would always be messy and dirty</em>. I come out with an analogy that compares data science to <em>cooking</em> -- first things first, data is like your meat and vegetables. <strong>Pick the ones that are fresh, clean, and suits you the most.</strong></p>
+<p>And just like a chef that doesn't really need to use cool techniques to smoke-grill or liquid nitrogen his food, as his main goal is to serve good food to his eaters even using simple ways. It is similar for a data scientist -- we don't really need to build a very fancy, complicated ML model (unless required for complicated tasks), but the main aim is to be able to tell things from the data you picked. </p>
+<p>The key is <strong><em>how you tell things</em></strong> - in this case, which <strong><em>attributes</em></strong> are you choosing.</p>
+<p>So these are the attributes that I come up with, which are pretty basic and easy-to-understand:</p>
+<ul>
+<li><strong>Ranking of the team</strong></li>
+</ul>
+<p>During prediction, we should take the ranking of the team in the year the match is held. If data is not available, my way to deal with it is to put a large number (I used 200, since there are less than 200 teams) as the rank.</p>
+<ul>
+<li><strong>Winning counts and drawing counts</strong> </li>
+</ul>
+<p>The <em>mean</em> of winning and drawing matches of a team in all her international appearances. Losing counts are not needed since it is just the complement of the two.</p>
+<ul>
+<li><strong>Goal difference of a team</strong></li>
+</ul>
+<p>The <em>goal difference mean</em> of a team in all her international appearances. eg. if team A and team B played a match with score 5-0, then the goal difference for team A is 5, and for team B is -5. This measures not just winning, but <em>to what extend</em> the team can win a game.</p>
+<ul>
+<li><strong>Winning counts and drawing counts against the opponent</strong></li>
+</ul>
+<p>Basically the match history for the two teams in the match. Note that we should beware of the date of the match, and only take the match history data <em>in the past</em> into account.</p>
+<ul>
+<li><strong>Neutrality</strong></li>
+</ul>
+<p>To see if one team is playing in its own country.</p>
+<p>This is also a chance for me to practise on <a href="https://pandas.pydata.org/">pandas</a>, a very convenient library on data manipulation. So the first script I write is <a href="https://github.com/gudgud96/FIFA-2018-Match-Predictor/blob/master/fifa-results-preprocess.py">fifa-results-preprocess.py</a>, mainly to generate the attributes that I want from raw data in <em>results.csv</em>. </p>
+<p>One thing to share is that - the script runs for around <em>18 minutes</em>! The reason is that for each row of match data, we have to compute the match history for the two teams. For that computation, we need to traverse <em>all rows before that particular row</em> since our data is arranged in chronological order. This obviously takes O(n^2).</p>
+<p>The pre-process generates <em>results_processed.csv</em>, which I drop some columns manually to get <em>results_processed_dev.csv</em>.</p>
+<h2><strong>Day 2: Machine Learning Day</strong></h2>
+<p>With your garlic and onions chopped, and your beef sliced, you are ready to cook your dish chef!</p>
+<p><img class="in-text" alt="Cook" src="../images/cook.jpg" /></p>
+<p>So basically, this prediction task can be framed as a <em>classification task</em>. Given the attributes, we are classifying if the home team shall lose (class 0), win (class 1), or draw (class 2).</p>
+<p>I first tried feeding my data into several types of classifiers using my script <a href="https://github.com/gudgud96/FIFA-2018-Match-Predictor/blob/master/fifa-ml.py">fifa-ml.py</a>. And shockingly, all classifiers return both training and testing accuracies at around <strong>55%</strong>, and no single classifier outperforms the other.</p>
+<p><img class="in-text" alt="Cook" src="../images/model_performance.png" /></p>
+<p>So, I rather use a linear regressor in the end, since it makes not much difference. The linear regressor can be thought as a 1-layer neural network, taking in <em>n</em> features and eventually returning the probability for each logits. In this case, it returns the winning, losing and drawing probability for the home team in the match. You can also use a logistic regressor, just that in my opinion in this particular task, both does the same thing.</p>
+<p>Beware that for linear regressor, all Y examples need to be one-hot-encoded. In sklearn, I do it by using a <a href="http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelBinarizer.html">LabelBinarizer</a>; in Keras, I do it by <a href="https://keras.io/utils/#to_categorical">to_categorical()</a>.</p>
+<p>And I did it! I attached the predictions for the knockout rounds here:</p>
+<p><img class="in-text" alt="LR" src="../images/linear-regressor-knockout.PNG" /></p>
+<p>So the top 4 teams are: Brazil, Spain, Argentina, Germany.</p>
+<p>For full results (including group stage results and probabilities), check it out here: <a href="https://github.com/gudgud96/FIFA-2018-Match-Predictor/blob/master/results_predict_output_final.csv">results_predict_output_final.csv</a>.</p>
+<h2><strong>Day 3: Neural Network Day</strong></h2>
+<p>Then I am wondering: since classic classifiers can't do a good job, will neural networks perform better? And so I came up with a neural network script using Keras: <a href="https://github.com/gudgud96/FIFA-2018-Match-Predictor/blob/master/fifa-ml-nn.py">fifa-ml-nn.py</a>.</p>
+<p>And <strong>the answer is no</strong>.</p>
+<p><img class="in-text" alt="deep" src="../images/fifa-deep-nn.png" /></p>
+<p>Even for large networks with a lot of hidden units, it seems like the accuracy just slowly converges to, similarly, around 55% (sometimes slightly higher, and NN is my only model that hits test accuracy of 59%, which is highest for now). But I am having dense layers with 300, 500, and even 1024 units but to only spike up the performance by less than 5%. It is not worth it.</p>
+<p>Still, there are slight difference between NN's prediction and LR's prediction. Let me attach the knockout stage predictions by NN here:</p>
+<p><img class="in-text" alt="nn" src="../images/nn-knockout.PNG" /></p>
+<p>So the top 4 teams this time are: Brazil, Spain, Germany, Portugal.</p>
+<p>For full results (including group stage results and probabilities), check it out here: <a href="https://github.com/gudgud96/FIFA-2018-Match-Predictor/blob/master/results_predict_output_nn_final.csv">results_predict_output_nn_final.csv</a>.</p>
+<h2><strong>Conclusions and Findings</strong></h2>
+<p>This is quite a good introductory data science mini-project, I would say, to go through the whole process on data un-wrangling, coming up with classification attributes, and implementing a classification model.</p>
+<p>My conclusion will be that <strong><em>football matches stays unpredictable</em></strong>, and I totally agree with <a href="https://www.linkedin.com/feed/update/urn:li:activity:6417784109510254592/">this LinkedIn post</a> when I read about it. The post even attached <a href="https://arxiv.org/pdf/1806.03208.pdf">this paper</a> for prediction using random forest and incorporating large number of attributes, but still unable to make accurate prediction.</p>
+<p>Not everything can be predicted using ML. It has its limitations.</p>
+<p>For my model, I can only say that teams like Brazil, Spain and Germany are <em>in favour of the attributes that I have set</em>, which mainly takes in account of the winning statistics of a team. But we all know that winning history can't really tell much - after all, when I am writing this blog post, Germany had been eliminated by the mighty South Korea with a 2-0.</p>
+<p><img class="in-text" alt="nn" src="../images/german.jpg" /></p>
+<p>All in all, predictions are not the main priority here. The most important thing is to learn skills in handling data, telling stories from it, and last but not least...<strong>support Belgium to the max!</strong></p>
+<p><img class="in-text" alt="Belgium" src="../images/belgium.jpg" /></p>
+        </div>
+    </main>
+    <!-- Main -->
+    
+    <!-- Footer -->
+    <footer id="fh5co-footer" role="contentinfo">
+      <div class="container">
+        <div class="row">
+          <div class="text-center">
+            <p class="fh5co-copyright">&copy; All Rights Reserved 2018. <br>By gudgud96, with dedication and passion.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Footer -->
+    
+    <!-- Go To Top -->
+    <a href="#" class="fh5co-gotop"><i class="ti-shift-left"></i></a>
+      
+    <!-- jQuery -->
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <!-- jQuery Easing -->
+    <script src="js/jquery.easing.1.3.js"></script>
+    <!-- Bootstrap -->
+    <script src="js/bootstrap.js"></script>
+    <!-- Owl carousel -->
+    <script src="js/owl.carousel.min.js"></script>
+    <!-- Magnific Popup -->
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <!-- Easy Responsive Tabs -->
+    <script src="js/easyResponsiveTabs.js"></script>
+    <!-- FastClick for Mobile/Tablets -->
+    <script src="js/fastclick.js"></script>
+    <!-- Velocity -->
+    <script src="js/velocity.min.js"></script>
+    <!-- Main JS -->
+    <script src="js/main.js"></script>
+
+  </body>
+</html>
