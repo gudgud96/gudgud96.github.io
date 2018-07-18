@@ -117,4 +117,4 @@ In today's world, with a large number of existing atheist it seems like religion
 
 We see how we started from a cognitive revolution, which allowed us to believe in the same myth and cooperate. Then we initiated the agricultural revolution, that left us in a luxury trap. Gradually, humankind was then unified by its 3 main pillars -- politics, economy and religion, through different forms until today.
 
-In Part 2, we will take a look in the modern days and see **"what we are taught to believe in"**.
+In [Part 2](sapiens-2.html), we will take a look in the modern days and see **"what we are taught to believe in"**.

@@ -7,3 +7,6 @@ nature-v2
 Sapiens - Pt.1
 Part 1 of summary written after reading Yuval Noah Harari's best seller - Sapiens: A Brief History of Humankind. Great perspective provided by Yuval, and in Part 1 we will focus on "how we have come over as human beings".
 sapiens-1
+Sapiens - Pt.2
+In the last part we talk about how we come over as human beings. In this part, we will focus on the next 5 keypoints on what we are taught to believe in. Part 2 of summary written after reading Yuval Noah Harari's best seller - Sapiens: A Brief History of Humankind.
+sapiens-2
