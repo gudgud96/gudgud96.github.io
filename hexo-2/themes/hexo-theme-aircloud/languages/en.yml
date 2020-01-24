@@ -1,0 +1,20 @@
+nav:
+  home: Home
+  tags: Tags
+  archives: Archives
+  about: About
+  search: Search
+  bloglist: Blog List
+#
+#post:
+#  postTime: 发布于
+#  tags: 标签
+#  visit: 访问
+post:
+  postTime: Post
+  tags: Tags
+  visit: Visit
+  donate: donate
+
+search:
+  search: search
