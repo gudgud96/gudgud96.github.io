@@ -16,4 +16,4 @@ I earned my bachelor’s degree in Computer Science major at Nanyang Technologic
 
 Music wise, I do piano accompaniment, songwriting, music production, and session work as a keyboardist. I am super keen in collaborations on all kinds of music projects, do hit me up if you wanna have fun together!
 
-My resume can be found [here](img/profile.jpeg).
+My resume can be found [here](../resume_new.pdf).
