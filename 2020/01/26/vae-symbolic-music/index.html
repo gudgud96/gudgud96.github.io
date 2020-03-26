@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Music research blog by Hao Hao Tan (gudgud96).">
+    <meta name="keyword"  content="machine learning music">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        VAE In Symbolic Music Modelling - gudgud96&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Blogs about Machine Learning Topics in Music. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/profile.jpeg" />
+        </div>
+        <div class="name">
+            <b>Hao Hao Tan 🇲🇾</b>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>About</span>
+                </a>
+            </li>
+            <li >
+                <a href="/bloglist/">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>Blog List</span>
+                </a>
+            </li>
+            <!--  -->
+        </ul>
+    </div>
+    <!-- 
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-VAE"><span class="toc-text">1 - VAE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Application"><span class="toc-text">2 - Application</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-MusicVAE"><span class="toc-text">1 - MusicVAE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-MIDI-VAE"><span class="toc-text">2 - MIDI-VAE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-VirtuosoNet"><span class="toc-text">3 - VirtuosoNet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Latent-Space-Regularization-for-Explicit-Control-of-Musical-Attributes"><span class="toc-text">4 - Latent Space Regularization for Explicit Control of Musical Attributes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Deep-Music-Analogy-via-Latent-Representation-Disentanglement"><span class="toc-text">5 - Deep Music Analogy via Latent Representation Disentanglement</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-Controlling-Symbolic-Music-Generation-Based-On-Concept-Learning-From-Domain-Knowledge"><span class="toc-text">6 - Controlling Symbolic Music Generation Based On Concept Learning From Domain Knowledge</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Thoughts-and-Discussion"><span class="toc-text">3 - Thoughts and Discussion</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Common-usage-of-the-latent-code"><span class="toc-text">1 - Common usage of the latent code</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-On-beta-value"><span class="toc-text">2 - On \(\beta\) value</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-On-music-representation-used"><span class="toc-text">3 - On music representation used</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-On-the-measure-of-“controllability”"><span class="toc-text">4 - On the measure of “controllability”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Can-VAE-be-an-end-to-end-architecture-for-music-generation"><span class="toc-text">5 - Can VAE be an end-to-end architecture for music generation?</span></a></li></ol></li></ol>
+</div>
+     -->
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> Blogs about Machine Learning Topics in Music. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        VAE In Symbolic Music Modelling
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2020-01-26 17:54:50</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#VAE" title="VAE">VAE</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#Symbolic Music" title="Symbolic Music">Symbolic Music</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<p>TLDR: This blog will discuss:<br>1 - A very simple VAE introduction<br>2 - Several papers that use VAE architecture for various symbolic music modelling tasks<br>3 - General thoughts on several aspects of VAE in symbolic music modelling</p>
+<br/>
+
+<h2 id="1-VAE"><a href="#1-VAE" class="headerlink" title="1 - VAE"></a>1 - VAE</h2><p>We know about the VAE’s ELBO function as below (refer <a href="https://ermongroup.github.io/cs228-notes/inference/variational/" target="_blank" rel="noopener">here</a> for ELBO derivation):<br>$$E_{z\sim q(Z|X)}[\log p(X|Z)] - \beta \cdot \mathcal{D}_{KL}(q(Z|X) || p(Z))$$</p>
+<p>The first term represents <strong>reconstruction accuracy</strong>, as the expectation of reconstructing \(X\) given \(Z\) needs to be maximized. Latent code \(z\) is sampled from a learnt posterior \(q(Z|X)\).</p>
+<p>The second term represents <strong>KL divergence</strong> – how deviated is the learnt posterior \(q(Z|X)\) from the prior \(p(Z)\). According to <a href="https://openreview.net/references/pdf?id=Sy2fzU9gl" target="_blank" rel="noopener">BetaVAE paper</a>, the \(\beta\) term weights the influence of KL divergence in the ELBO function.</p>
+<p>The prior distribution \(p(Z)\), in simple terms, is the assumption of how your data points are distributed. A common choice of prior distribution is the standard Gaussian \(\mathcal{N}(0, \mathcal{I})\). However, many start to think that a more natural choice of distribution should be a Gaussian Mixture Model (GMM) – $$\sum_{i=1}^{K} \phi_{i} \cdot \mathcal{N}(\mu_{i}, \Sigma_{i})$$ as the distribution of the data points could be mixtures of Gaussian components, rather than just one single standard Gaussian.</p>
+<p>The posterior distribution \(q(Z|X)\), in simple terms, is the “improvement” that you make on your assumed distribution of \(Z\), after inspecting data samples \(X\). Since the true posterior \(p(Z|X)\) is intractable, hence we use variational inference to get an approximation \(q(Z|X)\), and made it learnt by a neural network.</p>
+<p>The ultimate intuition of the VAE framework is to encode the huge <strong>data space</strong> into a compact <strong>latent space</strong>, where meaningful attributes can be extracted and controlled relatively easier in lower dimension. Hence, the objective would be: how can we <strong>utilize the latent space</strong> learnt for a multitude of music application tasks, including generation, interpolation, disentanglement, style transfer, etc.?</p>
+<br/>
+
+<h2 id="2-Application"><a href="#2-Application" class="headerlink" title="2 - Application"></a>2 - Application</h2><p>To study the objective above, below we list and discuss several papers that apply VAE framework on symbolic music modelling –</p>
+<h3 id="1-MusicVAE"><a href="#1-MusicVAE" class="headerlink" title="1 - MusicVAE"></a>1 - <a href="https://arxiv.org/pdf/1803.05428.pdf" target="_blank" rel="noopener"><strong>MusicVAE</strong></a></h3><p><img src="/img/musicvae.png" alt=""></p>
+<p><strong>Published at:</strong> ICML 2018<br><strong>Dataset type:</strong> Single track, monophonic piano music<br><strong>Representation used:</strong> Piano roll (final layer as softmax)<br><strong>Novelty:</strong> This should be one of the very first widely known papers that used VAE on music modelling, bringing in the idea from <a href="">Bowman et al.</a> The key contributions include: </p>
+<ul>
+<li>it clearly demonstrates the power of condensing useful musical information in the latent space. Variations in generated samples are more evident in latent space traversal, instead of data space.</li>
+<li>the “conductor” layer responsible for measure-level embeddings helps in preserving long term structure and reconstruction accuracy in longer sequences.</li>
+</ul>
+<p>An extension of this work on multi-track music is available <a href="https://arxiv.org/pdf/1806.00195.pdf" target="_blank" rel="noopener">here</a>.</p>
+<h3 id="2-MIDI-VAE"><a href="#2-MIDI-VAE" class="headerlink" title="2 - MIDI-VAE"></a>2 - <a href="https://tik-old.ee.ethz.ch/file//b17f34f911d0ecdb66bfc41af9cdf200/MIDIVAE_ISMIR_CR.pdf" target="_blank" rel="noopener"><strong>MIDI-VAE</strong></a></h3><p><img src="/img/midivae.png" alt=""></p>
+<p><strong>Published at:</strong> ISMIR 2018<br><strong>Dataset type:</strong> Multi-track, polyphonic music across jazz, classical, pop<br><strong>Representation used:</strong> Piano roll for each track. Note: for each timestep, instead of modelling 1 <em>n</em>-hot vector, <em>n</em> 1-hot vectors are modelled (final layer as softmax)<br><strong>Novelty:</strong> One of the very first music style transfer papers in the symbolic domain.</p>
+<ul>
+<li>The idea is to disentangle a portion out of the latent vector to be responsible for <strong>style classification</strong>, while the remaining should encode the characteristics of the data sample. During generation, \(z_{S_{1}}\) will be swapped to \(z_{S_{2}}\), and decoded with the remaining part of the latent vector.</li>
+<li>They also proposed a novel method to represent multi-track polyphonic music by training 3 GRUs, each responsible for pitch, instrument and velocity, used in both encoder and decoder part.</li>
+</ul>
+<p>How could we get both \(z_{S_{1}}\) and \(z_{S_{2}}\) for style-swap is not detailed in the paper. We assume that we need pairing data samples of style \(S_{1}\) and \(S_{2}\) each, encode them into latent vectors, cross-swap the style latent part and the residual latent part, and then decode.</p>
+<p>However in this framework, \(z_{S}\) is constrained to encode style-related information, but not necessarily to exclude sample-related information – sample-related information could also exist in \(z_{S}\). Ensuring <strong>identity transformation</strong> after cross-swapping style and sample latent codes may be a challenge in this framework, however ideas of using <em>adversarial training</em> to ensure sample invariance, such as in <a href="https://arxiv.org/pdf/1706.00409.pdf" target="_blank" rel="noopener">Fader Networks paper</a> or in this <a href="https://www.ijcai.org/Proceedings/2019/0652.pdf" target="_blank" rel="noopener">timbre disentanglement paper</a> should be easily extended from here.</p>
+<h3 id="3-VirtuosoNet"><a href="#3-VirtuosoNet" class="headerlink" title="3 - VirtuosoNet"></a>3 - <a href="http://archives.ismir.net/ismir2019/paper/000112.pdf" target="_blank" rel="noopener"><strong>VirtuosoNet</strong></a></h3><p><img src="/img/virtuoso.png" alt=""></p>
+<p><strong>Published at:</strong> ISMIR 2019<br><strong>Dataset type:</strong> Classical piano music<br><strong>Representation used:</strong> Score and performance features (refer to <a href="http://mac.kaist.ac.kr/pubs/JeongKwonKimNam-mec2019.pdf" target="_blank" rel="noopener">this paper</a>)<br><strong>Novelty:</strong> This paper focuses on expressive piano performance modelling. The key contributions are:</p>
+<ul>
+<li>As they argue that music scores can be interpreted and performed in various styles, this work uses a conditional VAE (CVAE) architecture for the performance encoder and decoder. The additional condition fed in is the <em>score representation</em> learnt by a separate score encoder.</li>
+<li>The score encoder consists of 3 levels, each encoding note, beat and measure information respectively. This work also uses the idea of <strong>hierachical attention</strong>, such that information is being attended on different levels: note, beat and measure during encoding</li>
+<li>During generation, it either randomly samples the style vector \(z\) from a normal distribution prior, or uses a pre-encoded \(z\) from other performances to decode performance features.</li>
+<li>An extension of this work, <a href="http://proceedings.mlr.press/v97/jeong19a/jeong19a.pdf" target="_blank" rel="noopener">GNN for Piano Performance Modelling</a>, incorporates the idea of using graphs to model performance events.</li>
+</ul>
+<h3 id="4-Latent-Space-Regularization-for-Explicit-Control-of-Musical-Attributes"><a href="#4-Latent-Space-Regularization-for-Explicit-Control-of-Musical-Attributes" class="headerlink" title="4 - Latent Space Regularization for Explicit Control of Musical Attributes"></a>4 - <a href="https://musicinformatics.gatech.edu/wp-content_nondefault/uploads/2019/06/Pati-and-Lerch-Latent-Space-Regularization-for-Explicit-Control-o.pdf" target="_blank" rel="noopener"><strong>Latent Space Regularization for Explicit Control of Musical Attributes</strong></a></h3><p><img src="/img/ashis.png" alt=""></p>
+<p><strong>Published at:</strong> ML4MD @ ICML 2019<br><strong>Dataset type:</strong> Single track, monophonic music<br><strong>Representation used:</strong> Piano roll (final layer as softmax)<br><strong>Novelty:</strong> This two-page extended abstract tackles the problem of controllable music generation over desired musical attributes. The simple yet powerful idea is that we can regularize some dimensions within the encoded latent vector to reflect the changes in our desired musical attributes (such as rhythm density, pitch range, etc.).</p>
+<p>The author suggests to add a regularization loss term during training, in the form of<br>$$ MSE(tanh(\mathcal{D}_{z_r}), sign(\mathcal{D}_a))$$</p>
+<p>where \(\mathcal{D}\) represents <strong>distance matrix</strong>, which is a 2-dimensional square matrix of shape \((|S|, |S|)\), containing the distances (taken pairwise) between the elements of a set \(S\). </p>
+<p>\(\mathcal{D}\) is the distance matrix of the \(r^{th}\) dimension value of encoded \(z\) for each sample, while \(\mathcal{D}_{a}\) is the distance matrix of musical attributes for each sample. The idea is to incorporate the relative distance of musical attributes within a training batch by regularizing the \(r^{th}\) dimension of \(z\), such that \(z^i_r &lt; z^j_r \Longleftrightarrow a^i &lt; a^j\).</p>
+<p>The interesting ideas that I find in this work is that the regularization loss captures <strong>relative distance</strong> instead of absolute distance, i.e. using \(MSE(\mathcal{D}_{z_r}, \mathcal{D}_a)\), or even more directly, using \(MSE(z_r, a)\). According to the author, this is to prevent the latent space to be distributed according to the distribution of the attribute space, as \(z_r\) is learnt to get closer to \(a\). This might be in direct conflict with the KL-divergence loss since this is trying to enforce a more Gaussian-like structure to the latent space. Hence, there might exists a tradeoff here between (1) the precision of \(z_r\) modelling the actual attribute values (as using relative distance will not be that precise as using absolute values), and (2) the correlation metric between \(z_r\) and \(a\).</p>
+<p>Figure below (through my own experiment) shows the same t-SNE diagram, the left side colored using regularized \(z_r\) values, and the right side colored using actual \(a\) values. We can see that the overall trend of value change is indeed captured, but the precision between values of \(z_r\) and \(a\) on individual samples are not necessarily accurate.</p>
+<h3 id="5-Deep-Music-Analogy-via-Latent-Representation-Disentanglement"><a href="#5-Deep-Music-Analogy-via-Latent-Representation-Disentanglement" class="headerlink" title="5 - Deep Music Analogy via Latent Representation Disentanglement"></a>5 - <a href="http://archives.ismir.net/ismir2019/paper/000072.pdf" target="_blank" rel="noopener"><strong>Deep Music Analogy via Latent Representation Disentanglement</strong></a></h3><p><img src="/img/deep-analogy.png" alt=""></p>
+<p><strong>Published at:</strong> ISMIR 2019<br><strong>Dataset type:</strong> Single track, monophonic piano music<br><strong>Representation used:</strong> Piano roll (final layer as softmax)<br><strong>Novelty:</strong> “Deep music analogy” shares a very similar concept with music style transfer. This work focuses on disentangling rhythm and pitch from monophonic music, hence achieving controllable synthesis based on a given template of rhythm, a given set of pitches, or a given chord condition.</p>
+<ul>
+<li>The proposed EC<sup>2</sup>-VAE architecture splits latent \(z\) into 2 parts – \(z_{p}\) and \(z_{r}\), where \(z_{r}\) is co-erced to reconstruct rhythmic patterns of the sample. Both \(z_{p}\) and \(z_{r}\), together with the chord condition, is used to decode into the original sample.</li>
+<li>Another point of view is to see it as a type of latent regularization – part of the latent code is “regularized” to be controllable on a particular type of attribute, which in this work the regularization is done by adding a classification loss output by a rhythm classifier.</li>
+<li>Objective evaluation is of 2-fold:<ul>
+<li>After pitch transposition, \(\Delta z_{r}\) should not be changed much and instead \(\Delta z_{p}\) should be changing. This is by measuring the L1-norm of change in \(z\).</li>
+<li>Modifying evaluation methods from <a href="https://arxiv.org/pdf/1802.05983.pdf" target="_blank" rel="noopener">FactorVAE</a>, this work proposes to evaluate disentanglement by measuring average variances of the values in each latent dimension after pitch / rhythm augmentation in input samples. Should the disentanglement be successful, when rhythm augmentation is done, the largest variance dimensions should correspond to the dimensions that are explicitly conditioned to model rhythm attributes (and vice versa for pitch attribute).</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-Controlling-Symbolic-Music-Generation-Based-On-Concept-Learning-From-Domain-Knowledge"><a href="#6-Controlling-Symbolic-Music-Generation-Based-On-Concept-Learning-From-Domain-Knowledge" class="headerlink" title="6 - Controlling Symbolic Music Generation Based On Concept Learning From Domain Knowledge"></a>6 - <a href="http://archives.ismir.net/ismir2019/paper/000100.pdf" target="_blank" rel="noopener"><strong>Controlling Symbolic Music Generation Based On Concept Learning From Domain Knowledge</strong></a></h3><p><img src="/img/extres.png" alt=""></p>
+<p><strong>Published at:</strong> ISMIR 2019<br><strong>Dataset type:</strong> Single track, monophonic piano music<br><strong>Representation used:</strong> Piano roll (final layer as softmax)<br><strong>Novelty:</strong> This work proposes a model known as ExtRes, which stands for <strong>extraction</strong> model and <strong>residual</strong> model. The residual model part is a generative model, while the extraction model allows learning reusable representation for a user-specified concept, given a function based on domain knowledge on the concept.</p>
+<p>From the graphical model, we can see that:</p>
+<ul>
+<li>During inference, latent code \(z_e\) is learnt to model user-defined attributes \(y\) via a probabilistic encoder with posterior \(q_{\phi_{e}}(z_e|y)\) and parameters \(\phi_{e}\) (the parameters are, in this case, the neural network weights). Separately, latent code \(z_r\) is learnt to model input sample \(x\) via another probabilistic encoder with posterior \(q_{\phi_{r}}(z_r|x, y)\) and parameters \(\phi_{r}\), taking in \(y\) as an additional condition during encoding.</li>
+<li>During generation, latent code \(z_e\) and \(z_r\) and both sampled from a standard Gaussian prior. A decoder with parameters \(\theta_y\) is trained to decode \(z_e\) into \(y\), and a separate decoder with parameters \(\theta_x\) is trained to decode \(z_r\) into \(x\), with an additional condition of \(y\).</li>
+</ul>
+<p>The final loss function is hence consists of 4 terms:</p>
+<ul>
+<li>the reconstruction loss of the input sample \(x\);</li>
+<li>the reconstruction loss of the attribute sequence \(y\);</li>
+<li>the KL divergence between posterior \(q_{\phi_{e}}(z_e|y)\) and prior \(p(z_e)\) for extraction model;</li>
+<li>the KL divergence between posterior \(q_{\phi_{r}}(z_r|x, y)\) and prior \(p(z_r)\) for residual model.</li>
+</ul>
+<p>Here, we can see that the residual model is trained in a CVAE manner, such as to achieve conditional generation, with condition \(y\) should \(y\) be either obtained from (1) the learnt extraction model, or (2) the dataset itsef (in this case, it resembles with the teacher-forcing training technique).</p>
+<br/>
+
+<p>Other relevant papers that we would like to list here include:<br>7 - <a href="https://arxiv.org/pdf/1711.07050.pdf" target="_blank" rel="noopener">A Classifying Variational Autoencoder with Application to Polyphonic Music Generation</a><br>8 - <a href="http://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1376485&dswid=-5769" target="_blank" rel="noopener">MahlerNet: Unbounded Orchestral Music with Neural Networks</a><br>9 - <a href="https://arxiv.org/pdf/1711.05772.pdf" target="_blank" rel="noopener">Latent Constraints: Learning to Generate Conditionally from Unconditional Generative Models</a><br>10 - <a href="https://arxiv.org/pdf/1707.04588.pdf" target="_blank" rel="noopener">GLSR-VAE: Geodesic Latent Space Regularization for Variational AutoEncoder Architectures</a></p>
+<br/>
+
+<h2 id="3-Thoughts-and-Discussion"><a href="#3-Thoughts-and-Discussion" class="headerlink" title="3 - Thoughts and Discussion"></a>3 - Thoughts and Discussion</h2><p>I hereby list some of my thoughts regarding these works as above for future discussion and hopefully for even more exciting future work.</p>
+<h3 id="1-Common-usage-of-the-latent-code"><a href="#1-Common-usage-of-the-latent-code" class="headerlink" title="1 - Common usage of the latent code"></a>1 - Common usage of the latent code</h3><p>We could observe that a whole lot of applications of VAE are focusing on <strong>music attribute / feature modelling</strong>. This is more commonly seen as it spans over several types of tasks including controllable music generation, higher level style transfer, and lower level attribute / feature transfer. Normally, a latent space is being encoded for each factor, so as to achieve separation in modelling different factors in the music piece. During generation, a latent code that exhibit the desired factor is either (i) encoded via the learnt posterior from an existing sample, or (2) sampled through a prior from each space, and then being combined and decoded.</p>
+<p>Here, we can summarize some key aspects that one would encounter while using VAE for music attribute modelling:</p>
+<p>(i) <strong>disentanglement</strong>: how are the attributes being <em>disentangled</em> from each other, so as to ensure that each latent space governs one and only desired factor;<br>(ii) <strong>regularization</strong>: how is the latent space being <em>regularized</em> to exhibit a certain desired factor – either by adding in a classifier, or using some self-defined regularization loss.<br>(iii) <strong>identity preservation</strong>: how can we ensure that the identity of the sample can be retained after transformation, while only being changed on the desired factor? Here, we argue that it is determined by 2 factors: the <em>reconstruction quality</em>, and the <em>disentanglement quality</em> of the model. For ensuring disentanglement quality, a common strategy is to use <strong>adversarial training</strong>, such that to ensure the latent space be invariant on the non-governing factors.</p>
+<h3 id="2-On-beta-value"><a href="#2-On-beta-value" class="headerlink" title="2 - On \(\beta\) value"></a>2 - On \(\beta\) value</h3><p>It is an interesting observation to note that commonly within the literature of VAE music modelling, a lot of the work uses a relatively low \(\beta\) value. Among the first 5 papers discussed above, each of them uses \(\beta\) value of 0.2, 0.1, 0.02, 0.001, and 0.1 respectively, commonly accompanied by an annealing strategy. Only for the 6th paper, \(\beta\) value is within a range of [0.7, 1.0] depending on the attribute modelled.</p>
+<p>It seems that although we are mostly modelling only monophonic or single-track polyphonic music, it has been hard enough to retain the reconstruction accuracy on a higher \(\beta\) value. Additionally, the <a href="">MIDI-VAE</a> paper has further showed that the reconstruction accuracy are very much poorer given higher \(\beta\) values. It would be interesting to unveil the reasons behind why sequential music data are inherently hard to achieve higher reconstruction accuracy. More important, given the fact of the tradeoff between disentanglement and reconstruction as proposed by <a href="">\(\beta\)-VAE</a>, how could we find a balanced sweet spot for good disentanglement provided with such low range of \(\beta\) values remain an interesting challenge.</p>
+<h3 id="3-On-music-representation-used"><a href="#3-On-music-representation-used" class="headerlink" title="3 - On music representation used"></a>3 - On music representation used</h3><p>Common music representation used during modelling include MIDI-like events, piano roll or text (for more details refer to <a href="https://arxiv.org/abs/1709.01620" target="_blank" rel="noopener">this survey paper</a>). For VAE in music modelling, the most common used representation is either MIDI-like events (mostly for polyphonic music), or piano roll. Hence, the encoder and decoder used in VAE are often autoregressive, either using LSTMs, GRUs, or even <a href="https://arxiv.org/pdf/1912.05537.pdf" target="_blank" rel="noopener">Transformers</a>. Often times, the encoder or the decoder part can be further split into hierachies, with each level modelling low to high-level features from note, measure, phrase to the whole segment.</p>
+<h3 id="4-On-the-measure-of-“controllability”"><a href="#4-On-the-measure-of-“controllability”" class="headerlink" title="4 - On the measure of “controllability”"></a>4 - On the measure of “controllability”</h3><p>How could we evaluate if a model has a “higher controllability”, on a given factor, during generation? The most related one might be by <a href="https://github.com/ashispati/AttributeModelling" target="_blank" rel="noopener">Pati et al.</a>, whom has given an interpretability metric which mainly returns a score depicting the correlation between the latent code and the attribute modelled.</p>
+<h3 id="5-Can-VAE-be-an-end-to-end-architecture-for-music-generation"><a href="#5-Can-VAE-be-an-end-to-end-architecture-for-music-generation" class="headerlink" title="5 - Can VAE be an end-to-end architecture for music generation?"></a>5 - Can VAE be an end-to-end architecture for music generation?</h3><p>From most of the works above, we see VAE being used to generate mainly short segments of music (4 bars, 16 beats, etc.), which are unlike <strong>language modelling</strong> approaches such as <a href="">Music Transformer</a>, <a href="">MuseNet</a>, and <a href="">Pop Music Transformer</a> that can generate minute-long decent music pieces with observable long term structure.</p>
+<p>Latent space models and language models might each have their own strengths in the context of music generation. Latent space models are useful for feature / attribute modelling, with an extension of usage on style transfer; whereas language models are strong at generation long sequences which exhibit structure. Combining the strengths of both approaches might be an interesting direction for improving the quality and flexibility of state-of-the-art music generation models.</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        <li>
+            <a target="_blank" href="https://twitter.com/GoodGood014">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-twitter"></i>
+                            </span>
+            </a>
+        </li>
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/gudgud96">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://www.linkedin.com/in/tan-hao-hao">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-linkedin"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+    </ul>
+    
+    <p>
+        <!-- <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span> -->
+        All Rights Reserved @ gudgud96. Created By <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud" target="_blank" rel="noopener">AirCloud</a></p>
+</footer><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://gudgud96-github-io.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+
+
+</html>
