@@ -33,6 +33,8 @@ The ultimate intuition of the VAE framework is to encode the huge **data space**
 
 ## 2 - Application
 
+**Symbolic music domain** refers to the usage of **high-level symbols** such as event tokens, text, or piano roll matrices as representation during music modelling. Audio-based music modelling is not covered in this scope. The reason of using symbolic music representation for modelling is that it incorporates higher level features such as structure, harmony, rhythm etc. directly within the representation itself, without the need of further preprocessing.
+
 To study the objective above, below we list and discuss several papers that apply VAE framework on symbolic music modelling --
 
 ### 1 - [**MusicVAE**](https://arxiv.org/pdf/1803.05428.pdf)
@@ -42,7 +44,7 @@ To study the objective above, below we list and discuss several papers that appl
 **Published at:** ICML 2018
 **Dataset type:** Single track, monophonic piano music
 **Representation used:** Piano roll (final layer as softmax)
-**Novelty:** This should be one of the very first widely known papers that used VAE on music modelling, bringing in the idea from [Bowman et al.]() The key contributions include: 
+**Novelty:** This should be one of the very first widely known papers that used VAE on music modelling, bringing in the idea from [Bowman et al.](https://arxiv.org/abs/1511.06349) The key contributions include: 
 - it clearly demonstrates the power of condensing useful musical information in the latent space. Variations in generated samples are more evident in latent space traversal, instead of data space.
 -  the "conductor" layer responsible for measure-level embeddings helps in preserving long term structure and reconstruction accuracy in longer sequences.
 
@@ -95,6 +97,8 @@ where \\(\mathcal{D}\\) represents **distance matrix**, which is a 2-dimensional
 The interesting ideas that I find in this work is that the regularization loss captures **relative distance** instead of absolute distance, i.e. using \\(MSE(\mathcal{D}_{z_r}, \mathcal{D}_a)\\), or even more directly, using \\(MSE(z_r, a)\\). According to the author, this is to prevent the latent space to be distributed according to the distribution of the attribute space, as \\(z_r\\) is learnt to get closer to \\(a\\). This might be in direct conflict with the KL-divergence loss since this is trying to enforce a more Gaussian-like structure to the latent space. Hence, there might exists a tradeoff here between (1) the precision of \\(z_r\\) modelling the actual attribute values (as using relative distance will not be that precise as using absolute values), and (2) the correlation metric between \\(z_r\\) and \\(a\\).
 
 Figure below (through my own experiment) shows the same t-SNE diagram, the left side colored using regularized \\(z_r\\) values, and the right side colored using actual \\(a\\) values. We can see that the overall trend of value change is indeed captured, but the precision between values of \\(z_r\\) and \\(a\\) on individual samples are not necessarily accurate.
+
+![](/img/ashis2.png)
 
 ### 5 - [**Deep Music Analogy via Latent Representation Disentanglement**](http://archives.ismir.net/ismir2019/paper/000072.pdf)
 
@@ -160,11 +164,13 @@ Here, we can summarize some key aspects that one would encounter while using VAE
 
 It is an interesting observation to note that commonly within the literature of VAE music modelling, a lot of the work uses a relatively low \\(\beta\\) value. Among the first 5 papers discussed above, each of them uses \\(\beta\\) value of 0.2, 0.1, 0.02, 0.001, and 0.1 respectively, commonly accompanied by an annealing strategy. Only for the 6th paper, \\(\beta\\) value is within a range of [0.7, 1.0] depending on the attribute modelled.
 
-It seems that although we are mostly modelling only monophonic or single-track polyphonic music, it has been hard enough to retain the reconstruction accuracy on a higher \\(\beta\\) value. Additionally, the [MIDI-VAE]() paper has further showed that the reconstruction accuracy are very much poorer given higher \\(\beta\\) values. It would be interesting to unveil the reasons behind why sequential music data are inherently hard to achieve higher reconstruction accuracy. More important, given the fact of the tradeoff between disentanglement and reconstruction as proposed by [\\(\beta\\)-VAE](), how could we find a balanced sweet spot for good disentanglement provided with such low range of \\(\beta\\) values remain an interesting challenge.
+It seems that although we are mostly modelling only monophonic or single-track polyphonic music, it has been hard enough to retain the reconstruction accuracy on a higher \\(\beta\\) value. Additionally, the [MIDI-VAE](https://arxiv.org/abs/1809.07600) paper has further showed that the reconstruction accuracy are very much poorer given higher \\(\beta\\) values. It would be interesting to unveil the reasons behind why sequential music data are inherently hard to achieve higher reconstruction accuracy. More important, given the fact of the tradeoff between disentanglement and reconstruction as proposed by [\\(\beta\\)-VAE](https://openreview.net/forum?id=Sy2fzU9gl), how could we find a balanced sweet spot for good disentanglement provided with such low range of \\(\beta\\) values remain an interesting challenge.
 
 ### 3 - On music representation used
 
 Common music representation used during modelling include MIDI-like events, piano roll or text (for more details refer to [this survey paper](https://arxiv.org/abs/1709.01620)). For VAE in music modelling, the most common used representation is either MIDI-like events (mostly for polyphonic music), or piano roll. Hence, the encoder and decoder used in VAE are often autoregressive, either using LSTMs, GRUs, or even [Transformers](https://arxiv.org/pdf/1912.05537.pdf). Often times, the encoder or the decoder part can be further split into hierachies, with each level modelling low to high-level features from note, measure, phrase to the whole segment.
+
+Recently, [Jeong et al.](http://proceedings.mlr.press/v97/jeong19a/jeong19a.pdf) proposed to use graphs instead of normal sequential tokens to represent music performances. Although the superiority of using graph as compared to common sequential representations is not evident yet, this might be a promising and interesting path to pursue for future work.
 
 ### 4 - On the measure of "controllability"
 
@@ -172,6 +178,6 @@ How could we evaluate if a model has a "higher controllability", on a given fact
 
 ### 5 - Can VAE be an end-to-end architecture for music generation?
 
-From most of the works above, we see VAE being used to generate mainly short segments of music (4 bars, 16 beats, etc.), which are unlike **language modelling** approaches such as [Music Transformer](), [MuseNet](), and [Pop Music Transformer]() that can generate minute-long decent music pieces with observable long term structure.
+From most of the works above, we see VAE being used to generate mainly short segments of music (4 bars, 16 beats, etc.), which are unlike **language modelling** approaches such as [Music Transformer](https://arxiv.org/pdf/1809.04281.pdf), [MuseNet](https://openai.com/blog/musenet/), and [Pop Music Transformer](https://arxiv.org/pdf/2002.00212.pdf) that can generate minute-long decent music pieces with observable long term structure.
 
 Latent space models and language models might each have their own strengths in the context of music generation. Latent space models are useful for feature / attribute modelling, with an extension of usage on style transfer; whereas language models are strong at generation long sequences which exhibit structure. Combining the strengths of both approaches might be an interesting direction for improving the quality and flexibility of state-of-the-art music generation models.
