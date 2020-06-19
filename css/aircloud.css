@@ -968,8 +968,12 @@ pre code {
   border: none;
 }
 .highlight td {
+  font-family: Courier;
   border: none;
   padding: 0;
+}
+.highlight td span{
+  font-family: Courier;
 }
 .highlight figcaption {
   font-size: 1em;
@@ -992,12 +996,14 @@ pre code {
   background-color: #eff2f3;
 }
 .highlight .code pre {
+  font-family: Courier;
   width: 100%;
   padding-left: 10px;
   padding-right: 10px;
   background-color: #f7f7f7;
 }
 .highlight .line {
+  font-family: Courier;
   height: 20px;
 }
 .gutter {
