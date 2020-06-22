@@ -3,7 +3,6 @@ title: Where Could AI Music Possibly Head Towards?
 date: 2018-09-24 16:52:50
 tags:
     - General Thoughts
-    - AI Music
 ---
 
 There has been quite a hype in AI music generation recently. We have [Flow Machines](http://www.flow-machines.com/) creating their famous song [Daddy's Car](https://www.youtube.com/watch?v=LSHZ_b05W7o). We have startups like [Amper](http://www.ampermusic.com), [Aiva](http://soundcloud.com/user-95265362) and [Jukedeck](http://www.jukedeck.com). We have tech giants like [Google Magenta](http://magenta.tensorflow.org) and [IBM Watson](http://www.ibm.com/watson/music). We have Taryn Southern (in the picture), composing music using AI. The community is slowly growing and gaining attention from the public.

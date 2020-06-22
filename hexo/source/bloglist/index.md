@@ -13,8 +13,9 @@ Keunwoo Choi: https://keunwoochoi.wordpress.com/
 Yixiao Zhang: https://ldzhangyx.github.io/
 Magenta: https://magenta.tensorflow.org/blog
 Hao-Wen Dong: https://salu133445.github.io/
+Sander Dieleman: https://benanne.github.io/
 
 ### Others
-Jiang Yu's Blog: https://nguwijy.wordpress.com
+Jiang Yu Ngyuwi: https://nguwijy.wordpress.com
 Thomas Kipf: http://tkipf.github.io/
 Chaitanya Joshi: https://chaitjo.github.io/
