@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Music research blog by Hao Hao Tan (gudgud96).">
+    <meta name="keyword"  content="machine learning music">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Semi-Supervised Learning for Music Modelling - gudgud96&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Blogs about Machine Learning Topics in Music. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/profile.jpeg" />
+        </div>
+        <div class="name">
+            <b>Hao Hao Tan 🇲🇾</b>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>About</span>
+                </a>
+            </li>
+            <li >
+                <a href="/bloglist/">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>Blog List</span>
+                </a>
+            </li>
+            <!--  -->
+        </ul>
+    </div>
+    <!-- 
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Introduction"><span class="toc-text">1 - Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Why-Semi-Supervised-Learning"><span class="toc-text">2 - Why Semi-Supervised Learning?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Applying-SSL-to-Deep-Learning-Models"><span class="toc-text">3 - Applying SSL to Deep Learning Models</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SSL-using-Deep-Generative-Models"><span class="toc-text">SSL using Deep Generative Models</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Variational-Deep-Embedding-VaDE"><span class="toc-text">Variational Deep Embedding (VaDE)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Comparison"><span class="toc-text">Comparison</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Applications"><span class="toc-text">4 - Applications</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion"><span class="toc-text">Conclusion</span></a></li></ol>
+</div>
+     -->
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> Blogs about Machine Learning Topics in Music. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Semi-Supervised Learning for Music Modelling
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2020-05-13 18:23:35</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#VAE" title="VAE">VAE</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<p>TLDR: This blog will discuss:<br>1 - Motivation of using semi-supervised learning in music modelling<br>2 - Two SSL frameworks based on latent generative models - <strong>Kingma et al</strong> and <strong>VaDE</strong><br>3 - Applications of these frameworks on music-related tasks<br><br/></p>
+<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1 - Introduction"></a>1 - Introduction</h2><p>In a <a href="/2020/01/26/vae-symbolic-music/">previous post</a>, we have discussed the usage of the popular VAE framework in symbolic music modelling tasks (surely, the framework can also be adapted to all kinds of music-related tasks). We have also seen that after training, the model jointly learns both <strong>inference</strong> and <strong>generation</strong> capabilities. Furthermore, by using extra techniques such as <strong>disentanglement</strong>, <strong>latent regularization</strong>, or using a more complex prior such as <strong>Gaussian mixture model</strong>, we observe how one or many meaningful, controllable latent space(s) could be learnt to support various downstream creative applications such as style transfer, morphing, analysis, etc.</p>
+<p>In this post, we introduce the application of <strong>semi-supervised learning (SSL)</strong>, which is very compatible with the VAE framework as we will see, to music modelling tasks. The (arguably) biggest pain-point in the music domain is that often times <strong>we do not have enough labelled data</strong> for all kinds of reasons – annotation difficulties, copyright issues, noise and high variance in annotations due to its subjective nature, etc. So, it will be good if the model can learn desirable properties with only limited amount of quality data.</p>
+<h2 id="2-Why-Semi-Supervised-Learning"><a href="#2-Why-Semi-Supervised-Learning" class="headerlink" title="2 - Why Semi-Supervised Learning?"></a>2 - Why Semi-Supervised Learning?</h2><p>The strengths and importance of SSL is especially evident in the music domain in my opinion. In particular, for abstract musical concepts which the labels definitely need human annotations (e.g. mood tags, arousal &amp; valence, style, etc.), we can often observe two scenarios: (i) either the <strong>amount of labels is too little</strong>, which forbids the model to generalize well; or (ii)  when the amount of labels start to scale, it becomes <strong>too noisy and deviated</strong>, due to the subjective nature of these annotations, which hinders the model from learning good representations. </p>
+<p>Therefore, one of the solutions is to introduce SSL – we leverage the abundant amount of unlabelled data to learn common music representations, e.g. note, pitch, structure, etc., and we use only a very small set of <em>quality</em> labels (i.e. labels which are further filtered) to learn the desired abstract property. This further relates to the task of <strong>representation learning</strong> because we need to be able to learn reusable, high quality representations with only a small amount of labelled data in order achieve good results.</p>
+<h2 id="3-Applying-SSL-to-Deep-Learning-Models"><a href="#3-Applying-SSL-to-Deep-Learning-Models" class="headerlink" title="3 - Applying SSL to Deep Learning Models"></a>3 - Applying SSL to Deep Learning Models</h2><h3 id="SSL-using-Deep-Generative-Models"><a href="#SSL-using-Deep-Generative-Models" class="headerlink" title="SSL using Deep Generative Models"></a>SSL using Deep Generative Models</h3><p>We start from one of the earliest papers that discuss SSL in deep learning models. In <a href="https://papers.nips.cc/paper/5352-semi-supervised-learning-with-deep-generative-models.pdf" target="_blank" rel="noopener">Kingma et al.</a> the authors proposed a framework of using deep generative models for SSL, with graphical models as illustrated in Figure 1.</p>
+<figure>
+  <img style="width:108%;" src="/img/kingma-ssl-3.png" alt=""/>
+  <figcaption><br/>Figure 1: Graphical model of 3 formulations proposed in Kingma et al.</figcaption>
+</figure>
+
+<p>The generation components can be understood as how each model assumes each data point to be generated. \(\textrm{M1}\) resembles the idea of <strong>latent variable models</strong>, where a data point is generated from a latent prior, and further being projected to the observation space. \(\textrm{M2}\) is simply two strands of \(\textrm{M1}\) – one on the discrete class variable \(\textbf{y}\), and the other on the continuous latent \(\textbf{z}\). \(\textrm{M2}\) can also be viewed as a <strong>disentanglement</strong> model, if we understand it as learning separate spaces for labels in \(\textbf{y}\), and residual information in \(\textbf{z}\) (e.g. writing styles in MNIST). \(\textrm{M1} + \textrm{M2}\) is generally a hierachical combination of both.</p>
+<p>On the other hand, all exact posterior \(p(\textbf{z} | \textbf{X})\) are approximated using variational inference by introducing a new distribution \(q_{\phi}(\textbf{z} | \textbf{X})\). The posterior can also be called the <strong>inference</strong> component, as we are <strong>inferring</strong> the latent distributions from the observations. </p>
+<p>The posterior for \(\textrm{M1}\) is evident to be \(q_{\phi}(\textbf{z} | \textbf{X})\), and the model employs a separate classifier (e.g. an SVM) to predict \(\textbf{y}\) from the low-dimension manifold \(\textbf{z}\), which could be encoded with more meaningful representations and yields better classification accuracy. For \(\textrm{M2}\), the authors parameterized the posterior to be \(q_{\phi}(\textbf{z} | \textbf{X}, \textbf{y}) = q_{\phi}(\textbf{z} | \textbf{X}) \cdot q_{\phi}(\textbf{y} | \textbf{X})\), which the class labels are inferred directly from \(\textbf{X}\) using a separate Gaussian inference network.</p>
+<p>So, how does the objective function look like if we want to train the model in a semi-supervised manner?</p>
+<p>For \(\textrm{M1}\), we are basically training a VAE, so the objective function is:<br>$$E_{\textbf{z}\sim q_{\phi} (\textbf{z}|\textbf{X})}[\log p_\theta(\textbf{X}|\textbf{z})] - \mathcal{D}_{KL}(q_\phi(\textbf{z}|\textbf{X}) || p(\textbf{z}))$$ Additionally, the label classifier is trained separated on only labelled data. Hence, the posterior learnt will serve as a feature extractor used to train the label classifier.</p>
+<p>For \(\textrm{M2}\), we need to consider two cases: if label is present (<em>supervised</em>), then the objective function is very similar to the VAE objective function, other than an additional given \(\textbf{y}\):<br>$$\mathcal{L(\textbf{X}, y)} = E_{\textbf{z}\sim q_\phi(\textbf{z}|\textbf{X}, y)} [ \log p_\theta(\textbf{X}|\textbf{z}, y) + \log p_\theta(y) + \log p(\textbf{z}) - \log q_\phi(\textbf{z}|\textbf{X}, y)] \\ = E_{\textbf{z}\sim q_\phi(\textbf{z}|\textbf{X}, y)}[\log p_\theta(\textbf{X}|\textbf{z}, y)] - \mathcal{D}_{KL}(q_\phi(\textbf{z}|\textbf{X}, y) || p(\textbf{z}))$$ If label is not present (<em>unsupervised</em>), then we <strong>marginalize</strong> over all possibilities of class labels as below:</p>
+<p>$$\mathcal{U(\textbf{X})} = \displaystyle\sum_{y} q_\phi(y | \textbf{X}) \cdot [ \mathcal{L(\textbf{X}, y)} - \mathcal{D}_{KL}(q_\phi(y|\textbf{X}) || p(y)) ] \\ = \displaystyle \sum_y q_\phi(y | \textbf{X}) \cdot \mathcal{L(\textbf{X}, y)} + \mathcal{H}(q_\phi(y|\textbf{X}))$$ </p>
+<p>where the additional <strong>entropy</strong> term \(\mathcal{H}(q_\phi(y|\textbf{X}))\) pushes the distribution to conform to a multinomial prior distribution. Additionally, to improve the classification capability of \(q_\phi(y|\textbf{X})\), a classification loss (e.g. cross-entropy loss) can be added during the supervised scenario. The extension to \(\textrm{M1} + \textrm{M2}\) is then straigtforward by combining the loss terms of both models. All inference and generation parameters, \(\phi\) and \(\theta\), are parameterized using neural networks, with some popular choices in the music domain like 1D or 2D CNNs, RNNs, attention networks etc.</p>
+<h3 id="Variational-Deep-Embedding-VaDE"><a href="#Variational-Deep-Embedding-VaDE" class="headerlink" title="Variational Deep Embedding (VaDE)"></a>Variational Deep Embedding (VaDE)</h3><figure>
+  <img style="width:50%; display: block; margin-left: auto; margin-right: auto;" src="/img/vade-ssl.png" alt=""/>
+  <figcaption><br/>Figure 2: Graphical model of VaDE.</figcaption>
+</figure>
+
+<p><a href="https://arxiv.org/pdf/1611.05148.pdf" target="_blank" rel="noopener">VaDE</a> employs the idea of <strong>unsupervised and generative approach on clustering</strong>. Hence as shown in Figure 2, the graphical model is a hierachical structure from \(\textbf{X} \rightarrow \textbf{z} \rightarrow y\) for the inference component. One can relate this to discrete representation learning using VAE with a <strong>Gaussian mixture prior</strong> – after inferring the latent variable \(\textbf{z}\), the variable is assigned to a particular cluster with index \(y\). Hence, it is straightforward that the objective function is the ELBO extended to a mixture-of-Gaussian scenario:<br>$$E_{\textbf{z}\sim q_{\phi} (\textbf{z}, y|\textbf{X})}[\log p_\theta(\textbf{X}|\textbf{z})] - \mathcal{D}_{KL}(q_\phi(\textbf{z}, y| \textbf{X}) || p(\textbf{z}, y))$$ The second KL term regularizes the latent embedding \(z\) to lie on the mixture-of-Gaussians manifold. Similarly, we can introduce both supervised and unsupervised scenario in this case: when labels are present (<em>supervised</em>), the KL term is written as:</p>
+<p>$$ - \mathcal{D}_{KL}(q_\phi(\textbf{z}|\textbf{X}, y) || p(\textbf{z}|y))$$</p>
+<p>and when labels are not present (<em>unsupervised</em>), we similarly <strong>marginalize</strong> over all possibilities of class labels, as we have done for the \(\textrm{M2}\) model before:<br>$$ - \displaystyle \sum_y q_\phi(y|\textbf{X}) \cdot \mathcal{D}_{KL}(q_\phi(\textbf{z}|\textbf{X}) || p(\textbf{z}|y)) + \mathcal{H}(q_\phi(y|\textbf{X}))$$</p>
+<h3 id="Comparison"><a href="#Comparison" class="headerlink" title="Comparison"></a>Comparison</h3><p>Here, we can see that both frameworks by Kingma et al. and VaDE share a lot of similarities. Firstly, both frameworks are <strong>latent variable models</strong>, and make use of the <strong>generative</strong> approach. To achieve semi-supervised capabilities, both frameworks adopt the strategy to <strong>marginalize</strong> over all classes. In fact, if we look close at the inference component in \(\textrm{M1} + \textrm{M2}\), the left strand actually resembles the inference graphical model of VaDE. The main difference in both frameworks lie in the prior distribution. Kingma et al. model 2 separate distributions, which is a multinomial distribution for \(y\) and a standard Gaussian for \(\textbf{z}\), whereas VaDE integrates both into a single mixture-of-Gaussians.</p>
+<h2 id="4-Applications"><a href="#4-Applications" class="headerlink" title="4 - Applications"></a>4 - Applications</h2><p>The SSL frameworks above are suitable to be applied in music domain for two reasons: firstly, by training the model we can get both <strong>discriminative</strong> capability for analysis / feature extraction, and <strong>generation</strong> capability for all kinds of creative synthesis. Secondly, we can rely on the generation component to learn <strong>meaningful musical representations</strong> from unlabelled data. Through training the model to generate outputs that are similar to the data distribution, we want the model to learn useful, reusable musical features which can be easily regularized or separated by leveraging only a small amount of labels.</p>
+<p>An example discussed for music generation is by <a href="http://www.lucasnferreira.com/papers/2019/ismir-learning.pdf" target="_blank" rel="noopener">Ferreira et al</a> on generating music with sentiment. Obviously, the amount of unlabelled music is massive, and sentiment-labelled data is extremely scarce. The authors adopted the model from <a href="https://arxiv.org/pdf/1704.01444.pdf" target="_blank" rel="noopener">Radford et al</a> on generating reviews with sentiment. The model used is an \(\textrm{mLSTM}\) which takes in the previous tokens as input, and is trained to predict the next token in an autoregressive manner. The intermediate representation from \(\textrm{mLSTM}\) are used for sentiment classification. Thi model can actually be interpreted as a variant of \(\textrm{M1}\), with the intermediate representation from \(\textrm{mLSTM}\) as \(\textbf{z}\), and a separate logistic regressor is used to predict \(y\) from \(\textbf{z}\).</p>
+<figure>
+  <img style="width:80%; display: block; margin-left: auto; margin-right: auto;" src="/img/radford-sentiment.png" alt=""/>
+  <figcaption><br/>Figure 3: Sentiment fine-tuning on mLSTM by Ferreira et al.</figcaption>
+</figure>
+
+<p>Another example is by <a href="https://arxiv.org/pdf/1906.08152.pdf" target="_blank" rel="noopener">Luo et al</a> on disentangling pitch and timbre for audio recordings on playing single notes. The model proposed basically resembles with VaDE, with an additional <em>disentanglement</em> added to learn separate spaces for pitch and timbre. The authors studied the results of pitch and timbre classification by using increasing amount of labelled data. An additional advantage demonstrated is that we can learnt both <strong>discrete</strong> and <strong>continuous</strong> representations for both pitch and timbre – <em>discrete</em> representations are intuitive for analysis, as pitch and timbre are normally in discrete terms; however, the <em>continuous</em> representations are useful for applications such as gradual timbre morphing. The representations between two instruments could serve as a blend of both which could help discover new types of instrument timbre styles.</p>
+<p>Another two strong examples demonstrating the strength of SSL-VAE frameworks (which also helped me understand a lot on SSL-VAE applications), though not in the music domain, is by the <a href="https://google.github.io/tacotron/" target="_blank" rel="noopener">Tacotron</a> team. Two of their papers explore similar ideas to VaDE and Kingma et al to involve <a href="https://arxiv.org/pdf/1810.07217.pdf" target="_blank" rel="noopener">hierarchical modelling</a> and <a href="https://arxiv.org/pdf/1910.01709.pdf" target="_blank" rel="noopener">semi-supervised learning</a> for realistic text-to-speech generation. One of the examples is demonstrated on affect conditioning, which is again often a scarely-labelled scenario, yet the authors are able to achieve outstanding results on speech synthesis.</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>With the rise in popularity of using latent variable models for music modelling, it is intuitive that by incorporating the frameworks mentioned above, these models can be extended easily to support SSL capabilities. Perhaps some interesting questions to ask are: what is the lower-bound of the amount of data we need to achieve good results with SSL-VAE architectures? How much could we further improve on the generation component to “self-supervisedly” learn good representations, and reduce the necessity of using more labels? Can the training go even further to purely unsupervised scenarios? These are indeed exciting research problems waiting to be solved.</p>
+<p>For the fundamental framework papers, please refer to the list below:</p>
+<ol>
+<li><a href="https://papers.nips.cc/paper/5352-semi-supervised-learning-with-deep-generative-models.pdf" target="_blank" rel="noopener">Semi-supervised Learning with Deep Generative Models</a></li>
+<li><a href="https://arxiv.org/pdf/1611.05148.pdf" target="_blank" rel="noopener">Variational Deep Embedding: An Unsupervised and Generative Approach to Clustering</a></li>
+<li><a href="https://papers.nips.cc/paper/7174-learning-disentangled-representations-with-semi-supervised-deep-generative-models.pdf" target="_blank" rel="noopener">Learning Disentangled Representations with Semi-Supervised Deep Generative Models</a></li>
+</ol>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        <li>
+            <a target="_blank" href="https://twitter.com/GoodGood014">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-twitter"></i>
+                            </span>
+            </a>
+        </li>
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/gudgud96">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://www.linkedin.com/in/tan-hao-hao">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-linkedin"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+    </ul>
+    
+    <p>
+        <!-- <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span> -->
+        All Rights Reserved @ gudgud96. Created By <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud" target="_blank" rel="noopener">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://gudgud96-github-io.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+
+
+</html>
