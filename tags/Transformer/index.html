@@ -63,16 +63,22 @@
                     <span>Home</span>
                 </a>
             </li>
-            <li  class=active >
+            <!-- <li  class=active >
                 <a href="/tags">
                     <i class="iconfont icon-biaoqian1"></i>
                     <span>Tags</span>
                 </a>
-            </li>
+            </li> -->
             <li >
                 <a href="/archives">
                     <i class="iconfont icon-guidang2"></i>
                     <span>Archives</span>
+                </a>
+            </li>
+            <li >
+                <a href="/publications/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>Publications</span>
                 </a>
             </li>
             <li >
@@ -126,6 +132,21 @@
                     <span class="tag-text">2020</span>
                 </span>
     <ul>
+        
+        <!-- <li class="listing-item">
+        <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+        <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+        </li> -->
+        <li >
+            <span>07-24</span>
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/2020/07/24/conv_fourier/">
+                        <span>
+                            Spectrogram Conversion with CNNs
+                        </span>
+            </a>
+            <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+        </li>
         
         <!-- <li class="listing-item">
         <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
