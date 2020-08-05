@@ -3,6 +3,7 @@ title: Semi-Supervised Learning for Music Modelling
 date: 2020-05-13 18:23:35
 tags:
     - VAE
+    - Music Representation Learning
 ---
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 

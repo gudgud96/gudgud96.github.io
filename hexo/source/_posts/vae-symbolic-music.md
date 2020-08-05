@@ -4,6 +4,7 @@ date: 2020-01-26 17:54:50
 tags:
     - VAE
     - Symbolic Music
+    - Music Representation Learning
 ---
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 

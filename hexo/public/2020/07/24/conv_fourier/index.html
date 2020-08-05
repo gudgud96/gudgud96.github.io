@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Music research blog by Hao Hao Tan (gudgud96).">
+    <meta name="keyword"  content="machine learning music">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Spectrogram Conversion with CNNs - gudgud96&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Blogs about Machine Learning Topics in Music. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/profile.jpeg" />
+        </div>
+        <div class="name">
+            <b>Hao Hao Tan 🇲🇾</b>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <!-- <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>Tags</span>
+                </a>
+            </li> -->
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li >
+                <a href="/publications/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>Publications</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>About</span>
+                </a>
+            </li>
+            <li >
+                <a href="/bloglist/">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>Blog List</span>
+                </a>
+            </li>
+            <!--  -->
+        </ul>
+    </div>
+    <!-- 
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Introduction"><span class="toc-text">1 - Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Short-Time-Fourier-Transform-STFT"><span class="toc-text">2 - Short Time Fourier Transform (STFT)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Inverse-STFT"><span class="toc-text">3 - Inverse STFT</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Code-Implementation"><span class="toc-text">4 - Code Implementation</span></a></li></ol>
+</div>
+     -->
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> Blogs about Machine Learning Topics in Music. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Spectrogram Conversion with CNNs
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2020-07-24 18:20:39</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#Music Signal Processing" title="Music Signal Processing">Music Signal Processing</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<p>TLDR: This blog will discuss:<br>1 - A very brief introduction on short-time Fourier transform<br>2 - How spectrogram conversion can be implemented using CNNs (based on <a href="https://github.com/KinWaiCheuk/nnAudio" target="_blank" rel="noopener">nnAudio</a>)<br><br/></p>
+<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1 - Introduction"></a>1 - Introduction</h2><p>Recently, I have wanted to understand more about the audio domain in music signal processing. The obvious start will be to understand from time-frequency representations first, namely <strong>spectrograms</strong>. My wonderful colleague Raven Cheuk had released a GPU audio processing named <a href="https://github.com/KinWaiCheuk/nnAudio" target="_blank" rel="noopener">nnAudio</a> last year, which implements fast spectrogram conversions on GPU with 1D convolution nets, and I decided to further understand this connection between STFT and 1D CNNs.</p>
+<h2 id="2-Short-Time-Fourier-Transform-STFT"><a href="#2-Short-Time-Fourier-Transform-STFT" class="headerlink" title="2 - Short Time Fourier Transform (STFT)"></a>2 - Short Time Fourier Transform (STFT)</h2><p>First, we discuss the case for <strong>discrete Fourier transform</strong> (DFT), which converts a given audio signal of length \(L\) into a vector \(X_{DFT}\) of size \(N\), where \(N\) is the number of frequency bins (commonly, we set \(L = N\) for convenience in calculations). DFT basically tells the frequency distribution of the audio signal across multiple frequency bins. The equation can be written as:<br>$$X_{DFT}[n] = \displaystyle\sum_{l=1}^{L} x[l] \cdot e^{-i \cdot 2 \pi \cdot n \cdot \frac{l}{N}}$$</p>
+<p>However, the output DFT does not contain any time-related information. Hence, the solution is to chop the audio signal into multiple <strong>windows</strong>, apply DFT on each of them, and concatenate the vector outputs along the time axis. This results in the <strong>discrete short-time Fourier transform</strong> (STFT), which converts a given audio signal of length \(L\) into a time-frequency representation of shape \((N, T)\). \(N\) is the number of frequency bins, and \(T\) is the number of time steps, whereby for each time step a DFT operation is performed within a window of length \(L_{\textrm{w}}\) (similarly, \(L_{\textrm{w}} = N\) for convenience in calculations), and the number of steps is determined by how much the window is slided (hop length, \(H\)) to finish “sweeping” the audio signal.</p>
+<figure>
+  <img style="width:100%;" src="/img/stft.png" alt=""/>
+  <figcaption><br/>Figure 1: Discrete Short-Time Fourier Transform.</figcaption>
+</figure>
+
+<p>Given an audio signal \(x\), a <strong>complex-form spectrogram</strong> \(X\) which is the output of STFT is expressed by:<br>$$X[n, t] = \displaystyle\sum_{l=1}^{L_w} x[t \cdot H + l] \cdot w[l] \cdot e^{-i \cdot 2 \pi \cdot \frac{n}{N} \cdot l}$$</p>
+<p>We can further use Euler’s formula to expand \(e^{-i \cdot 2 \pi \cdot \frac{n}{N} \cdot l}\) into \(\cos(2 \pi \cdot \frac{n}{N} \cdot l) - i\sin(2 \pi \cdot \frac{n}{N} \cdot l)\). The term \(w[l]\) is an additional <a href="https://en.wikipedia.org/wiki/Window_function" target="_blank" rel="noopener"><strong>window function</strong></a> which helps to distribute spectral leakage according to the needs of the application. </p>
+<p>From Figure 1, we can already see the resemblance between 1D CNNs and STFT conversions. Understanding from the perspective of convolution networks, we can interpret Figure 1 as having \(N\) <strong>cosine and sine “filters”</strong> respectively, and perform <strong>1D convolution</strong> on the audio signal, whereby the <strong>stride</strong> is exactly of the <strong>hop length</strong> \(H\). </p>
+<h2 id="3-Inverse-STFT"><a href="#3-Inverse-STFT" class="headerlink" title="3 - Inverse STFT"></a>3 - Inverse STFT</h2><p>Can inverse STFT be implemented in terms of CNNs as well? In fact, this <a href="https://github.com/pseeth/torch-stft" target="_blank" rel="noopener">torch-stft</a> library implemented inverse STFT using 1D transposed convolutional nets. However, here I would like to portray an implementation using 2D convolution nets instead.</p>
+<p>If we put together the equations of discrete DFT and inverse DFT (with window function) as below:<br>$$X_{DFT}[n] = \displaystyle\sum_{l=1}^{L} x[l] \cdot w[l] \cdot e^{-i \cdot 2 \pi \cdot n \cdot \frac{l}{N}} \\ x[l] = \frac{1}{N \cdot w[l]} \displaystyle\sum_{n=1}^{N} X_{DFT}[n] \cdot e^{i \cdot 2 \pi \cdot n \cdot \frac{l}{N}}$$</p>
+<p>we can observe that both equations appear to be very related, and the terms are seemingly interchangeable. This also means that if we implement STFT using 1D convolutions, <strong>we can perform inverse STFT using the same cosine and sine “filters”</strong>, as the Euler term stays the same. </p>
+<p>As \(X_{DFT}\) is in complex form, we can observe that the multiplication with the Euler term results in:<br>$$(X_{real} + i X_{imag})(\cos \phi + i \sin \phi) \\ = (X_{real}\cos \phi - X_{imag}\sin \phi) + i(X_{real}\sin \phi + X_{imag}\cos \phi)$$ and as the input signal \(x\) is a real-value signal, we should observe that the values lie within the real part of the output, and \(X_{real}\sin \phi + X_{imag}\cos \phi = 0\).</p>
+<figure>
+  <img style="width:100%;" src="/img/istft.png" alt=""/>
+  <figcaption><br/>Figure 2: Inverse Short-Time Fourier Transform with the same convolution filters.</figcaption>
+</figure>
+
+<p>Since STFT is just a temporal version of DFT, we can perform inverse DFT using the above-stated method on each time step. Figure 2 illustrates the above-stated method using the same convolution filters. The only difference is that, since now the input is a 2D spectrogram, we have to perform 2D convolution. Hence, we can interpret the operation as performing 2D convolution using the cosine / sine filters of shape \((N, 1)\) on the spectrogram with shape \((N, T)\) with stride \((1, 1)\). </p>
+<p>The final output will be the segments of the original audio, with overlapped redundant parts due to the windows overlapping each other during STFT (see the parts to the left of the red dashed line in Figure 2). We can easily observe that other than the first segment, all segments have a starting overlapped segment of length \(L_w - H\), hence by removing these starting overlapped segments and concatenating all segments together we can reconstruct the original audio signal.</p>
+<h2 id="4-Code-Implementation"><a href="#4-Code-Implementation" class="headerlink" title="4 - Code Implementation"></a>4 - Code Implementation</h2><p>The above-stated methods are implemented in nnAudio using PyTorch, I provide the portals as follows:</p>
+<ol>
+<li><a href="https://github.com/KinWaiCheuk/nnAudio/blob/master/Installation/nnAudio/Spectrogram.py#L534" target="_blank" rel="noopener">Short-Time Fourier Transform with 1D-CNNs</a></li>
+<li><a href="https://github.com/KinWaiCheuk/nnAudio/blob/master/Installation/nnAudio/Spectrogram.py#L581" target="_blank" rel="noopener">Inverse STFT with 2D-CNNs</a></li>
+</ol>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        <li>
+            <a target="_blank" href="https://twitter.com/GoodGood014">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-twitter"></i>
+                            </span>
+            </a>
+        </li>
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/gudgud96">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://www.linkedin.com/in/tan-hao-hao">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-linkedin"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+    </ul>
+    
+    <p>
+        <!-- <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span> -->
+        All Rights Reserved @ gudgud96. Created By <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud" target="_blank" rel="noopener">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://gudgud96-github-io.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+
+
+</html>

@@ -15,6 +15,7 @@ Magenta: https://magenta.tensorflow.org/blog
 Hao-Wen Dong: https://salu133445.github.io/
 Sander Dieleman: https://benanne.github.io/
 
+
 ### Others
 Jiang Yu Ngyuwi: https://nguwijy.wordpress.com
 Thomas Kipf: http://tkipf.github.io/

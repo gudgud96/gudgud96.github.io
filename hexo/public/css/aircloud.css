@@ -1241,4 +1241,20 @@ pre .javascript .function {
 .gitment-comment p {
   text-indent: 0;
 }
+
+.page-tags > .item {
+  padding: 5px 8px;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  background: #ededed;
+  color: #666;
+  letter-spacing: 1px;
+  margin: 3px 1px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.page-tags > .item:hover{
+  background-color: rgba(39,243,106,0.15);
+}
 /*# sourceMappingURL=aircloud.css.map */

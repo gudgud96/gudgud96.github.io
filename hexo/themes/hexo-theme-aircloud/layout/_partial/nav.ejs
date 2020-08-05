@@ -16,16 +16,22 @@
                     <span><%= __('nav.home') %></span>
                 </a>
             </li>
-            <li <% if(is_current('tags')){ %> <%- "class=active" %> <% } %>>
+            <!-- <li <% if(is_current('tags')){ %> <%- "class=active" %> <% } %>>
                 <a href="<%= url_for(config.tag_dir) %>">
                     <i class="iconfont icon-biaoqian1"></i>
                     <span><%= __('nav.tags') %></span>
                 </a>
-            </li>
+            </li> -->
             <li <% if(is_current('archive')){ %> <%- "class=active" %> <% } %>>
                 <a href="<%= url_for(config.archive_dir) %>">
                     <i class="iconfont icon-guidang2"></i>
                     <span><%= __('nav.archives') %></span>
+                </a>
+            </li>
+            <li <% if(is_current('publications')){ %> <%- "class=active" %> <% } %>>
+                <a href="<%= config.root %><%- 'publications/' %>">
+                    <i class="iconfont publications"></i>
+                    <span><%= __('nav.publications') %></span>
                 </a>
             </li>
             <li <% if(is_current('about')){ %> <%- "class=active" %> <% } %>>
