@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Music research blog by Hao Hao Tan (gudgud96).">
+    <meta name="keyword"  content="machine learning music">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        ISMIR 2020 - Part 2 - gudgud96&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Blogs about Machine Learning Topics in Music. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/profile.jpeg" />
+        </div>
+        <div class="name">
+            <b>Hao Hao Tan 🇲🇾</b>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <!-- <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>Tags</span>
+                </a>
+            </li> -->
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li >
+                <a href="/publications/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>Publications</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>About</span>
+                </a>
+            </li>
+            <li >
+                <a href="/bloglist/">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>Blog List</span>
+                </a>
+            </li>
+            <!--  -->
+        </ul>
+    </div>
+    <!-- 
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Music-Source-Separation"><span class="toc-text">6 - Music Source Separation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-Music-Transcription-Pitch-Estimation"><span class="toc-text">7 - Music Transcription &#x2F; Pitch Estimation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-Model-Pruning"><span class="toc-text">8 - Model Pruning</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-Cover-Song-Detection"><span class="toc-text">9 - Cover Song Detection</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-Last-Words-on-ISMIR-2020"><span class="toc-text">10 - Last Words on ISMIR 2020</span></a></li></ol>
+</div>
+     -->
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> Blogs about Machine Learning Topics in Music. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        ISMIR 2020 - Part 2
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2020-10-17 09:10:42</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#Music Information Retrieval" title="Music Information Retrieval">Music Information Retrieval</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<h2 id="6-Music-Source-Separation"><a href="#6-Music-Source-Separation" class="headerlink" title="6 - Music Source Separation"></a>6 - Music Source Separation</h2><p><a href="https://program.ismir2020.net/poster_2-04.html" target="_blank" rel="noopener"><strong>Investigating U-Nets with various Intermediate Blocks for Spectrogram-based Singing Voice Separation</strong></a></p>
+<figure>
+  <img style="width:70%;" src="/img/ismir_unets.png" alt=""/>
+</figure>
+
+<p>U-Nets are very common in singing voice separation, with their prior success in image segmentation. This work further inspects the usage of various intermediate blocks by providing comparison and evaluations. 2 types of intermediate blocks are used, <strong>Time-Distributed Blocks</strong> which does not have inter-frame operations, and <strong>Time-Frequency Blocks</strong> which considers both time and frequency domain. The variants of each block are inspected (fully connected, CNN, RNN etc.). The <a href="https://www.youtube.com/watch?v=DuOvWpckoVE&feature=youtu.be&ab_channel=KU-Intelligence-Engineering-Lab" target="_blank" rel="noopener">demo</a> provided by this work is really superb - the best configuration found in this work yields a very clean singing voice separation.</p>
+<p><a href="https://program.ismir2020.net/poster_6-07.html" target="_blank" rel="noopener"><strong>Content based singing voice source separation via strong conditioning using aligned phonemes</strong></a></p>
+<figure>
+  <img style="width:70%;" src="/img/ismir_phoneme1.png" alt=""/>
+</figure>
+
+<p>This work explores <strong>informed source separation</strong> - utilizing prior knowledge about the mixture and target source. In this work, the conditioning information used is lyrics, which are further aligned in the granularity of phonemes. This work uses the <a href="https://arxiv.org/pdf/1709.07871.pdf" target="_blank" rel="noopener">FiLM</a> layer for conditioning, which the conditioning input is a 2D matrix of phonemes w.r.t. time. For weak conditioning, the same FiLM operation to the whole input patch; for strong conditioning, different FiLM operations are computed at different time frames.</p>
+<p><a href="https://program.ismir2020.net/poster_5-08.html" target="_blank" rel="noopener"><strong>Exploring Aligned Lyrics-informed Singing Voice Separation</strong></a></p>
+<figure>
+  <img style="width:70%;" src="/img/ismir_phoneme2.png" alt=""/>
+</figure>
+
+<p>Similar to the above work, this work also utilizes aligned lyrics / phonemes for improving singing voice separation. The architecture is different - this work takes the backbone from the state-of-the-art <a href="https://sigsep.github.io/open-unmix/" target="_blank" rel="noopener">Open Unmix</a> model, then the authors propose to use an additional <strong>lyric encoder</strong> to learn embeddings for conditioning on the backbone. This idea resembles much with the idea from <a href="https://paperswithcode.com/task/text-to-speech-synthesis" target="_blank" rel="noopener">text-to-speech</a> models, where the text information is encoded to condition on the speech synthesis component.</p>
+<p><a href="https://program.ismir2020.net/poster_5-16.html" target="_blank" rel="noopener"><strong>Multitask Learning for Instrument Activation Aware Music Source Separation</strong></a></p>
+<figure>
+  <img style="width:50%;" src="/img/ismir_multitask.png" alt=""/>
+</figure>
+
+<p>This work leverages multitask learning for source separation. Multitask learning states that by choosing a relevant subsidiary task, and allow it to train in line with the original task, can improve the performance of the original task. This work chooses to use <strong>instrument activation detection</strong> as the subsidary task, because it can intuitively suppress wrongly predicted activation by the source separation model at the supposed silent segments. By training on a larger dataset with multitask learning, the model can perform better on almost all aspects as compared to Open Unmix.</p>
+<h2 id="7-Music-Transcription-Pitch-Estimation"><a href="#7-Music-Transcription-Pitch-Estimation" class="headerlink" title="7 - Music Transcription / Pitch Estimation"></a>7 - Music Transcription / Pitch Estimation</h2><p><a href="https://program.ismir2020.net/poster_2-18.html" target="_blank" rel="noopener"><strong>Multiple F0 Estimation in Vocal Ensembles using Convolutional Neural Networks</strong></a></p>
+<figure>
+  <img style="width:65%;" src="/img/ismir_vocal.png" alt=""/>
+</figure>
+
+<p>This work is a direct adaptation of CNNs on F0 estimation, applying on vocal ensembles. The key takeaways for me in this work is of 3-fold: (i) <strong>phase information does help</strong> for F0 estimation tasks (would it also be the same for other tasks? this will be interesting to explore); (ii) deeper models will work better; (iii) late concatenation of magnitude and phase information works better than early concatenation of both.</p>
+<p><a href="https://program.ismir2020.net/poster_3-01.html" target="_blank" rel="noopener"><strong>Multi-Instrument Music Transcription Based on Deep Spherical Clustering of Spectrograms and Pitchgrams</strong></a></p>
+<figure>
+  <img style="width:90%;" src="/img/ismir_spherical.png" alt=""/>
+</figure>
+
+<p>This is a super interesting work! For previous music transcription works, the output will be of a pre-defined set of instruments, with activation predicted for each instrument. This work intends to transcribe arbitrary instruments, hence being able to transcribe undefined instruments that are not included in the training data. The key idea is also inspired by methods from the speech domain, where <strong>deep clustering</strong> separates a speech mixture to an arbitrary number of speakers based on the characteristics of voices. Hence, the spectrograms and pitchgrams (estimated by an <a href="https://brianmcfee.net/papers/ismir2017_salience.pdf" target="_blank" rel="noopener">existing multi-pitch estimator</a>) provide complementary information for timbre-based clustering and part separation.</p>
+<p><a href="https://program.ismir2020.net/poster_3-17.html" target="_blank" rel="noopener"><strong>Polyphonic Piano Transcription Using Autoregressive Multi-state Note Model</strong></a></p>
+<figure>
+  <img style="width:70%;" src="/img/ismir_transcription.png" alt=""/>
+</figure>
+
+<p>This work recognizes the problem of frame-level transcription: some frames might start after the onset events, which makes it harder to distinguish and transcribe. To solve this, the authors use an <strong>autoregressive model</strong> by utilizing the time-frequency and predicted transcription of the previous frame, and feeding them during the training of current step. Training of the autoregressive model is done via teacher-forcing. Results show that the model provides significantly higher accuracy on both note onset and offset estimation compared to its non-auto-regressive version. And just one thing to add: their <a href="https://program.ismir2020.net/lbd_444.html" target="_blank" rel="noopener">demo</a> is super excellent, such sleek and smooth visualization on real-time music transcription!</p>
+<h2 id="8-Model-Pruning"><a href="#8-Model-Pruning" class="headerlink" title="8 - Model Pruning"></a>8 - Model Pruning</h2><p><a href="https://program.ismir2020.net/poster_4-11.html" target="_blank" rel="noopener"><strong>Ultra-light deep MIR by trimming lottery ticket</strong></a></p>
+<figure>
+  <img style="width:70%;" src="/img/ismir_lottery.png" alt=""/>
+</figure>
+
+<p>The <a href="https://arxiv.org/pdf/1803.03635.pdf" target="_blank" rel="noopener">lottery ticket hypothesis</a> paper is the best paper in ICLR 2020, which motivates me to looking into this interesting work. Also, model compression is a really useful technique in an industrial setting as it significantly reduces memory footprint when scaling up to large-scale applications. With the new proposed approach by the authors known as <strong>structured trimming</strong>, which remove units based on magnitude, activation and normalization-based criteria, model size can be even more lighter without trading off much in terms of accuracy. The cool thing of this paper is that it evaluates the trimmed model on various popular MIR tasks, and these efficient trimmed subnetworks, removing up to 85% of the weights in deep models, could be found.</p>
+<h2 id="9-Cover-Song-Detection"><a href="#9-Cover-Song-Detection" class="headerlink" title="9 - Cover Song Detection"></a>9 - Cover Song Detection</h2><p><a href="https://program.ismir2020.net/poster_2-15.html" target="_blank" rel="noopener"><strong>Combining musical features for cover detection</strong></a></p>
+<figure>
+  <img style="width:100%;" src="/img/ismir_doras.png" alt=""/>
+</figure>
+
+<p>In previous cover song detection works, either the harmonic-related representation (e.g. <a href="https://www.upf.edu/web/mtg/hpcp" target="_blank" rel="noopener">HPCP</a>, <a href="https://brianmcfee.net/papers/ismir2017_chord.pdf" target="_blank" rel="noopener">cremaPCP</a>) or the melody-related representation (e.g. <a href="https://arxiv.org/pdf/1907.01824.pdf" target="_blank" rel="noopener">dominant melody</a>, <a href="https://arxiv.org/pdf/1910.09862.pdf" target="_blank" rel="noopener">multi-pitch</a>) is used. This work simply puts both together, and explores various fusion methods to inspect its improvement. The key intuition is that some cover songs are similar in harmonic content but not in dominant melody, and some are of the opposite. The interesting finding is that with only a simple average aggregation of \(d_\textrm{melody}\) and \(d_\textrm{cremaPCP}\), the model is able to yield the best improvement over individual models, and (strangely) it performs even better than a more sophisticated late fusion model.</p>
+<p><a href="https://program.ismir2020.net/poster_6-15.html" target="_blank" rel="noopener"><strong>Less is more: Faster and better music version identification with embedding distillation</strong></a></p>
+<figure>
+  <img style="width:100%;" src="/img/ismir_furkan.png" alt=""/>
+</figure>
+
+<p>In <a href="https://arxiv.org/pdf/1910.12551.pdf" target="_blank" rel="noopener">a previous work</a>, the authors proposed a musically-motivated embedding learning model for cover song detection, but the required embedding size is pretty huge at around 16,000. In this work, the authors experimented with various methods to reduce the amount of dimension in the embedding for large-scale retrieval applications. The results show that with a <strong>latent space reconfiguration</strong> method, which is very similar to transfer learning methods by fine-tuning additional dense layers on a pre-trained model, coupling with a normalized softmax loss, the model can achieve the best performance even under an embedding size of 256. Strangely, this performs better than training the whole network + dense layers from scratch.</p>
+<h2 id="10-Last-Words-on-ISMIR-2020"><a href="#10-Last-Words-on-ISMIR-2020" class="headerlink" title="10 - Last Words on ISMIR 2020"></a>10 - Last Words on ISMIR 2020</h2><p>That’s all for my ISMIR 2020! I think the most magical moment for me would be when I could finally chat with some of the authors (and some are really big names!) of the works that I really like throughout my journey of MIR, and furthermore being able to exchange opinions with them. Just hope to be able to meet all of them physically some day!</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        <li>
+            <a target="_blank" href="https://twitter.com/GoodGood014">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-twitter"></i>
+                            </span>
+            </a>
+        </li>
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/gudgud96">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://www.linkedin.com/in/tan-hao-hao">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-linkedin"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+    </ul>
+    
+    <p>
+        <!-- <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span> -->
+        All Rights Reserved @ gudgud96. Created By <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud" target="_blank" rel="noopener">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://gudgud96-github-io.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+
+
+</html>
