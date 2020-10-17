@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Music research blog by Hao Hao Tan (gudgud96).">
+    <meta name="keyword"  content="machine learning music">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        ISMIR 2020 - Part 1 - gudgud96&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Blogs about Machine Learning Topics in Music. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/profile.jpeg" />
+        </div>
+        <div class="name">
+            <b>Hao Hao Tan 🇲🇾</b>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <!-- <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>Tags</span>
+                </a>
+            </li> -->
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li >
+                <a href="/publications/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>Publications</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>About</span>
+                </a>
+            </li>
+            <li >
+                <a href="/bloglist/">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>Blog List</span>
+                </a>
+            </li>
+            <!--  -->
+        </ul>
+    </div>
+    <!-- 
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Introduction"><span class="toc-text">1 - Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Controllable-Symbolic-Music-Generation"><span class="toc-text">2 - Controllable Symbolic Music Generation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Disentangled-Representation-Learning"><span class="toc-text">3 - Disentangled Representation Learning</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Singing-Voice-Conversion"><span class="toc-text">4 - Singing Voice Conversion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Audio-Synthesis"><span class="toc-text">5 - Audio Synthesis</span></a></li></ol>
+</div>
+     -->
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> Blogs about Machine Learning Topics in Music. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        ISMIR 2020 - Part 1
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2020-10-17 09:10:42</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#Music Information Retrieval" title="Music Information Retrieval">Music Information Retrieval</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<p>TLDR: This blog will discuss:<br>1 - Various exciting papers (sorted according to topics) and research directions of ISMIR 2020<br>2 - My own conference experience of this year’s ISMIR<br><br/></p>
+<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1 - Introduction"></a>1 - Introduction</h2><p>Finally, ISMIR 2020 is around the corner! The conference was originally designated to take place in Montreal, Canada (which was a dream place for me to visit, because a lot of major conferences like NeurIPS, ICLR, ICML were hosted there before). But sadly due to COVID-19, the conference is changed into a virtual event. It is also my first ISMIR, and I have been so looking forward to it since day 1 of doing MIR research, so indeed it is a little bit disappointed for unable to travel and meet people physically this year.</p>
+<p>Nevertheless, I can already feel that ISMIR is such a unique conference as compared to others, although in a virtual setting, and I can almost understand why so many ISMIR visitors have repeatedly emphasized that ISMIR is the best conference of all. The topics are super interesting, and the community is super friendly, always willing to share &amp; exchange, and extremely fun to talk to.</p>
+<p>Below I try to summarize the papers &amp; posters that I have personally visited, sorted by relevant topics. The list will by no means be exhaustive, and will be very related to my own focus &amp; familiarity (I am more familiar / interested in controllable music generation, music representation learning, music audio synthesis, and some popular MIR tasks e.g. pitch estimation, voice conversion, source separation etc.).</p>
+<h2 id="2-Controllable-Symbolic-Music-Generation"><a href="#2-Controllable-Symbolic-Music-Generation" class="headerlink" title="2 - Controllable Symbolic Music Generation"></a>2 - Controllable Symbolic Music Generation</h2><p><a href="https://program.ismir2020.net/poster_5-06.html" target="_blank" rel="noopener"><strong>Attributes-Aware Deep Music Transformation</strong></a></p>
+<figure>
+  <img style="width:100%;" src="/img/ismir_attr.png" alt=""/>
+</figure>
+
+<p>This work uses a very similar architecture like <a href="https://arxiv.org/pdf/1706.00409.pdf" target="_blank" rel="noopener">Fader Networks</a> in the computer vision domain - a conditional VAE, with an additional adversarial component to ensure latent \(z\) does not incorporate condition information. Evaluation on controllability is done on monophonic music. I tried the same architecture on polyphonic music in <a href="https://program.ismir2020.net/poster_1-13.html" target="_blank" rel="noopener">Music FaderNets</a>, but I found that it does not produce optimal results in terms of linearity as compared to other latent regularization methods.<br>One interesting thing is that the authors do not compare results on linear correlation with <a href="https://arxiv.org/pdf/1707.04588.pdf" target="_blank" rel="noopener">GLSR-VAE</a>, because they argued that GLSR-VAE is not designed to enforce linear correlation between latent values and attributes. I agree this to a certain extent, but to me linear correlation between both is still the most intuitive way to achieve controllability on low-level attributes, hence measuring that is still important in the context of controllable generation.</p>
+<p><a href="https://program.ismir2020.net/poster_6-08.html" target="_blank" rel="noopener"><strong>BebopNet: Deep Neural Models for Personalized Jazz Improvisations (Best Paper Award)</strong></a></p>
+<figure>
+  <img style="width:100%;" src="/img/ismir_bebop.png" alt=""/>
+</figure>
+
+<p>Congrats on this paper getting the best research award of this year! Compared to other similar works, this work focuses on <strong>personalization</strong>. Within the pipeline, other than the generation component, a dataset personal to the user is collected to train personal preference metrics, very much like an active learning strategy. As the music plays, the user adjusts a meter to display the level of satisfaction of the currently heard jazz solo. Then a regression model is trained to predict the user’s taste. Finally, a beam serach is employed by using the criterion of score predicted the user preference regression model. The output of beam search should result in a music piece most adhered to the user preference. A very simple idea, but could be widely adoptable to all kinds of generation models to add in more degree of personalization.</p>
+<p><a href="https://program.ismir2020.net/poster_1-05.html" target="_blank" rel="noopener"><strong>Connective Fusion: Learning Transformational Joining of Sequences with Application to Melody Creation</strong></a></p>
+<figure>
+  <img style="width:100%;" src="/img/ismir_conn.png" alt=""/>
+</figure>
+
+<p>This work proposes <strong>connective fusion</strong>, which is a generation scheme by transforming between two given music sequences. The architecture is inspired by the <a href="https://arxiv.org/pdf/1711.05772.pdf" target="_blank" rel="noopener">Latent Constraint</a> paper - firstly, we pretrain a VAE to learn latent code \(z\) for a music sequence. Then, using a GAN-like actor-critic method, we learn a generator \(G\) that generates latent code pair \((z^\prime_L, z^\prime_R)\) that is indistuingishable from the input pair\((z_L, z_R)\). During training, we also add in an additional style vector \(s\), hence also learning a style space which controls how the two sequences are connectively fused.<br>I was fortunate enough to discuss with the author Taketo Akama about several issues of using VAE for music generation. In general, we found a significant tradeoff between attribute controllability and reconstruction (identity preservation), and training to generate longer sequence seems to really be a hassle. <a href="http://archives.ismir.net/ismir2019/paper/000100.pdf" target="_blank" rel="noopener">His work last year</a> has also helped me a lot with Music FaderNets, so huge kudos to him!</p>
+<p><a href="https://program.ismir2020.net/poster_6-16.html" target="_blank" rel="noopener"><strong>Generating Music with a Self-Correcting Non-Chronological Autoregressive Model</strong></a></p>
+<figure>
+  <img style="width:100%;" src="/img/ismir_edit.png" alt=""/>
+</figure>
+
+<p>I spotted this work previously during ML4MD and find it interesting because it suggests a very different approach towards music generation, which is using <strong>edit distance</strong>. The two key differences with common music generation idea is that (i) music composition can be non-chronological in nature, and (ii) the generation process should allow adding and removing notes. The input representaion used is pixel-like piano roll, so the approach inherits the problem of not distinguishing long sustains and continuous short onsets. Also, the evaluation is done with comparison against <a href="https://www.jmlr.org/papers/volume17/16-272/16-272.pdf" target="_blank" rel="noopener">orderless NADE</a> and <a href="https://arxiv.org/pdf/1903.07227.pdf" target="_blank" rel="noopener">CoCoNet</a>, but with several recent works suggesting that richer vocabulary of event tokens can improve generation results, it might me interesting to see how this work compares or even adds value on top of these works.</p>
+<p><a href="https://program.ismir2020.net/poster_3-06.html" target="_blank" rel="noopener"><strong>PIANOTREE VAE: Structured Representation Learning for Polyphonic Music</strong></a></p>
+<figure>
+  <img style="width:60%;" src="/img/ismir_pianotree.png" alt=""/>
+</figure>
+
+<p>This work proposes a new hierarchical representation for polyphonic music. Commonly, polyphonic music is either represented by piano rolls (which is commonly treated like pixels), or MIDI event tokens. The authors suggest a <strong>tree-like structure</strong>, where each beat is a tree node, and the notes played on the same beat are the childrens of the node. They also propose a VAE model structure which has one-to-one correspondence with the data structure, and the evaluation shows that as compared to previous representations, PianoTree VAE is superior in terms of reconstruction and downstream music generation.<br>I definitely think that PianoTree has the potential to be the <em>de facto</em> representation of polyphonic music, because indeed it is more reasonable to understand polyphonic music in terms of hierachical structure, as compared to a flat sequence of tokens. However, I personally think that the common usage of PianoTree will depend on two key factor: <strong>the ease of usage</strong> (e.g. open source of encoder components and examples of usage), and whether <strong>the data structure is tightly coupled with the proposed VAE model</strong>. Event tokens are used widespread because any kind of sequence models / NLP models can be ported on top of that representation. Can PianoTree be ported easily to other kinds of architectures, and will the performance on all aspects remain the same? This is a crucial point for whether the structure will replace event tokens and be adopted widely in my opinion.</p>
+<p><a href="https://program.ismir2020.net/poster_5-05.html" target="_blank" rel="noopener"><strong>Learning Interpretable Representation for Controllable Polyphonic Music Generation</strong></a></p>
+<figure>
+  <img style="width:60%;" src="/img/ismir_interpretable.png" alt=""/>
+</figure>
+
+<p>This work is a demonstration of the power of PianoTree VAE above. This time, the authors explore the <strong>disentanglement of chords and texture</strong> of a music piece. The architecture adopts a similar idea as their prior work called <a href="http://archives.ismir.net/ismir2019/paper/000072.pdf" target="_blank" rel="noopener">EC\(^2\)-VAE</a> (which inspires Music FaderNets a huge lot as well!), where a chord encoder and texture encoder is used for latent representation learning, and a chord decoder with the PianoTree VAE decoder is used for reconstruction. They evaluated the results on three practical generation tasks: compositional style transfer, texture variation via sampling, and accompaniment arrangement. And, their demo and quality of generation is really superb, so it seems like PianoTree could really work well.<br>Meeting the NYU Shanghai team has also been a great experience, especially the discussions with Ziyu Wang has been really enjoyable. Huge kudos to them!</p>
+<p><a href="https://program.ismir2020.net/poster_1-13.html" target="_blank" rel="noopener"><strong>Music FaderNets: Controllable Music Generation Based on High-level Features via Low-level Feature Modelling (My Own Work)</strong></a></p>
+<figure>
+  <img style="width:100%;" src="/img/ismir_fadernets.png" alt=""/>
+</figure>
+
+<p>My work on controllable polyphonic music generation! At first I wanted to work on controllable geneeration based on emotion, but I found that representations of high-level musical qualities are not easy to learn with supervised learning techniques, either because of the <strong>insufficiency of labels</strong>, or the <strong>subjectiveness</strong> (and hence large variance) in human-annotated labels. We propose to use low-level features as “bridges” to between the music and the high level features. Hence, the model consists of:</p>
+<ul>
+<li><strong>faders</strong>, where each fader controls a low-level attribute of the music sample independently in a continuous manner. This relies on latent regularization and feature disentanglement</li>
+<li><strong>presets</strong>, which learn the relationship between the levels of the sliding knobs of low-level features, and the selected high-level feature. This relies on Gaussian Mixture VAEs which imposes hierachical dependencies.</li>
+</ul>
+<p>This method combines the advantages of <strong>rule-based methods</strong> and <strong>data-driven machine learning</strong>. Rule-based systems are good at interpretability (i.e. you can explicitly hear that some factors are obviously changing during generation), but it is not robust to all situations; whereas machine learning methods are the total opposite. Another interesting point is the usage of <strong>semi-supervised learning</strong>. Since we know that arousal labels are noisy, we can choose only the quality ones with lesser variance and higher representability for training. In this work we prove that lesser labels can be a good thing - using the semi-supervised setting of GM-VAE to train, with only 1% of labelled arousal data, we can learn well-separated, discriminative mixtures. This can provide a feasible approach to learn representations of other kinds of abstract high-level features.</p>
+<p><a href="https://program.ismir2020.net/poster_1-09.html" target="_blank" rel="noopener"><strong>Music SketchNet: Controllable Music Generation via Factorized Representations of Pitch and Rhythm</strong></a></p>
+<figure>
+  <img style="width:80%;" src="/img/ismir_sketchnet.png" alt=""/>
+</figure>
+
+<p>This work explores the application of music inpainting - given partial musical ideas (i.e. music segments), the model is able to “fill up the blanks” with sequences of similar style. An additional controllable factor is provided in this model on pitch and rhythm (pretty much inspired by <a href="http://archives.ismir.net/ismir2019/paper/000072.pdf" target="_blank" rel="noopener">EC\(^2\)-VAE</a> as well). There are 3 separate components: <strong>SketchVAE</strong> for latent representation learning, <strong>SketchInpainter</strong> for predicting missing measures based on previous and future contexts, and <strong>SketchConnector</strong> which finalizes the generation by simulating user controls with random unmasking (a common technique in training language generators).</p>
+<p><a href="https://program.ismir2020.net/poster_1-17.html" target="_blank" rel="noopener"><strong>The Jazz Transformer on the Front Line: Exploring the Shortcomings of AI-composed Music through Quantitative Measures</strong></a></p>
+<figure>
+  <img style="width:80%;" src="/img/ismir_jazz.png" alt=""/>
+</figure>
+
+<p>This is a really interesting work that tries to answer a lot of pressing questions related to Transformer-based music generation. Are Transformers really that good? If not, what are the culprits? Does structure-related labels help generation?</p>
+<p>For me the real key contributions for this work are the findings concluded on the proposed objective metrics used to evaluate the generated music. There are so many objective metrics being proposed (I recall <a href="https://arxiv.org/pdf/1912.05537.pdf" target="_blank" rel="noopener">this work</a> suggesting several metrics for Transformer AE as well), but for Transformers which are often crowned for more structured generation, how do we evaluate structureness other than subjective tests? I find the idea of using <a href="https://www.audiolabs-erlangen.de/resources/MIR/FMP/C4/C4S3_ScapePlot.html" target="_blank" rel="noopener">fitness scape plot</a> to quantify structureness super interesting. Although the field will never agree on a set of evaluation metrics, but understanding where Transformers are still short of in overall will definitely drive the community to pinpoint on certain areas to improve.</p>
+<h2 id="3-Disentangled-Representation-Learning"><a href="#3-Disentangled-Representation-Learning" class="headerlink" title="3 - Disentangled Representation Learning"></a>3 - Disentangled Representation Learning</h2><p><a href="https://program.ismir2020.net/poster_5-10.html" target="_blank" rel="noopener"><strong>Unsupervised Disentanglement of Pitch and Timbre for Isolated Musical Instrument Sounds</strong></a></p>
+<figure>
+  <img style="width:80%;" src="/img/ismir_jyun.png" alt=""/>
+</figure>
+
+<p>Work by my senpais, Yin-Jyun Luo and and Raven Cheuk, so definitely hands down! Jyun worked on <a href="https://arxiv.org/pdf/1906.08152.pdf" target="_blank" rel="noopener">pitch-timbre disentanglement</a> before, and in this work he decided to push it further - can we do such disentanglement in an unsupervised manner? </p>
+<p>This work employs a key idea: <strong>moderate pitch shiftings will not change timbre</strong>. Hence, even if we don’t have any labels annotated on pitch and timbre, we can still achieve disentanglement by <a href="https://paperswithcode.com/task/contrastive-learning" target="_blank" rel="noopener">contrastive learning paradigms</a> - data augmentation by transposing the pitch, but enforce relations in \(z_\textrm{pitch}\) and \(z_\textrm{timbre}\). The authors propose 4 losses: regression loss, <a href="https://arxiv.org/pdf/2002.05709.pdf" target="_blank" rel="noopener">contrastive loss</a>, <a href="https://arxiv.org/pdf/1703.10593v7.pdf" target="_blank" rel="noopener">cycle consistency loss</a> and a new <strong>surrogate label loss</strong>. I personally think the power of this framework is not just for disentangling timbre and pitch, but unsupervised representation learning as a whole. Can this unsupervised framework be applied on other harder problems (e.g. music sequences, and disentangling musical factors)? How would data augmentation happen in different problems, and would that affect the formulation of losses? These will be interesting questions that require much creativity to explore.</p>
+<p><a href="https://program.ismir2020.net/poster_3-15.html" target="_blank" rel="noopener"><strong>Metric learning VS classification for disentangled music representation learning</strong></a></p>
+<figure>
+  <img style="width:105%;" src="/img/ismir_metric.png" alt=""/>
+</figure>
+
+<p>This interesting work connects 3 things together: metric learning (learns similarity between examples), classification, and disentangled representation learning (which corresponds to <a href="http://www.justinsalamon.com/uploads/4/3/9/4/4394963/lee_disentangledmusicsim_icassp2020.pdf" target="_blank" rel="noopener">this work</a>). Firstly, the authors connect classication and metric learning with <strong>proxy-based metric learning</strong>. Then, with all combinations of models and their disentangled version, evaluation is done on 4 types of tasks: training time, similarity retrieval, auto-tagging, and triplet-prediction. Results show that classification-based models are<br>generally advantageous for training time, similarity retrieval, and auto-tagging, while deep metric learning exhibits better performance for triplet-prediction. Disentanglement slightly improves the result on most settings.</p>
+<p><a href="https://program.ismir2020.net/poster_1-15.html" target="_blank" rel="noopener"><strong>dMelodies: A Music Dataset for Disentanglement Learning</strong></a></p>
+<figure>
+  <img style="width:100%;" src="/img/ismir_dmel.png" alt=""/>
+</figure>
+
+<p>This work proposes a new dataset which resembles <a href="https://github.com/deepmind/dsprites-dataset" target="_blank" rel="noopener">dSprites</a> in the computer vision domain, which is designed for learning and <strong>evaluating disentangled representation learning algorithms for music</strong>. The authors also ran benchmark experiments using common disentanglement methods (\(\beta\)-VAE, Annealed-VAE and Factor-VAE). Overall, the results suggest that disentanglement is comparable, but reconstruction accuracy is much worse, and the sensitivity on hyperparameters are much higher. This again proves the tradeoff between reconstruction and disentanglement / controllability using VAEs on music data.<br>I discussed with the author Ashis Pati on why not use real-world monophonic music dataset (e.g. <a href="https://ifdo.ca/~seymour/nottingham/nottingham.html" target="_blank" rel="noopener">Nottingham dataset</a>) with attribute annotations, but generating synthetic data instead. He suggests that it is to preserve the orthogonality and balanced composition of each attribute within the dataset. It seems like the balance between orthogonality and resemblance to real music is a lot more delicate that expected when creating a dataset like this. (Meanwhile, Ashis’ work has been very crucial to Music FaderNets, and it is such a joy to finally meet him and chat in person. One of the coolest moment during the conference!)</p>
+<h2 id="4-Singing-Voice-Conversion"><a href="#4-Singing-Voice-Conversion" class="headerlink" title="4 - Singing Voice Conversion"></a>4 - Singing Voice Conversion</h2><p><a href="https://program.ismir2020.net/poster_1-08.html" target="_blank" rel="noopener"><strong>Zero-Shot Singing Voice Conversion</strong></a></p>
+<figure>
+  <img style="width:80%;" src="/img/ismir_singing.png" alt=""/>
+</figure>
+
+<p>The most interesting part of this work is the <strong>zero-shot</strong> part, which largely incorporates ideas from the speech domain. Speaker embedding networks were found to be successful for enabling zero-shot voice conversion of speech, whereby the system can model and adapt to new unseen voices on the fly. The authors adopted the same idea for singing voice conversion by using a <a href="https://github.com/CorentinJ/Real-Time-Voice-Cloning" target="_blank" rel="noopener">pretrained speaker embedding network</a>, and then using the WORLD vocoder with learnable parameters for synthesis. It seems like the “pre-trained fine-tune” idea from other domains has influenced much works in MIR, moreover this work shows that using relevant foreign-domain embeddings (speech) on music tasks (singing voice) can actually work.</p>
+<h2 id="5-Audio-Synthesis"><a href="#5-Audio-Synthesis" class="headerlink" title="5 - Audio Synthesis"></a>5 - Audio Synthesis</h2><p><a href="https://program.ismir2020.net/poster_4-16.html" target="_blank" rel="noopener"><strong>DrumGAN: Synthesis of Drum Sounds with Timbral Feature Conditioning Using Generative Adversarial Networks</strong></a></p>
+<figure>
+  <img style="width:60%;" src="/img/ismir_drumgan.png" alt=""/>
+</figure>
+
+<p>Super cool and useful work (can’t wait to use the plugin as a producer)! This work uses a <strong>progressive growing GAN</strong> (similar to the idea in <a href="">GANSynth</a>) to synthesize different types of drum sounds. Moreover, to achieve user controllability, the model allows several factors to be changed during input time, including  brightness, boominess, hardness etc. to synthesize different kinds of drum sounds. To evaluate controllability, unlike using Spearman / Pearson correlation or <a href="http://proceedings.mlr.press/v80/adel18a/adel18a.pdf">R-score in linear regressor</a>, which are more popular in the music generation domain, this work evaluates against several other baseline scores as proposed in <a href="https://arxiv.org/pdf/1911.11853.pdf" target="_blank" rel="noopener">a previous work using U-Net architecture</a>. This could probably shed light to a new spectrum of measurements in terms of factor controllability.</p>
+<p>Another interesting thing is that this work uses <strong>complex STFT spectrogram</strong> as the audio representation. When I worked on piano audio synthesis, the common representation used is the magnitude Mel-spectrogram, which is why for the output a vocoder (e.g. WaveNet, WaveGAN, WaveGlow) is needed to invert Mel-spectrograms to audio. But in this work, the output directly reconstructs the real and imaginary parts of the spectrogram, and to reconstruct the audio we only need to do an inverse STFT. This can ensure better audio reconstruction quality, and phase information might also help audio representation learning.</p>
+<p><em>The remaining topics (source separation, transcription, model pruning and cover song detection) will be covered in <a href="/2020/10/17/ismir_2020_pt2/">Part 2</a></em>.</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        <li>
+            <a target="_blank" href="https://twitter.com/GoodGood014">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-twitter"></i>
+                            </span>
+            </a>
+        </li>
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/gudgud96">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://www.linkedin.com/in/tan-hao-hao">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-linkedin"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+    </ul>
+    
+    <p>
+        <!-- <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span> -->
+        All Rights Reserved @ gudgud96. Created By <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud" target="_blank" rel="noopener">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://gudgud96-github-io.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+
+
+</html>
