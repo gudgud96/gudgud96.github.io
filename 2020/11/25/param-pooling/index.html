@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Music research blog by Hao Hao Tan (gudgud96).">
+    <meta name="keyword"  content="machine learning music">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Parameterized Pooling Layers - gudgud96&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Blogs about Machine Learning Topics in Music. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/profile.jpeg" />
+        </div>
+        <div class="name">
+            <b>Hao Hao Tan 🇲🇾</b>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <!-- <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>Tags</span>
+                </a>
+            </li> -->
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li >
+                <a href="/publications/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>Publications</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>About</span>
+                </a>
+            </li>
+            <li >
+                <a href="/bloglist/">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>Blog List</span>
+                </a>
+            </li>
+            <!--  -->
+        </ul>
+    </div>
+    <!-- 
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Introduction"><span class="toc-text">1 - Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-AutoPool"><span class="toc-text">2 - AutoPool</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Generalized-Mean-Pooling-GeMPool"><span class="toc-text">2 - Generalized Mean Pooling (GeMPool)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Other-Aggregating-Mechanisms"><span class="toc-text">3 - Other Aggregating Mechanisms</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Code-Implementation"><span class="toc-text">4 - Code Implementation</span></a></li></ol>
+</div>
+     -->
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> Blogs about Machine Learning Topics in Music. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Parameterized Pooling Layers
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2020-11-25 10:24:37</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#Music Signal Processing" title="Music Signal Processing">Music Signal Processing</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#Deep Learning" title="Deep Learning">Deep Learning</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<p>TLDR: This blog will discuss:<br>1 - Two parameterized pooling layers which aim to improve beyond average and max pooling<br>2 - The techniques introduced are: <a href="https://www.justinsalamon.com/uploads/4/3/9/4/4394963/mcfee_autopool_taslp_2018.pdf" target="_blank" rel="noopener">AutoPool</a> and <a href="https://arxiv.org/pdf/1711.02512.pdf" target="_blank" rel="noopener">Generalized Mean Pooling (GeMPool)</a><br><br/></p>
+<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1 - Introduction"></a>1 - Introduction</h2><p>Pooling layers in deep learning serve the purpose of <strong>aggregating information</strong> - given a bunch of numbers, how do I summarize them into 1 number which represents this bunch of numbers the most? </p>
+<p>The very first encounter of most deep learning practitioners with pooling layers should be within the stack of “conv - pool - relu” block in image classification architectures, e.g. LeNet, ResNet, etc. Pooling layers come after convolution layers, with the purpose to <strong>downsample</strong> the image, also hoping to produce a more compact representation within a lower dimension. Another common usage of pooling layers is on <strong>temporal aggregation</strong> for sequence data, e.g. summarizing values across a time axis. For example, to learn an embedding (e.g. song embedding, sentence embedding) of shape \((d,)\) from a 2-D sequence data (e.g. spectrograms, word embeddings) with shape \((M, T)\), where \(T\) is the temporal axis, it is very common to apply pooling on the temporal axis to reduce the representation into 1-D.</p>
+<p>The most common pooling methods are either <strong>average pooling</strong> or <strong>max pooling</strong>. Average pooling takes the mean of a given set of values, hence the contribution of each value to the final aggregated value is equal. Whereas, max pooling takes only the max value, hence the max value contributes fully to the final aggregated value. A (probably inappropiate) analogy will be: average pooling is more like collective opinion &amp; democracy, whereas max pooling is more like tyranny &amp; eliticism where only the best speaks.</p>
+<figure>
+  <img style="width:100%;" src="/img/mean-vs-max-pool.png" alt=""/>
+  <figcaption><br/>Figure 1: Average Pooling VS Max Pooling. Is there a way to exploit states between both?</figcaption>
+</figure>
+
+<p>The also explains why average pooling produces <strong>smoother, blurrer</strong> feature maps, and max pooling produces <strong>sharper, discontinuous</strong> feature maps. However, it is not guaranteed that either of the representation is the best for our applications. The question is: <strong>is there a way to exploit states between average and max pooling?</strong> Furthermore, can we rely on backpropagation and deep learning to learn a parameter \(p\), such that it gives us the best pooled output for our own application? This is the motivation of <strong>parameterized / adaptive pooling</strong> methods.</p>
+<p>Below I will discuss two methods that I recently read up, which is <a href="https://www.justinsalamon.com/uploads/4/3/9/4/4394963/mcfee_autopool_taslp_2018.pdf" target="_blank" rel="noopener">AutoPool</a> and <a href="https://arxiv.org/pdf/1711.02512.pdf" target="_blank" rel="noopener">Generalized Mean Pooling (GeMPool)</a>. Both methods are commonly used in papers across signal processing, MIR, and image recognition applications.</p>
+<br/>
+
+<h2 id="2-AutoPool"><a href="#2-AutoPool" class="headerlink" title="2 - AutoPool"></a>2 - AutoPool</h2><p>AutoPool, proposed by McFee et al, generalizes the pooling equation as below:</p>
+<p>$$w(\alpha, x) = \frac{e^{\alpha \cdot x}}{\displaystyle\sum_{z \in X} e^{\alpha \cdot z}} \\  y = \displaystyle\sum_{x \in X} x \cdot w(\alpha, x)$$</p>
+<p>where \(y\) is the aggregated value, \(X\) is the set of values, and \(\alpha \in [0, \infty)\) is the trainable scalar parameter.</p>
+<p>We can easily see that this equation takes the form of a <strong>weighted sum</strong> - each element \(x\), contributes to the final aggregated value \(y\), with a weight factor determined by function \(w\).</p>
+<ol>
+<li><p>when \(\alpha = 0\), it is clear that \(w(\alpha, x) = \frac{1}{|X|}\) because \(e^{\alpha \cdot x} = 1\) and the denominator resembles the number of elements in \(X\). The corresponds to <strong>average pooling</strong>, and each value has equal contribution.</p>
+</li>
+<li><p>when \(\alpha = 1\), the authors term this as <strong>softmax pooling</strong>, as each value contributes with a factor of its softmax value.</p>
+</li>
+<li><p>when \(\alpha \to \infty\), the max value will have more contributing factor. This is because $$\displaystyle\lim_{\alpha \to \infty} \frac{e^{\alpha \cdot x}}{\displaystyle\sum_{z \in X} e^{\alpha \cdot z}} =<br>\displaystyle\lim_{\alpha \to \infty}<br>\frac{ (\frac{e^{\alpha \cdot x}}{e^{\alpha \cdot x_{max}}}) } { 1 + (\frac{e^{\alpha \cdot x_1}}{e^{\alpha \cdot x_{max}}}) + (\frac{e^{\alpha \cdot x_2}}{e^{\alpha \cdot x_{max}}}) + … }$$ Hence, by dividing \(x_{max}\) on both numerator and denominator, we can see that only if \(x = x_{max}\), then the limit equals to \(1\), or else the limit equals to \(0\). We can see that this corresponds to <strong>max pooling</strong>.</p>
+</li>
+</ol>
+<br/>
+
+<h2 id="2-Generalized-Mean-Pooling-GeMPool"><a href="#2-Generalized-Mean-Pooling-GeMPool" class="headerlink" title="2 - Generalized Mean Pooling (GeMPool)"></a>2 - Generalized Mean Pooling (GeMPool)</h2><p>GeMPool, first proposed by Radenovic et al., generalizes the pooling equation as below:</p>
+<p>$$y = (\frac{1}{|X|} \displaystyle\sum_{x \in X} x^p)^{\frac{1}{p}}$$</p>
+<p>where \(y\) is the aggregated value, \(X\) is the set of values, and \(p \in [1, \infty)\) is the trainable scalar parameter.</p>
+<ol>
+<li><p>when \(p = 1\), this clearly corresponds to <strong>average pooling</strong>;</p>
+</li>
+<li><p>when \(p \to \infty\), it corresponds to <strong>max pooling</strong>. A way to prove this is to calculate the following limit:<br>$$ \lim_{p \to \infty} (\frac{1}{|X|} \displaystyle\sum_{x \in X} x^p)^{\frac{1}{p}} = \lim_{p \to \infty} (\frac{1}{|X|})^\frac{1}{p} \cdot x_{max} \cdot ((\frac{x_1}{x_{max}})^{p} + (\frac{x_2}{x_{max}})^{p} + …)^\frac{1}{p} = x_{max}$$</p>
+</li>
+</ol>
+<br/>
+
+<h2 id="3-Other-Aggregating-Mechanisms"><a href="#3-Other-Aggregating-Mechanisms" class="headerlink" title="3 - Other Aggregating Mechanisms"></a>3 - Other Aggregating Mechanisms</h2><p>Both methods aforementioned are parameterizing pooling methods with a single scalar value. We find the common design of such equation is to parameterize the <strong>exponent</strong> of the equation. We see that when the exponent is at its base value, the equation falls back to average pooling. As the value of exponent is increased, we can see that <strong>the contributing factor of large values increase</strong>, where for small values the contributing factor decreases. Several papers and applications have conducted ablation studies that show parameterized pooling improves model performance, but comparison across different parameterized pooling methods hasn’t been conducted before to the best of my knowledge.</p>
+<p>A more sophisticated method of aggregating values is to use <strong>attention</strong>, as a weightage is learnt for each value, known as <strong>attention mask</strong>, however the amount of parameters on the aggregation also scales up w.r.t the size of values. It will be exciting to see if pooling mechanisms and attention mechanisms could be compared side-by-side in terms of bringing improvement to model performance.</p>
+<br/>
+
+<h2 id="4-Code-Implementation"><a href="#4-Code-Implementation" class="headerlink" title="4 - Code Implementation"></a>4 - Code Implementation</h2><p>I provide the portals to the original source code / reimplementation of the parameterized pooling methods:</p>
+<ol>
+<li><a href="https://github.com/marl/autopool/blob/master/autopool/autopool.py" target="_blank" rel="noopener">AutoPool official implementation in Keras</a></li>
+<li><a href="https://github.com/JDAI-CV/fast-reid/fastreid/layers/pooling.py" target="_blank" rel="noopener">Generalized Mean Pooling reimplementation in PyTorch</a></li>
+<li><a href="https://gist.github.com/gudgud96/72d6530a5a4ecaece09532e0ed1b3e01" target="_blank" rel="noopener">Github Gist on both pooling methods in TF2 Keras</a> </li>
+</ol>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        <li>
+            <a target="_blank" href="https://twitter.com/GoodGood014">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-twitter"></i>
+                            </span>
+            </a>
+        </li>
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/gudgud96">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://www.linkedin.com/in/tan-hao-hao">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-linkedin"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+    </ul>
+    
+    <p>
+        <!-- <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span> -->
+        All Rights Reserved @ gudgud96. Created By <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud" target="_blank" rel="noopener">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://gudgud96-github-io.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+
+
+</html>
