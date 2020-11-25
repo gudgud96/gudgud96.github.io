@@ -14,9 +14,18 @@ Yixiao Zhang: https://ldzhangyx.github.io/
 Magenta: https://magenta.tensorflow.org/blog
 Hao-Wen Dong: https://salu133445.github.io/
 Sander Dieleman: https://benanne.github.io/
+Justin Salamon: https://www.justinsalamon.com/news
+Jordi Pons: http://www.jordipons.me/
+Ilaria Manco: https://ilariamanco.com/
 
+### ML in Production
+Chip Huyen: https://huyenchip.com/
+Eugene Yan: https://eugeneyan.com/
+Shreya Shankar: https://www.shreya-shankar.com/
+Netflix Blog: https://netflixtechblog.com/
+Assaf Pinhasi: https://medium.com/@assaf.pinhasi
 
-### Others
+### Other Wonderful Folks
 Jiang Yu Ngyuwi: https://nguwijy.wordpress.com
 Thomas Kipf: http://tkipf.github.io/
 Chaitanya Joshi: https://chaitjo.github.io/
