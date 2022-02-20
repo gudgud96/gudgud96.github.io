@@ -26,6 +26,7 @@ Netflix Blog: https://netflixtechblog.com/
 Assaf Pinhasi: https://medium.com/@assaf.pinhasi
 
 ### Other Wonderful Folks
-Jiang Yu Ngyuwi: https://nguwijy.wordpress.com
-Thomas Kipf: http://tkipf.github.io/
-Chaitanya Joshi: https://chaitjo.github.io/
+Jiang Yu Ngyuwi on Math: https://nguwijy.wordpress.com
+Thomas Kipf on Graph DL: http://tkipf.github.io/
+Chaitanya Joshi on Graph DL: https://chaitjo.github.io/
+Cyanide on SWE: https://kemingy.github.io/

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Music research blog by Hao Hao Tan (gudgud96).">
+    <meta name="keyword"  content="machine learning music">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        MIR Papers 2021 (and ISMIR) - gudgud96&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Music Information Retrieval, Deep Learning, ML Systems </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/profile.jpeg" />
+        </div>
+        <div class="name">
+            <b>Hao Hao Tan 🇲🇾</b>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <!-- <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>Tags</span>
+                </a>
+            </li> -->
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li >
+                <a href="/publications/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>Publications</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>About</span>
+                </a>
+            </li>
+            <li >
+                <a href="/bloglist/">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>Blog List</span>
+                </a>
+            </li>
+            <!--  -->
+        </ul>
+    </div>
+    <!-- 
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Introduction"><span class="toc-text">1 - Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Differentiable-Digital-Signal-Processing"><span class="toc-text">2 - Differentiable Digital Signal Processing</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Sound-Synthesis"><span class="toc-text">3 - Sound Synthesis</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-General-Audio-Representations"><span class="toc-text">4 - General Audio Representations</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-On-Music-Tagging"><span class="toc-text">5 - On Music Tagging</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Some-music-open-source-projects"><span class="toc-text">6 - Some music open source projects</span></a></li></ol>
+</div>
+     -->
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> Music Information Retrieval, Deep Learning, ML Systems </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        MIR Papers 2021 (and ISMIR)
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2022-02-19 23:47:54</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#Music Information Retrieval" title="Music Information Retrieval">Music Information Retrieval</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1 - Introduction"></a>1 - Introduction</h2><p>It’s been almost a year since my last post, and of course a lot has changed. I am no longer working on cover song detection anymore, nor am I training models to solve MIR problems at the moment. I still do, like <a href="https://github.com/gudgud96/noisy-student-emotion-training" target="_blank" rel="noopener">trying something for MediaEval</a> or <a href="https://github.com/gudgud96/diff-wave-synth" target="_blank" rel="noopener">reproducing papers I like</a>, but mostly after work which is, you know, not a lot of time left.</p>
+<p>Which is also why I haven’t been writing for long, because writing is slow and given the time available, I rather spend more time coding to maximize output (or procrastinate to minimize it…). But inspired by my recent co-worker, I still find blogging necessary to record and clear your mind, and most importantly, ISMIR 2021 is like N months ago and the idea to write a post about it was always dangling (which I really should have finished this N months ago…)</p>
+<p>So here it comes!</p>
+<h2 id="2-Differentiable-Digital-Signal-Processing"><a href="#2-Differentiable-Digital-Signal-Processing" class="headerlink" title="2 - Differentiable Digital Signal Processing"></a>2 - Differentiable Digital Signal Processing</h2><p>I think 2021 is very much a year on DDSP and its applications, and it has also been my recent interest. Just to name a few works that I follow slightly closer:</p>
+<p><a href="https://arxiv.org/abs/2001.04643" target="_blank" rel="noopener"><strong>DDSP: Differentiable Digital Signal Processing</strong></a></p>
+<p>The idea is neat - using WaveNet to synthesize audio is costing way too many parameters, so maybe we need to instill some domain knowledge as inductive bias. Perhaps we can make use of <strong>synthesizers</strong> (let’s take additive synthesizers as an example). To learn the parameters of a synth, the synth itself should be “differentiable” so that gradients can be back-propagated. Hence each DSP component within a synth (F0, loudness, filter design, reverb, etc.) can be implemented as differentiable functions, to allow the learning of parameters via optimizing a (multi-level) spectrogram loss. The parameters needed is simply <strong>10x lesser</strong> to achieve high fidelity synthesis.</p>
+<p><a href="https://arxiv.org/abs/2105.04752" target="_blank" rel="noopener"><strong>Differentiable Signal Processing with Black-Box Audio Effects</strong></a></p>
+<p>A neat idea with direct application usage. Given that third party audio FX plugins are non-differentiable, one most obvious solution is to bring in gradient approximation solutions (if you don’t want to re-implement the differentiable version of the entire thing). This paper uses a stochastic gradient approximation method called <a href="https://en.wikipedia.org/wiki/Simultaneous_perturbation_stochastic_approximation" target="_blank" rel="noopener"><em>simultaneous permutation stochastic approximation</em></a> for the gradient from black box -&gt; deep encoder. Various applications can span, e.g. automatic mixing / mastering / EQ etc.</p>
+<p><em>Side note</em>: the authors mention about the training process - it needs to be parallelized to a single-GPU, multi-CPU setup, so that model training runs on GPU but FX plugins run on CPU. This is pretty much the same training setup as in reinforcement learning (GPU for model, CPU for simulation). I am recently reading about <a href="https://github.com/ray-project/ray" target="_blank" rel="noopener">Ray</a>, which is precisely designed for this kind of setup, and I think it might be a suitable use case.</p>
+<p><a href="https://arxiv.org/abs/2010.10291" target="_blank" rel="noopener"><strong>Automatic Multitrack Mixing with A Differentiable Mixing Console of Neural Audio Effects</strong></a></p>
+<p>Also on auto-mixing, this paper basically trains a (TCN) model to learn the parameters on the mixing console, which also needs the components on the mixing console (EQ, Compressor, Reverb) to be differentiable. Also, a stereo loss function is introduced because spatialization is important for mixing.</p>
+<p><a href="https://archives.ismir.net/ismir2021/paper/000053.pdf" target="_blank" rel="noopener"><strong>Synthesizer Soundmatching with Differentiable DSP</strong></a></p>
+<p>This work focuses more on estimating synth parameters (presets). It needs an estimator network (for the params) and a differentiable (additive/subtractive) synth. Two mode of trainings can be supported - either <em>supervised</em> with synth parameter labels,  or <em>unsupervised</em> by reproducing input waveform.</p>
+<p><a href="https://arxiv.org/abs/2111.10003#:~:text=Differentiable%20Wavetable%20Synthesis%20(DWTS)%20is,end%2Dto%2Dend%20training." target="_blank" rel="noopener"><strong>Differentiable Wavetable Synthesis</strong></a></p>
+<p>Simply implementing the similar idea of DDSP on wavetable synthesis. Since I am a Serum user, wavetable synthesis have always been my favourite, so I tried to <a href="https://github.com/gudgud96/diff-wave-synth" target="_blank" rel="noopener">reproduce this paper</a> as well, with my own implementation of wavetable synth in PyTorch.</p>
+<p><a href="https://arxiv.org/abs/2112.09312" target="_blank" rel="noopener"><strong>MIDI-DDSP</strong></a></p>
+<p>I worked in this direction a short while before (on piano synthesis, <a href="https://github.com/gudgud96/piano-synthesis" target="_blank" rel="noopener">short paper</a> here), and I only managed to model dynamics and articulation, and I have to use WaveGlow for synthesis which doesn’t perform very well at that time, not to mention the amount of time it takes to train WaveGlow. This work extends to model <em>timbre</em> and <em>vibrato</em>, as well as using DDSP for the synthesis layer. Much more extensive and optimized work.</p>
+<h2 id="3-Sound-Synthesis"><a href="#3-Sound-Synthesis" class="headerlink" title="3 - Sound Synthesis"></a>3 - Sound Synthesis</h2><p><a href="https://arxiv.org/abs/2111.05011" target="_blank" rel="noopener"><strong>RAVE: A variational autoencoder for fast and high-quality neural audio synthesis</strong></a></p>
+<p>A VAE + adversarial fine tuning method for audio synthesis, main advantage is that it can synthesize on CPU + <strong>20x</strong> faster than before. VAE + adversarial fine tuning is a pretty common training technique to improve audio synthesis quality, one paper that I read before is <a href="https://arxiv.org/abs/1711.05772" target="_blank" rel="noopener">Latent Constraints</a>. </p>
+<p><a href="https://arxiv.org/abs/2107.05050" target="_blank" rel="noopener"><strong>Neural Waveshaping Synthesis</strong></a></p>
+<p>One of my favourite papers in ISMIR. To achieve efficient CPU synthesis, this work proposes <em>Neural Waveshaping Unit</em> (and a fast version) to produce complex timbre evolution. Combining with a differentiable noise synthesizer, only 260k model parameters are needed. I probably will write a bit more to delve into this work further in future.</p>
+<p><a href="https://arxiv.org/abs/2111.08462" target="_blank" rel="noopener"><strong>Towards Lightweight Controllable Audio Synthesis with Conditional Implicit Neural Representations</strong></a></p>
+<p>A starting work on using implicit neural representations for audio synthesis. The advantage is that INR is itself a compact representation, hence it can learn faster and generally produce quantitatively better audio reconstructions with equal parameter counts (I think there’s much more value in this direction and I should probably delve deeper)</p>
+<h2 id="4-General-Audio-Representations"><a href="#4-General-Audio-Representations" class="headerlink" title="4 - General Audio Representations"></a>4 - General Audio Representations</h2><p><a href="https://arxiv.org/abs/2111.12124" target="_blank" rel="noopener"><strong>Towards Learning Universal Audio Representations</strong></a></p>
+<p>A very ambitious work to provide universal audio representation for various downstream tasks. The architecture used is a <a href="https://arxiv.org/abs/1812.03982" target="_blank" rel="noopener"><em>Slow-Fast</em></a> <a href="https://arxiv.org/abs/2102.06171" target="_blank" rel="noopener"><em>Normalizer-Free</em></a> <em>F0 Net</em> given observations in previous work, and transfers well among a wide range of audio-reated tasks.</p>
+<p><a href="https://archives.ismir.net/ismir2021/paper/000090.pdf" target="_blank" rel="noopener"><strong>MuseBERT: Pre-training Music Representation for Music Understanding and Controllable Generation</strong></a></p>
+<p>Convert symbolic music into note-level token representation, and apply BERT-like pretraining. The model is capable of texture generation, chord analysis, accompaniment refinement.</p>
+<p><a href="https://arxiv.org/abs/2103.09410" target="_blank" rel="noopener"><strong>Contrastive Learning of Musical Representations</strong></a></p>
+<p><a href="https://arxiv.org/abs/2002.05709" target="_blank" rel="noopener">SimCLR</a> on raw music audio, hence the augmentations are specific to music (which the author provides a <a href="https://github.com/Spijkervet/torchaudio-augmentations" target="_blank" rel="noopener">repo</a> on it). This self-supervised method can work well on MTAT and MSD tagging.</p>
+<h2 id="5-On-Music-Tagging"><a href="#5-On-Music-Tagging" class="headerlink" title="5 - On Music Tagging"></a>5 - On Music Tagging</h2><p><a href="https://arxiv.org/abs/2111.13457" target="_blank" rel="noopener"><strong>Semi-supervised Music Tagging Transformer</strong></a></p>
+<p>Probably one of the hottest paper during ISMIR. The idea is pretty simple - which is to apply semi-supervised learning on music tagging, and it is super reasonable because tagged music data is super scarce. I tried a <a href="https://github.com/gudgud96/noisy-student-emotion-training" target="_blank" rel="noopener">similar idea</a> during the same time for MediaEval, hence working with emotion data, and noisy student training does not give very conclusive results in the end.</p>
+<h2 id="6-Some-music-open-source-projects"><a href="#6-Some-music-open-source-projects" class="headerlink" title="6 - Some music open source projects"></a>6 - Some music open source projects</h2><p>The most familiar one I know would still be <a href="https://github.com/KinWaiCheuk/nnAudio" target="_blank" rel="noopener">nnAudio</a> by Kin Wai Cheuk, it’s a cool PyTorch audio processing library with sweet CQT implementations. I helped a little on Griffin-Lim and VQT, and I probably would try inverse-CQT next.</p>
+<p>Recently I am also looking into <a href="https://github.com/spotify/pedalboard" target="_blank" rel="noopener">pedalboard</a> by Spotify, which is quite a cool project on chaining audio effects - it’s simple and it just works. I also find <a href="https://github.com/DBraun/DawDreamer" target="_blank" rel="noopener">DawDreamer</a> an interesting one, basically it’s a DAW on Python. The backend still uses JUCE but it provides a Python user interface.</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        <li>
+            <a target="_blank" href="https://twitter.com/GoodGood014">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-twitter"></i>
+                            </span>
+            </a>
+        </li>
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/gudgud96">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://www.linkedin.com/in/tan-hao-hao">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-linkedin"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+    </ul>
+    
+    <p>
+        <!-- <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span> -->
+        All Rights Reserved @ gudgud96. Created By <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud" target="_blank" rel="noopener">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://gudgud96-github-io.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+
+
+</html>
