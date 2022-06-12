@@ -8,10 +8,14 @@ comments: true
 
 Hao Hao Tan (郑豪好) - from Kuala Lumpur, Malaysia, residing in Singapore.
 
-Currently I am working on **recommendation system architecture** at **TikTok**. My main challenge is to evolute and optimize TikTok's RecSys architecture to be leaner and more efficient, to support the ever-growing load brought in by immense DAU. 
+I am a software engineer at **TikTok**, working on the **ranking module architecture** of TikTok's main feed recommendation. My scope covers system optimization, ML serving infra for deep ranking models, and site reliability engineering. 
 
-Before TikTok, I built cover song detection systems at [Fairphonic](https://fairphonic.com/), a tech startup focusing on music royalties solution. I also worked on controllable music generation during my time at the [Audio, Music and AI Lab](https://dorienherremans.com/team) at SUTD, led by Prof Dorien Herremans.
+Before TikTok, 
 
-I am mainly interested in music tech, deep learning, and scalable ML systems. I work on MIR projects as an independent, and recently I focus more on DDSP, efficient music synthesis and cover song detection.
+- I worked on **music content recognition** (much like [Youtube Content ID](https://support.google.com/youtube/answer/2797370?hl=en)) at [Fairphonic](https://fairphonic.com/), a tech startup focusing on music royalties solution
+
+- I also worked on **controllable music generation** at the [Audio, Music and AI Lab](https://dorienherremans.com/team) with Prof Dorien Herremans, focusing on [emotion-based music generation](https://arxiv.org/abs/2007.15474)
+
+I am mainly interested in music tech, deep learning, and scalable ML systems. My recent focus is on DDSP-related topics (in particular [differentiable wavetable synthesis](https://github.com/gudgud96/diff-wave-synth)), efficient audio synthesis, and scalable cover song detection.
 
 I completed my Computer Science bachelor’s degree at Nanyang Technological University, with previous internship experience at [PayPal]() and [ViSenze](https://www.visenze.com/).

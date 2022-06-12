@@ -60,6 +60,16 @@
         </li>
         <% } %>
 
+        <% if (config.soundcloud_username) { %>
+        <li>
+            <a target="_blank"  href="https://soundcloud.com/<%= config.soundcloud_username %>">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-spotify"></i>
+                            </span>
+            </a>
+        </li>
+        <% } %>
+
     </ul>
     <% if(config.friends) { %>
     <p>
