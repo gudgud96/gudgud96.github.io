@@ -4,7 +4,31 @@ title: "Publications"
 date: 2020-01-23 04:48:33
 comments: true
 ---
-## Publications
+## Publications / Talks
+
+<h3><mark style="background-color: rgba(39,243,106,0.15);">Parameter Inference of Music Synthesizers using Deep Learning</mark></h3>
+<i>Audio Developer Conference (ADC) 2022</i>
+
+> An introductory talk that covers how synthesizer parameter inference facilitates the sound design process, and gives an overview of the recent works that use deep learning to perform parameter inference, as well as the challenges that were faced in solving this task.
+
+<div class="page-tags">
+    <a class="item" href="https://www.youtube.com/watch?v=nZ560W6bA3o">VIDEO</a>
+    <a class="item" href="https://docs.google.com/presentation/d/1PA4fom6QvCW_YG8L0MMVumrAluljcymndNlaK2HW5t0/edit">SLIDES</a>
+</div>
+
+<br/>
+
+<h3><mark style="background-color: rgba(39,243,106,0.15);">Semi-supervised music emotion recognition using noisy student training and harmonic pitch class profiles</mark></h3>
+<i>MediaEval 2021, Emotions and Themes in Music Challenge</i>
+
+> An experiment on leveraging semi-supervised learning on music emotion recognition with noisy student training. Ranked 6th on the [challenge](https://multimediaeval.github.io/2021-Emotion-and-Theme-Recognition-in-Music-Task/results).
+
+<div class="page-tags">
+    <a class="item" href="https://arxiv.org/pdf/2112.00702.pdf">PDF</a>
+    <a class="item" href="https://github.com/gudgud96/noisy-student-emotion-training">CODE</a>
+</div>
+
+<br/>
 
 <h3><mark style="background-color: rgba(39,243,106,0.15);">Music FaderNets: Controllable Music Generation Based On High-Level Features via Low-Level Feature Modelling</mark></h3>
 <ins>Hao Hao Tan</ins>, Dorien Herremans.<br/>

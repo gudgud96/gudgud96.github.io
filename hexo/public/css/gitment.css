@@ -1144,3 +1144,5 @@ a.gitment-editor-footer-tip:hover {
 .gitment-markdown hr {
     border-bottom-color: #eee;
 }
+
+.icon-soundcloud:before { content: "\e758"; }

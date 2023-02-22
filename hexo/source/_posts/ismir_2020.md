@@ -1,25 +1,12 @@
 ---
-title: ISMIR 2020 - Part 1
+title: MIR Papers 2020 (and ISMIR)
 date: 2020-10-17 09:10:42
 tags:
     - Music Information Retrieval
 ---
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
-TLDR: This blog will discuss:
-1 - Various exciting papers (sorted according to topics) and research directions of ISMIR 2020
-2 - My own conference experience of this year's ISMIR
-<br/>
-
-## 1 - Introduction
-
-Finally, ISMIR 2020 is around the corner! The conference was originally designated to take place in Montreal, Canada (which was a dream place for me to visit, because a lot of major conferences like NeurIPS, ICLR, ICML were hosted there before). But sadly due to COVID-19, the conference is changed into a virtual event. It is also my first ISMIR, and I have been so looking forward to it since day 1 of doing MIR research, so indeed it is a little bit disappointed for unable to travel and meet people physically this year.
-
-Nevertheless, I can already feel that ISMIR is such a unique conference as compared to others, although in a virtual setting, and I can almost understand why so many ISMIR visitors have repeatedly emphasized that ISMIR is the best conference of all. The topics are super interesting, and the community is super friendly, always willing to share & exchange, and extremely fun to talk to.
-
-Below I try to summarize the papers & posters that I have personally visited, sorted by relevant topics. The list will by no means be exhaustive, and will be very related to my own focus & familiarity (I am more familiar / interested in controllable music generation, music representation learning, music audio synthesis, and some popular MIR tasks e.g. pitch estimation, voice conversion, source separation etc.).
-
-## 2 - Controllable Symbolic Music Generation
+## 1 - Controllable Symbolic Music Generation
 
 [**Attributes-Aware Deep Music Transformation**](https://program.ismir2020.net/poster_5-06.html)
 
@@ -103,7 +90,7 @@ This is a really interesting work that tries to answer a lot of pressing questio
 
 For me the real key contributions for this work are the findings concluded on the proposed objective metrics used to evaluate the generated music. There are so many objective metrics being proposed (I recall [this work](https://arxiv.org/pdf/1912.05537.pdf) suggesting several metrics for Transformer AE as well), but for Transformers which are often crowned for more structured generation, how do we evaluate structureness other than subjective tests? I find the idea of using [fitness scape plot](https://www.audiolabs-erlangen.de/resources/MIR/FMP/C4/C4S3_ScapePlot.html) to quantify structureness super interesting. Although the field will never agree on a set of evaluation metrics, but understanding where Transformers are still short of in overall will definitely drive the community to pinpoint on certain areas to improve.
 
-## 3 - Disentangled Representation Learning
+## 2 - Disentangled Representation Learning
 
 [**Unsupervised Disentanglement of Pitch and Timbre for Isolated Musical Instrument Sounds**](https://program.ismir2020.net/poster_5-10.html)
 
@@ -133,7 +120,7 @@ generally advantageous for training time, similarity retrieval, and auto-tagging
 This work proposes a new dataset which resembles [dSprites](https://github.com/deepmind/dsprites-dataset) in the computer vision domain, which is designed for learning and **evaluating disentangled representation learning algorithms for music**. The authors also ran benchmark experiments using common disentanglement methods (\\(\beta\\)-VAE, Annealed-VAE and Factor-VAE). Overall, the results suggest that disentanglement is comparable, but reconstruction accuracy is much worse, and the sensitivity on hyperparameters are much higher. This again proves the tradeoff between reconstruction and disentanglement / controllability using VAEs on music data.
 I discussed with the author Ashis Pati on why not use real-world monophonic music dataset (e.g. [Nottingham dataset](https://ifdo.ca/~seymour/nottingham/nottingham.html)) with attribute annotations, but generating synthetic data instead. He suggests that it is to preserve the orthogonality and balanced composition of each attribute within the dataset. It seems like the balance between orthogonality and resemblance to real music is a lot more delicate that expected when creating a dataset like this. (Meanwhile, Ashis' work has been very crucial to Music FaderNets, and it is such a joy to finally meet him and chat in person. One of the coolest moment during the conference!)
 
-## 4 - Singing Voice Conversion
+## 3 - Singing Voice Conversion
 
 [**Zero-Shot Singing Voice Conversion**](https://program.ismir2020.net/poster_1-08.html)
 
@@ -143,7 +130,7 @@ I discussed with the author Ashis Pati on why not use real-world monophonic musi
 
 The most interesting part of this work is the **zero-shot** part, which largely incorporates ideas from the speech domain. Speaker embedding networks were found to be successful for enabling zero-shot voice conversion of speech, whereby the system can model and adapt to new unseen voices on the fly. The authors adopted the same idea for singing voice conversion by using a [pretrained speaker embedding network](https://github.com/CorentinJ/Real-Time-Voice-Cloning), and then using the WORLD vocoder with learnable parameters for synthesis. It seems like the "pre-trained fine-tune" idea from other domains has influenced much works in MIR, moreover this work shows that using relevant foreign-domain embeddings (speech) on music tasks (singing voice) can actually work.
 
-## 5 - Audio Synthesis
+## 4 - Audio Synthesis
 
 [**DrumGAN: Synthesis of Drum Sounds with Timbral Feature Conditioning Using Generative Adversarial Networks**](https://program.ismir2020.net/poster_4-16.html)
 
@@ -155,4 +142,90 @@ Super cool and useful work (can't wait to use the plugin as a producer)! This wo
 
 Another interesting thing is that this work uses **complex STFT spectrogram** as the audio representation. When I worked on piano audio synthesis, the common representation used is the magnitude Mel-spectrogram, which is why for the output a vocoder (e.g. WaveNet, WaveGAN, WaveGlow) is needed to invert Mel-spectrograms to audio. But in this work, the output directly reconstructs the real and imaginary parts of the spectrogram, and to reconstruct the audio we only need to do an inverse STFT. This can ensure better audio reconstruction quality, and phase information might also help audio representation learning.
 
-*The remaining topics (source separation, transcription, model pruning and cover song detection) will be covered in [Part 2](/2020/10/17/ismir_2020_pt2/)*.
+## 5 - Music Source Separation
+
+[**Investigating U-Nets with various Intermediate Blocks for Spectrogram-based Singing Voice Separation**](https://program.ismir2020.net/poster_2-04.html)
+
+<figure>
+  <img style="width:70%;" src="/img/ismir_unets.png" alt=""/>
+</figure>
+
+U-Nets are very common in singing voice separation, with their prior success in image segmentation. This work further inspects the usage of various intermediate blocks by providing comparison and evaluations. 2 types of intermediate blocks are used, **Time-Distributed Blocks** which does not have inter-frame operations, and **Time-Frequency Blocks** which considers both time and frequency domain. The variants of each block are inspected (fully connected, CNN, RNN etc.). The [demo](https://www.youtube.com/watch?v=DuOvWpckoVE&feature=youtu.be&ab_channel=KU-Intelligence-Engineering-Lab) provided by this work is really superb - the best configuration found in this work yields a very clean singing voice separation.
+
+[**Content based singing voice source separation via strong conditioning using aligned phonemes**](https://program.ismir2020.net/poster_6-07.html)
+
+<figure>
+  <img style="width:70%;" src="/img/ismir_phoneme1.png" alt=""/>
+</figure>
+
+This work explores **informed source separation** - utilizing prior knowledge about the mixture and target source. In this work, the conditioning information used is lyrics, which are further aligned in the granularity of phonemes. This work uses the [FiLM](https://arxiv.org/pdf/1709.07871.pdf) layer for conditioning, which the conditioning input is a 2D matrix of phonemes w.r.t. time. For weak conditioning, the same FiLM operation to the whole input patch; for strong conditioning, different FiLM operations are computed at different time frames.
+
+[**Exploring Aligned Lyrics-informed Singing Voice Separation**](https://program.ismir2020.net/poster_5-08.html)
+
+<figure>
+  <img style="width:70%;" src="/img/ismir_phoneme2.png" alt=""/>
+</figure>
+
+Similar to the above work, this work also utilizes aligned lyrics / phonemes for improving singing voice separation. The architecture is different - this work takes the backbone from the state-of-the-art [Open Unmix](https://sigsep.github.io/open-unmix/) model, then the authors propose to use an additional **lyric encoder** to learn embeddings for conditioning on the backbone. This idea resembles much with the idea from [text-to-speech](https://paperswithcode.com/task/text-to-speech-synthesis) models, where the text information is encoded to condition on the speech synthesis component.
+
+[**Multitask Learning for Instrument Activation Aware Music Source Separation**](https://program.ismir2020.net/poster_5-16.html)
+
+<figure>
+  <img style="width:50%;" src="/img/ismir_multitask.png" alt=""/>
+</figure>
+
+This work leverages multitask learning for source separation. Multitask learning states that by choosing a relevant subsidiary task, and allow it to train in line with the original task, can improve the performance of the original task. This work chooses to use **instrument activation detection** as the subsidary task, because it can intuitively suppress wrongly predicted activation by the source separation model at the supposed silent segments. By training on a larger dataset with multitask learning, the model can perform better on almost all aspects as compared to Open Unmix.
+
+## 6 - Music Transcription / Pitch Estimation
+
+[**Multiple F0 Estimation in Vocal Ensembles using Convolutional Neural Networks**](https://program.ismir2020.net/poster_2-18.html)
+
+<figure>
+  <img style="width:65%;" src="/img/ismir_vocal.png" alt=""/>
+</figure>
+
+This work is a direct adaptation of CNNs on F0 estimation, applying on vocal ensembles. The key takeaways for me in this work is of 3-fold: (i) **phase information does help** for F0 estimation tasks (would it also be the same for other tasks? this will be interesting to explore); (ii) deeper models will work better; (iii) late concatenation of magnitude and phase information works better than early concatenation of both.
+
+[**Multi-Instrument Music Transcription Based on Deep Spherical Clustering of Spectrograms and Pitchgrams**](https://program.ismir2020.net/poster_3-01.html)
+
+<figure>
+  <img style="width:90%;" src="/img/ismir_spherical.png" alt=""/>
+</figure>
+
+This is a super interesting work! For previous music transcription works, the output will be of a pre-defined set of instruments, with activation predicted for each instrument. This work intends to transcribe arbitrary instruments, hence being able to transcribe undefined instruments that are not included in the training data. The key idea is also inspired by methods from the speech domain, where **deep clustering** separates a speech mixture to an arbitrary number of speakers based on the characteristics of voices. Hence, the spectrograms and pitchgrams (estimated by an [existing multi-pitch estimator](https://brianmcfee.net/papers/ismir2017_salience.pdf)) provide complementary information for timbre-based clustering and part separation.
+
+[**Polyphonic Piano Transcription Using Autoregressive Multi-state Note Model**](https://program.ismir2020.net/poster_3-17.html)
+
+<figure>
+  <img style="width:70%;" src="/img/ismir_transcription.png" alt=""/>
+</figure>
+
+This work recognizes the problem of frame-level transcription: some frames might start after the onset events, which makes it harder to distinguish and transcribe. To solve this, the authors use an **autoregressive model** by utilizing the time-frequency and predicted transcription of the previous frame, and feeding them during the training of current step. Training of the autoregressive model is done via teacher-forcing. Results show that the model provides significantly higher accuracy on both note onset and offset estimation compared to its non-auto-regressive version. And just one thing to add: their [demo](https://program.ismir2020.net/lbd_444.html) is super excellent, such sleek and smooth visualization on real-time music transcription!
+
+## 7 - Model Pruning
+
+[**Ultra-light deep MIR by trimming lottery ticket**](https://program.ismir2020.net/poster_4-11.html)
+
+<figure>
+  <img style="width:70%;" src="/img/ismir_lottery.png" alt=""/>
+</figure>
+
+The [lottery ticket hypothesis](https://arxiv.org/pdf/1803.03635.pdf) paper is the best paper in ICLR 2020, which motivates me to looking into this interesting work. Also, model compression is a really useful technique in an industrial setting as it significantly reduces memory footprint when scaling up to large-scale applications. With the new proposed approach by the authors known as **structured trimming**, which remove units based on magnitude, activation and normalization-based criteria, model size can be even more lighter without trading off much in terms of accuracy. The cool thing of this paper is that it evaluates the trimmed model on various popular MIR tasks, and these efficient trimmed subnetworks, removing up to 85% of the weights in deep models, could be found.
+
+## 8 - Cover Song Detection
+
+[**Combining musical features for cover detection**](https://program.ismir2020.net/poster_2-15.html)
+
+<figure>
+  <img style="width:100%;" src="/img/ismir_doras.png" alt=""/>
+</figure>
+
+In previous cover song detection works, either the harmonic-related representation (e.g. [HPCP](https://www.upf.edu/web/mtg/hpcp), [cremaPCP](https://brianmcfee.net/papers/ismir2017_chord.pdf)) or the melody-related representation (e.g. [dominant melody](https://arxiv.org/pdf/1907.01824.pdf), [multi-pitch](https://arxiv.org/pdf/1910.09862.pdf)) is used. This work simply puts both together, and explores various fusion methods to inspect its improvement. The key intuition is that some cover songs are similar in harmonic content but not in dominant melody, and some are of the opposite. The interesting finding is that with only a simple average aggregation of \\(d_\textrm{melody}\\) and \\(d_\textrm{cremaPCP}\\), the model is able to yield the best improvement over individual models, and (strangely) it performs even better than a more sophisticated late fusion model.
+
+[**Less is more: Faster and better music version identification with embedding distillation**](https://program.ismir2020.net/poster_6-15.html)
+
+<figure>
+  <img style="width:100%;" src="/img/ismir_furkan.png" alt=""/>
+</figure>
+
+In [a previous work](https://arxiv.org/pdf/1910.12551.pdf), the authors proposed a musically-motivated embedding learning model for cover song detection, but the required embedding size is pretty huge at around 16,000. In this work, the authors experimented with various methods to reduce the amount of dimension in the embedding for large-scale retrieval applications. The results show that with a **latent space reconfiguration** method, which is very similar to transfer learning methods by fine-tuning additional dense layers on a pre-trained model, coupling with a normalized softmax loss, the model can achieve the best performance even under an embedding size of 256. Strangely, this performs better than training the whole network + dense layers from scratch.
