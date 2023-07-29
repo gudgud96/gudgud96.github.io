@@ -1,5 +1,5 @@
 ---
-title: On The Boom of Generative AI
+title: On The Generative AI Boom
 date: 2023-04-24 16:52:50
 tags:
     - General Thoughts
