@@ -1,0 +1,50 @@
+---
+title: On The Boom of Generative AI
+date: 2023-04-24 16:52:50
+tags:
+    - General Thoughts
+---
+
+In 2018, I wrote [my first blog post](/2018/09/24/ai-music-direction/) when I first worked on AI music generation. It was a snapshot of what I personally think to be the right positoning of AI music generation at the time. 
+
+Five years passed, and I am glad that generative AI, as a whole, is having its blossoming moment today. At this juncture, I would like to write a few points regarding generative AI and LLMs, as a snapshot of my current opinions.
+
+## AI and Job Market
+
+**1** - The right way I think going forward with AI is definitely the **"co-pilot"** mode, complementing human at doing "baseline-level work". However creative and cool one's work is, there are still portions of work that are mundane and time-consuming - polishing edges in PS for art designers, track labelling for music producers, writing emails for programmers, etc. That's where AI come to the rescue.
+
+**2** - Of course, what defines "baseline-level work" changes from time to time - data-entry + processing work is cool during IBM mainframe days; today [ChatGPT can even plot graphs and do basic data analysis](). That means humans are, and should be, constantly upskilling themselves. The challenge is then to keep the speed of upskilling at the same rate as AI adoption; if not, even slowing AI adoption for the sake of upskilling. I personally am more optimistic that, there will first be a major understanding and a re-position of job skills to adapt to the AI wave, and then the widespread of AI adoption in various sectors happens, instead of the opposite.
+
+**3** - My optimism is based on two points: firstly, I don't think AI will be adopted that quickly to make jobs vanish. Secondly, I believe that there will be enough jobs created, or obsolete skills transferred, during the process of AI adoption. I personally agree with the [lump of labor fallacy](https://en.wikipedia.org/wiki/Lump_of_labour_fallacy). Demands are ever-growing, in fact, new technology gives birth to new demands ("hey, now with this, we can do this!"). That explains why [unemployment rate does not rise when previous major tech advancement happens](). Generative AI already gives birth to a middle layer of "AI engineers" (now in the form of "prompt engineers") - not that hard-core to know the ML math, but more skillful to help those who only know basic usage of generative AI products. 
+
+**4** - There is a worry of AI automating jobs that even require creative and critical thinking, like copywriters, telemarketers, even interior designers. I argue two points. Firstly, even for humans, there are too many reasons for not hiring a more technically competent person - most likely because we can foresee, or already have, a better working relationship with an alternative candidate, albeit less competent technically. Secondly, humans are better at doing "out-of-distribution" stuffs - sometimes that's called "uniqueness" or "style". Facing the AI wave, it becomes more important to find out our "out-of-distribution" areas, areas which we can provide the most unique value. This is not something that we should do only when we are facing the AI wave - we should already been doing it the whole time in an ever-competitive job market.
+
+**5** - To elaborate on why AI won't be adopted that quickly: at first, there is [inertia for any kind of technological impact](), especially in this case, given our worry of the correctness and reliability of LLMs. Of course, LLMs will get better, but I think the **insecurity** of relying fully on an LLM forms a stronger inertia to slow the widespread of AI adoption.
+
+**6** - What AI can't further replace is the **"context"** of our jobs. "Context" is an intangible concept, but it covers every subtle detail in our job scope outside of the domain hard knowledge - relationships you own, habits you form while collaborating, ways to cut corners to ship things faster, etc. There are just way too many things other than domain knowledge for one to perform well in their job, just like a good software engineer never just know how to code well. These "contexts" are the things at risk if one proposes to replace a human operator with AI. The knowledge of "context" can hardly be transferred and quantified, and this is why I think a total replacement of human by AI for a job role might actually be counterproductive.
+
+**7** - These points all go back to reiterate the "co-pilot" mode: **we don't replace existing jobs with AI**. We might reduce vacancies due to AI, as we liberate more manpower which uses AI tools. But as demands surge, the liberated manpower will be re-invested into exploring new interests, attending to new demands, and starting new business directions. These will then create more job oppurtunities.
+
+## About the AI tech
+
+**8** - I think why LLM products are powerful is because they solve "the last mile problem". As compared to search engines, it understands your intent, sieves throught massive amount of data, tailors the response to your use case, and somehow shows the magic of "human touch". But I don't think it replaces search engines. A lot of times I don't need that personal touch, and I enjoy the speedy response with an abundant of sources from the search engine. Hence, I think the true value of LLMs lies in specialized areas (imagine a legal contract drafter, or a healthcare counsellor), instead of being a general-purpose chatbot. But at the same time, I feel the "last mile problem" is much harder to solve in these scenarios.
+
+**9** - I am not optimistic about prompt engineering. "Searching for prompts that works best for a generative model" is model-specific, or even product-specific. Specific prompts will go obsolete (like "Let's think step-by-step"), and I believe models will improve to serve prompts that are more and more general. Also, I think prompts are primitive, and not the best UI/UX. Who wants to type a whole paragraph of essay to perform tasks, and if it goes wrong, type in longer paragraphs? There will be better solutions, and I personally admire what [DragGAN]() has done - spot-on demonstration of the power of controllable generation, without prompts.
+
+**10** - I don't think AGI / strong AI is coming in the near future - it is more like a [stochastic parrot](). I don't see any theoretical grounds in current machine learning field that can make programs "think that they exist" (some "cogito ergo sum" resemblance here). Even not to mention the inefficiency of machine "learning" - given 1.4T parameters and the world wide web, GPT-4 is still far from what a 86-billion-neuron human brain can do. The risks implicated by the misuse of AI far outweigh the risk of CPUs conquering the world.
+
+**11** - It seems like AI can already do a lot, but there are a few areas that I think will be extremely interesting. First off, I still think deep learning on audio / music is behind its counterparts on image and language. Engineering challenges of on-device ML inference, which guarantees better data privacy and mobility, will be a big problem worth solving. Decades-old research problems on how to leverage massive amount of unlabelled data, and explaning learnt representations of deep learning models, remains valuable questions to answer.
+
+## AI and Content Creation
+
+**12** - IP in generative AI is an interesting subject. In the musical context, covers and remixes have already brought a great deal of storm to the concept of IP infringement around 10 - 20 years ago, especially when UGC platforms popped out. It will be even harder moving forward, as the line between "original" and "derivative" will be blurred even further. 
+
+**13** - Personally, I think the trend will be to first impose a strict ban on any kind of generation that directly threatens identity. In that case, stuffs like voice cloning, deepfake videos will have very limited room to grow, although of entertainment purposes.
+
+**14** - Then there comes big-data facilitated, AI-generated content. Personally, I believe the pro-AI side will win eventually, because analogous to streaming models, AI-generated / assisted content will be a major part of the content market, given the ease of use of the AI tools. I also don't see any reason to oppose, for example, [Secret Invasion using AI-generated clips in its opening credits](), I find it an interesting artistic choice, and very well suited with the topic of deception in the series. I also think platforms like [Runway]() enhance creativity and explore possibilities, instead of stifling it.
+
+**15** - The key concern will then be how to use data ethically, in a way that every stakeholder is less unhappy. I believe regions with opposing stance on using data for AI training will soon find themselves losing competitive advantage down the road. Although the journey will be all bumpy and grudgy, filled with ugly lawsuits and tempered bloodbath, I think it will lead to adoption instead of opposition eventually. (With shallow knowledge, I think the [WGA Hollywood strike]() is more of a debate on fair compensation than a debate on AI, if it is an a debate of AI I would refer to point 4).
+
+## Conclusion
+
+**16** - To close, I want to put in [Francois Chollet's great quote]() which came just in time when the generative AI boom starts: "Fell in love with the problem, not the method. Chasing trends is counter-productive". AI is a shiny method with promising potentials, but fundamentals shall prevail, that we should first build products that people needs, and solve problems that we are interested in.
