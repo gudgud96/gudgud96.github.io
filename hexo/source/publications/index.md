@@ -6,6 +6,17 @@ comments: true
 ---
 ## Publications / Talks
 
+<h3><mark style="background-color: rgba(39,243,106,0.15);">Exciting Trends in Music Technology with Deep Learning</mark></h3>
+<i>NUS Hackers Talk 2024</i>
+
+> Summarizes recent applications of deep learning in the music technology industry, uncovering use cases such as music generation, source separation, voice conversion, cover song detection, etc. <br/> [NUS Hackers](https://www.nushackers.org/about) is a student-run open-source community club in NUS, which hosts the biggest student hackathon ([Hack&Roll](https://hacknroll.nushackers.org/)) annually in Singapore.
+
+<div class="page-tags">
+    <a class="item" href="https://docs.google.com/presentation/d/1c1S5GmVecDmIlEQiO2acMa2VjQKzUmUgdaE2WxndJMM/edit?usp=sharing">SLIDES</a>
+</div>
+
+<br/>
+
 <h3><mark style="background-color: rgba(39,243,106,0.15);">Parameter Inference of Music Synthesizers using Deep Learning</mark></h3>
 <i>Audio Developer Conference (ADC) 2022</i>
 
