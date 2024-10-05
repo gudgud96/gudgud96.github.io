@@ -1,8 +1,14 @@
 ---
 layout: layout
 ---
+<div class="post-content <% if(config.post_style && !config.post_style.indent) {%>no-indent<% } %>" style="margin-top: 32px; margin-bottom: 24px; outline: 2px #100100 round; border-radius: 25px;
+    background: #eafaff;
+    padding: 16px;">
+    <h2>Welcome to gudgud96's blog!</h2>
+    <p>Hi 👋 this is Hao Hao, or you can call me Harry. I write about machine learning 🤖 and music/audio 🎵. You can learn more about me <a href="/about">here</a>.</p>
+</div>
 
-<div class="post-preview-container" style="min-height: <%- config.per_page * 72 %>px">
+<div class="post-preview-container" style="min-height: <%- Math.min(config.per_page, page.posts.length) * 72 %>px">
     <% page.posts.each(function(post){ %>
     <div class="post-preview">
         <div class="post-time"><%= post.date.format(config.date_format) %></div>

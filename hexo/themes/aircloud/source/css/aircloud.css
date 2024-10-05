@@ -1,6 +1,6 @@
 /*varibles*/
 * {
-  font-family: "italic", Helvetica, Arial, "Heiti SC", "Microsoft YaHei";
+  font-family: "Inter", sans-serif;
 }
 body,
 html {
@@ -91,7 +91,7 @@ body {
 }
 .nav {
   position: relative;
-  padding-top: 50px;
+  /* padding-top: 50px; */
   color: #333333;
   width: 100%;
   display: flex;
@@ -355,8 +355,8 @@ body {
   cursor: pointer;
   margin-top: 0;
   margin-bottom: 5px;
-  color: #101010;
-  font-size: 18px;
+  color: #000000;
+  font-size: 20px;
   font-weight: 300;
   transition: color 0.4s;
 }
@@ -374,6 +374,7 @@ body {
   text-decoration: none;
 }
 .post-preview-container {
+  margin-top: 32px;
   min-height: 420px;
 }
 .pager {
@@ -586,11 +587,11 @@ body {
 .post-container .post-title {
   width: 100%;
   text-align: center;
-  line-height: 24px;
-  margin-top: 0;
-  margin-bottom: 5px;
-  color: #101010;
-  font-size: 20px;
+  line-height: 38px;
+  margin-top: 32px;
+  margin-bottom: 16px;
+  color: #000000;
+  font-size: 38px;
   font-weight: 300;
 }
 .post-container .post-meta {
@@ -642,8 +643,8 @@ body {
   color: #4990E2;
 }
 .post-content p {
-  color: #404040;
-  font-size: 14px;
+  color: #000000;
+  font-size: 15px;
   line-height: 30px;
   text-indent: 2em;
   letter-spacing: 1px;

@@ -6,22 +6,26 @@ comments: true
 ---
 ## Publications / Talks
 
-<h3><mark style="background-color: rgba(39,243,106,0.15);">Exciting Trends in Music Technology with Deep Learning</mark></h3>
-<i>NUS Hackers Talk 2024</i>
-
-> Summarizes recent applications of deep learning in the music technology industry, uncovering use cases such as music generation, source separation, voice conversion, cover song detection, etc. <br/> [NUS Hackers](https://www.nushackers.org/about) is a student-run open-source community club in NUS, which hosts the biggest student hackathon ([Hack&Roll](https://hacknroll.nushackers.org/)) annually in Singapore.
-
+<h3><mark style="background-color: rgba(39,243,106,0.15);">📄 MR-MT3: Memory Retaining Multi-Track Music Transcription to Mitigate Instrument Leakage</mark></h3>
+<ins>Hao Hao Tan</ins>, Kin Wai Cheuk, Taemin Cho, Wei-Hsiang Liao, Yuki Mitsufuji.<br/>
+<i>Preprint, under review</i>
 <div class="page-tags">
+    <a class="item" href="https://arxiv.org/abs/2403.10024">arXiv</a>
+</div>
+
+<br/>
+
+<h3><mark style="background-color: rgba(39,243,106,0.15);">🗣️ Exciting Trends in Music Technology with Deep Learning</mark></h3>
+<i>NUS Hackers Talk 2024</i>
+<div class="page-tags">
+    <a class="item" href="https://www.youtube.com/watch?v=j_RL7m0n1_I&t=286s&ab_channel=NUSHackers">VIDEO</a>
     <a class="item" href="https://docs.google.com/presentation/d/1c1S5GmVecDmIlEQiO2acMa2VjQKzUmUgdaE2WxndJMM/edit?usp=sharing">SLIDES</a>
 </div>
 
 <br/>
 
-<h3><mark style="background-color: rgba(39,243,106,0.15);">Parameter Inference of Music Synthesizers using Deep Learning</mark></h3>
+<h3><mark style="background-color: rgba(39,243,106,0.15);">🗣️ Parameter Inference of Music Synthesizers using Deep Learning</mark></h3>
 <i>Audio Developer Conference (ADC) 2022</i>
-
-> An introductory talk that covers how synthesizer parameter inference facilitates the sound design process, and gives an overview of the recent works that use deep learning to perform parameter inference, as well as the challenges that were faced in solving this task.
-
 <div class="page-tags">
     <a class="item" href="https://www.youtube.com/watch?v=nZ560W6bA3o">VIDEO</a>
     <a class="item" href="https://docs.google.com/presentation/d/1PA4fom6QvCW_YG8L0MMVumrAluljcymndNlaK2HW5t0/edit">SLIDES</a>
@@ -29,11 +33,8 @@ comments: true
 
 <br/>
 
-<h3><mark style="background-color: rgba(39,243,106,0.15);">Semi-supervised music emotion recognition using noisy student training and harmonic pitch class profiles</mark></h3>
+<h3><mark style="background-color: rgba(39,243,106,0.15);">📄 Semi-supervised music emotion recognition using noisy student training and harmonic pitch class profiles</mark></h3>
 <i>MediaEval 2021, Emotions and Themes in Music Challenge</i>
-
-> An experiment on leveraging semi-supervised learning on music emotion recognition with noisy student training. Ranked 6th on the [challenge](https://multimediaeval.github.io/2021-Emotion-and-Theme-Recognition-in-Music-Task/results).
-
 <div class="page-tags">
     <a class="item" href="https://arxiv.org/pdf/2112.00702.pdf">PDF</a>
     <a class="item" href="https://github.com/gudgud96/noisy-student-emotion-training">CODE</a>
@@ -41,12 +42,9 @@ comments: true
 
 <br/>
 
-<h3><mark style="background-color: rgba(39,243,106,0.15);">Music FaderNets: Controllable Music Generation Based On High-Level Features via Low-Level Feature Modelling</mark></h3>
+<h3><mark style="background-color: rgba(39,243,106,0.15);">📄 Music FaderNets: Controllable Music Generation Based On High-Level Features via Low-Level Feature Modelling</mark></h3>
 <ins>Hao Hao Tan</ins>, Dorien Herremans.<br/>
 <i>International Society for Music Information Retrieval (ISMIR) Conference 2020.</i>
-
-> Using **"faders"** (latent regularization & disentanglement) to control low-level musical features and **"presets"** (GM-VAE) to capture the relationship between the "faders" and the abstract, high-level feature for controllable music generation.
-
 <div class="page-tags">
     <a class="item" href="https://arxiv.org/pdf/2007.15474.pdf">PDF</a>
     <a class="item" href="https://github.com/gudgud96/music-fader-nets">CODE</a>
@@ -55,12 +53,9 @@ comments: true
 
 <br/>
 
-<h3><mark style="background-color: rgba(39,243,106,0.15);">Generative Modelling for Controllable Audio Synthesis of Expressive Piano Performance</mark></h3>
+<h3><mark style="background-color: rgba(39,243,106,0.15);">📄 Generative Modelling for Controllable Audio Synthesis of Expressive Piano Performance</mark></h3>
 <ins>Hao Hao Tan</ins>, Yin-Jyun Luo, Dorien Herremans.<br/>
 <i>Machine Learning for Media Discovery (ML4MD) Workshop, ICML 2020.</i>
-
-> Introducing **GM-VAEs** on temporal piano performance modelling, hence allowing **fine-grained controllability** on performance style features (articulation & dynamics) for audio synthesis.
-
 <div class="page-tags">
     <a class="item" href="https://arxiv.org/pdf/2006.09833.pdf">PDF</a>
     <a class="item" href="https://github.com/gudgud96/piano-synthesis">CODE</a>
@@ -69,12 +64,9 @@ comments: true
 
 <br/>
 
-<h3><mark style="background-color: rgba(39,243,106,0.15);">ChordAL: A Chord-Based Approach for Music Generation using Bi-LSTMs</mark></h3>
+<h3><mark style="background-color: rgba(39,243,106,0.15);">📄 ChordAL: A Chord-Based Approach for Music Generation using Bi-LSTMs</mark></h3>
 <ins>Hao Hao Tan</ins><br/>
 <i>Creative Submission Extended Abstract, International Conference of Computational Creativity (ICCC) 2019.</i>
-
-> A two-stage music generation pipeline with a **chord generator** and a **chord-to-note generator** as a *seq2seq* task. Chord embeddings unveil the pattern of the **Circle-of-Fifths**.
-
 <div class="page-tags">
     <a class="item" href="http://computationalcreativity.net/iccc2019/papers/iccc19-demo-9.pdf">PDF</a>
     <a class="item" href="https://github.com/gudgud96/ChordAL">CODE</a>
