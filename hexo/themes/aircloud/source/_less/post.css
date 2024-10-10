@@ -35,7 +35,7 @@
   line-height: 20px;
   font-size: 15px;
   text-indent: 2em;
-  color: #333333;
+  color: #000000;
   font-weight: 300;
 }
 .post-content > table,
@@ -100,32 +100,32 @@
   line-height: 175%;
 }
 .post-content h1 {
-  color: #333333;
+  color: #000000;
   margin-top: 20px;
   margin-bottom: 20px;
 }
 .post-content h2 {
-  color: #333333;
+  color: #000000;
   margin-top: 20px;
   margin-bottom: 20px;
 }
 .post-content h3 {
-  color: #333333;
+  color: #000000;
   margin-top: 20px;
   margin-bottom: 20px;
 }
 .post-content h4 {
-  color: #333333;
+  color: #000000;
   margin-top: 20px;
   margin-bottom: 20px;
 }
 .post-content h5 {
-  color: #333333;
+  color: #000000;
   margin-top: 20px;
   margin-bottom: 20px;
 }
 .post-content h6 {
-  color: #333333;
+  color: #000000;
   margin-top: 20px;
   margin-bottom: 20px;
 }
