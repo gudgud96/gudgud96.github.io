@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Music research blog by Hao Hao Tan (gudgud96).">
+    <meta name="keyword"  content="machine learning music">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Understanding RVC - Retrieval-based Voice Conversion - gudgud96&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="/css/custom.css" rel="stylesheet" type="text/css">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <!-- <script src="https://kit.fontawesome.com/a602a7dedc.js""></script> -->
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/profile.jpeg" />
+        </div>
+        <div class="name">
+            <b>Hao Hao Tan</b>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <!-- <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>Tags</span>
+                </a>
+            </li> -->
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li >
+                <a href="/publications/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>Publications</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>About</span>
+                </a>
+            </li>
+            <li >
+                <a href="/bloglist/">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>Blog List</span>
+                </a>
+            </li>
+            <!--  -->
+        </ul>
+    </div>
+    <!-- 
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-text">Table of Contents</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Introduction"><span class="toc-text">1 - Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Architecture"><span class="toc-text">2 - Architecture</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-Content-Feature-Extraction"><span class="toc-text">3.1 - Content Feature Extraction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-Pitch-Extraction"><span class="toc-text">3.2 - Pitch Extraction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-Acoustic-Model-VITS"><span class="toc-text">3.3 - Acoustic Model - VITS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-Retrieval-Module"><span class="toc-text">3.4 - Retrieval Module</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Inference"><span class="toc-text">4 - Inference</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Related-Work"><span class="toc-text">5 - Related Work</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Code-Implementation"><span class="toc-text">6 - Code Implementation</span></a>
+</div>
+     -->
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Understanding RVC - Retrieval-based Voice Conversion
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2024-09-26 22:53:51</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#Music Signal Processing" title="Music Signal Processing">Music Signal Processing</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#Deep Learning" title="Deep Learning">Deep Learning</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<p>TLDR: This blog will discuss:<br>1 - Technical concepts in the RVC project<br>2 - Individual modules, such as VITS, RMVPE, HuBERT<br>3 - The <code>top-k</code> retrieval module, and how does it improve generation quality</p>
+<div style="outline: 2px #100100 round; border-radius: 25px;
+    background: #eafaff;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    width: 40%">
+    <h3>Table of Contents</h3>
+    <a href="#">1 - Introduction</a><br/>
+    <a href="#">2 - Architecture</a><br/>
+    <a href="#">3 - Deep Dive</a><br/>
+    <a href="#">&emsp;&emsp;&emsp;3.1 - Content Feature Extraction</a><br/>
+    <a href="#">&emsp;&emsp;&emsp;3.2 - Pitch Extraction</a><br/>
+    <a href="#">&emsp;&emsp;&emsp;3.3 - Acoustic Model (VITS)</a><br/>
+    <a href="#">&emsp;&emsp;&emsp;3.4 - Retrieval Module</a><br/>
+    <a href="#">4 - Inference</a><br/>
+    <a href="#">5 - Related Work</a><br/>
+</div>
+
+<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1 - Introduction"></a>1 - Introduction</h2><p><strong>AI cover songs</strong> have taken the internet by storm alongside the recent generative AI boom ignited by ChatGPT. If you still haven’t had any experience on this piece of heavenly magic, have a listen to <a href="https://www.nytimes.com/2023/04/19/arts/music/ai-drake-the-weeknd-fake.html" target="_blank" rel="noopener">Fake Drake</a>, <a href="https://www.youtube.com/watch?v=HWsb7zTKplc&ab_channel=AiCovers" target="_blank" rel="noopener">AI Frank Sinatra</a>, or <a href="https://www.youtube.com/watch?v=uPMXn7IbdXw&ab_channel=%E5%8D%8E%E8%AF%ADAI%E7%BF%BB%E5%94%B1" target="_blank" rel="noopener">Stephanie Sun</a> (who later posted a <a href="https://www.straitstimes.com/life/entertainment/how-do-i-fight-with-that-stefanie-sun-issues-gloomy-response-to-popularity-of-ai-stefanie-sun" target="_blank" rel="noopener">gloomy response</a> on the matter). To be honest, it’s weird to feel exciting and scary at the same time after listening to them. </p>
+<p>In this blog post, I would like to provide a breakdown on (arguably) one of the most popular voice conversion project, which is the <a href="https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI" target="_blank" rel="noopener"><strong>RVC project</strong></a>. I personally think that RVC is one of the reasons why AI covers have gained huge momentum, given that RVC provides <a href="https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI/blob/main/LICENSE" target="_blank" rel="noopener">a rather permissive license</a> to use its source code and pretrained models, and an easy-to-use, beginner-friendly Web UI for fine-tuning. </p>
+<p>I have come across many non-technical tutorials / videos about how to fine-tune RVC, but have yet to read an in-depth breakdown on the technical side of things, hence the motivation of writing this blog post. I will re-draw some of the diagrams based on my understanding, and (try to) justify the important steps in the RVC model. </p>
+<p>Another thing to note is that, RVC shares a lot of common concepts with its “predecessor”, the <a href="https://github.com/svc-develop-team/so-vits-svc/tree/4.1-Stable" target="_blank" rel="noopener"><strong>So-VITS project</strong></a>, so I hope that this post provides enough details to help readers understand both projects. My crude understanding is that the main difference between So-VITS and RVC is the <code>top-k</code> retrieval module, so although the choices of some parts of the modules might be different, but the overall framework should stay similar.</p>
+<h2 id="2-Architecture"><a href="#2-Architecture" class="headerlink" title="2 - Architecture"></a>2 - Architecture</h2><p>Voice conversion is essentially a disentanglement task which aims to separate the content and the speaker information. Generally, a voice conversion model consists of a <strong>content encoder</strong> that extracts speaker-invariant content information (such as phonemes, text, intonation), and a <strong>acoustic model</strong> that reconstructs the target voice based on the given content. </p>
+<p>We can break-down RVC into the following modules:</p>
+<ul>
+<li>A <strong>content feature extractor</strong> to extract information such as phonemes, intonation, etc. from the source audio. Here, RVC chooses <a href=""><strong>HuBERT</strong></a>, or more precisely, a variant of <a href=""><strong>ContentVec</strong></a> - this choice is similar to the early versions of So-VITS. </li>
+<li>A <strong>pitch extractor</strong> to get the coarse-level and fine-level F0 estimation. Pitch is an important part of the content information, especially in the context of singing voice. Here, RVC chooses <a href=""><strong>RMVPE</strong></a>.</li>
+<li>A <strong>conditional acoustic model</strong> to generate the target audio based on given conditions (i.e. speaker ID &amp; content information). Here, RVC chooses <a href="https://arxiv.org/pdf/2106.06103" target="_blank" rel="noopener"><strong>VITS</strong></a> as its generation framework, with some noticeble influence by <a href="https://arxiv.org/abs/2010.05646" target="_blank" rel="noopener">HiFi-GAN</a> on the <a href="https://github.com/openvpi/DiffSinger/tree/refactor/modules/nsf_hifigan" target="_blank" rel="noopener">vocoder</a> - this choice is also largely inherited from So-VITS.</li>
+<li>A <strong>retrieval module</strong> newly introduced by RVC. Here, RVC stores all content features of the same speaker into a vector index, which can be used later for similarity search during inference. With this, since the content features are from the training set instead of being extracted solely from the source audio, it could introduce more information about the target speaker, further helping the reconstruction to sound more like the target speaker.</li>
+</ul>
+<figure>
+  <img style="width:100%;" src="/img/rvc-train.png" alt=""/>
+  <figcaption><br/>Figure 1: The architecture of RVC for training.</figcaption>
+</figure>
+<br/>
+
+<h2 id="3-1-Content-Feature-Extraction"><a href="#3-1-Content-Feature-Extraction" class="headerlink" title="3.1 - Content Feature Extraction"></a>3.1 - Content Feature Extraction</h2><p><strong>HuBERT</strong> is one of the most popular self-supervised speech representation, commonly used in speech and audio related tasks. First, audio chunks are converted into a series of tokens via an offline clustering method (e.g. a K-Means clustering on the MFCCs over a large dataset). Then, some tokens within a sequence are masked, and a Transformer is trained to predict the masked tokens, i.e. the <strong>masked language modelling</strong> method (there is a reason why BERT appears in the name). The features learnt seems to help reduce word-error rate in speech recognition tasks, showing its superiority in encoding content-related information. The clustering / masked-language-modelling parts are sometimes called the <em>teacher</em> / <em>student</em> modules.</p>
+<p>Both RVC and So-VITS uses the same <a href="https://huggingface.co/lj1995/VoiceConversionWebUI/resolve/main/hubert_base.pt" target="_blank" rel="noopener">hubert-base</a> model, but despite its name, I don’t think it’s a purely pretrained HuBERT model, because from the <a href="https://proceedings.mlr.press/v162/qian22b/qian22b.pdf" target="_blank" rel="noopener"><strong>ContentVec</strong></a> paper, it claims that HuBERT features could still achieve fairly good results on speaker identification, contradicting with the aim to disentangle speaker information. From the clues provided in So-VITS, I am more convinced that this “HuBERT” model has a higher resemblance with <strong>ContentVec</strong> (check out their <a href="https://www.youtube.com/watch?v=aiGp1g-dCY4&ab_channel=YangZhang" target="_blank" rel="noopener">video</a>), which requires more steps to reduce the source speaker information. ContentVec is basically HuBERT, with a few speaker-invariant tweaks:</p>
+<ul>
+<li>During offline-clustering, before converting the audio into HuBERT features, the audio is randomly converted into other speaker’s voices;</li>
+<li>Add speaker-related transformation (e.g. formant transform) as augmentation when training the speech representation network, and impose a contrastive loss to enforce invariance in timbre changes;</li>
+<li>During masked label prediction, feed speaker info as condition to the student network to remove any need for further encoding speaker info. </li>
+</ul>
+<figure>
+  <img style="width:100%;" src="/img/contentvec.png" alt=""/>
+  <figcaption><br/>Figure 2: ContentVec training, diagram from the <a href="https://arxiv.org/pdf/2106.06103" target="_blank" rel="noopener">original paper.</a></figcaption>
+</figure>
+<br/>
+
+<h2 id="3-2-Pitch-Extraction"><a href="#3-2-Pitch-Extraction" class="headerlink" title="3.2 - Pitch Extraction"></a>3.2 - Pitch Extraction</h2><p>Pitch (or more precisely, fundamental frequency) extraction is crucial for singing voice transfer. A popular pitch extractor used previously is <a href="https://github.com/marl/crepe" target="_blank" rel="noopener">crepe</a>, which is a convolutional neural network trained in a supervised manner. RVC chooses a recent work called <a href="https://arxiv.org/pdf/2306.15412" target="_blank" rel="noopener">RMVPE</a>, which is based on a U-Net like architecture. The key improvement is that RMVPE performs well even when the input audio is not a clean vocal track, so users can extract vocal pitch directly for polyphonic music, removing the need of running through a source separation model (probably the reason why the authors choose a U-Net). They also observe accuracy improvements over other pitch extraction models. </p>
+<h2 id="3-3-Acoustic-Model-VITS"><a href="#3-3-Acoustic-Model-VITS" class="headerlink" title="3.3 - Acoustic Model - VITS"></a>3.3 - Acoustic Model - VITS</h2><p>The gist of RVC and So-VITS is their acoustic model, which is based on <a href="https://arxiv.org/pdf/2106.06103" target="_blank" rel="noopener">VITS</a>. VITS is essentially a <strong>conditional VAE</strong>, augmented with <strong>normalizing flows</strong> and an <strong>adversarial training</strong> process. You can observe these 3 parts under the VITS module in Figure 1.</p>
+<p>First, let’s frame the voice conversion problem as a <em>conditional generation</em> problem. Let \(p(y | c)\) denote the likelihood function that represents the voice conversion process, where \(y\) is the output audio and \(c\) is the content information condition (i.e. the HuBERT features and extracted pitch). We can approximate this intractable likelihood function by maximizing the following ELBO function, following the conditional VAE formulation:</p>
+<p>$$E_{z\sim q(z|y)}[\log p(y|z, c)] - \mathcal{D}_{KL}(q(z|y) || p(z|c))$$</p>
+<p>From here we need 3 neural networks to parameterize the posterior encoder \(q(z|y)\), the prior encoder \(p(z|c)\), and a decoder \(p(y|z, c)\). The first term in the ELBO is the reconstruction loss, and the second term is the KL loss between the posterior and prior distribution. This pretty much sums up the conditional VAE formulation.</p>
+<p>To further improve on this, the authors find that increasing the expressiveness of the prior distribution is important for generating realistic samples. So, a <strong>normalizing (invertible) flow</strong> \(f_\theta\) is added to allow a transformation on the prior into a more complex distribution. Since the flow is invertible, during training the posterior is passed into the flow and compute the KL loss with the prior - this additional transform will help to bridge the “gap” between the posterior and the prior. Later during inference, the prior is passed into the inverse flow \(f^{-1}_{\theta}\) to map it to a more complex distribution for generation. This highly resembles the technique proposed in the <a href="https://arxiv.org/pdf/1505.05770" target="_blank" rel="noopener">variational inference with normalizing flows</a> paper.</p>
+<p>Lastly, as seen in most of the literature on high-fidelity singing voice synthesis or audio synthesis, a <strong><a href="">HiFi-GAN</a>-style adversarial training</strong> is used on the decoder to improve generation quality. You can observe this technique used in e.g. <a href="">DiffSinger</a>, <a href="">RAVE</a>, <a href="">Encodec</a>, <a href="">Stable Audio</a>, etc. The adversarial training introduces a (multi-period) discriminator that tells if the generation is ground truth or generated output. A few losses are introduced:</p>
+<ul>
+<li>For the discriminator, to better distinguish ground truth / generated output: \(L_{\textrm{adv}}(D) = E_{y,z}((D(y) - 1)^2 + (D(G(z)))^2)\) </li>
+<li>For the generator (VITS decoder), to better “confuse” the discriminator: \(L_{\textrm{adv}}(G) = E_{z}(D(G(z) - 1)^2)\) </li>
+<li>Feature matching loss from <a href="https://arxiv.org/pdf/1512.09300" target="_blank" rel="noopener">Larsen et al., 2016</a>, <a href="https://arxiv.org/pdf/1910.06711" target="_blank" rel="noopener">Kumar et al., 2019</a>, which is essentially the L1 loss of the discriminator’s intermediate states, when taking \(y\) and \(G(z)\) as input respectively: \(L_{\textrm{FM}}(G) = E_{y,z}(\sum_{l} ||D_l(y) - D_l(G(z))||_1)\)</li>
+</ul>
+<p>A little more about the decoder used (or more commonly known as <strong>vocoder</strong> here), it is the <a href="">NSF-HiFiGAN</a> from DiffSinger. Instead of using mel-spectrogram as input like HiFi-GAN, <a href="https://arxiv.org/pdf/1810.11946">NSF</a> (neural source-filter) takes in the learnt “spectral” features \(z\) and F0. The F0 is used to generate the excitation signal using a harmonic + noise <em>source module</em>. After that, the excitation signal and \(z\) are passed through the <em>neural filter module</em>, which consists of a series of convolutional layers and residual blocks across several upsampling resolutions, to “filter” the excitation signal in order to obtain the output audio. For the detailed implementation, kindly refer to the source code <a href="https://github.com/openvpi/DiffSinger/blob/refactor/modules/nsf_hifigan/models.py#L253" target="_blank" rel="noopener">here</a>.</p>
+<figure>
+  <img style="width:100%;" src="/img/nsf.png" alt=""/>
+  <figcaption><br/>Figure 3: Neural source filter model, diagram from ths <a href="https://arxiv.org/pdf/1810.11946" target="_blank" rel="noopener">NSF paper.</a> (exact details might differ from DiffSinger's implementation)</figcaption>
+</figure>
+<br/>
+
+<p>One more point to add is that, RVC chooses to use the <em>coarse</em> version of F0 (which is basically being <a href="https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI/blob/3548b4f1a55336629955c0d51deeb24b6de9c46e/infer/modules/train/extract/extract_f0_print.py#L95" target="_blank" rel="noopener">discretized into a fixed range of integers</a>) in the prior encoder, instead of the continuous-value fine-grain F0. I suppose the reason might be that the discretized “F0 tokens” are much easier to be used together with the HuBERT features, in this case, the discretized F0s are passed through an embedding layer and added to a projection of the HuBERT features, hence obtaining the condition signal for the prior encoder (see the source code <a href="https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI/blob/3548b4f1a55336629955c0d51deeb24b6de9c46e/infer/lib/infer_pack/models.py#L64" target="_blank" rel="noopener">here</a>).</p>
+<h2 id="3-4-Retrieval-Module"><a href="#3-4-Retrieval-Module" class="headerlink" title="3.4 - Retrieval Module"></a>3.4 - Retrieval Module</h2><p>The above sections should cover most of the high-level details in So-VITS. So, what’s new in RVC? The key idea is to store the ContentVec features for each speaker during training, hoping that they can be reused during inference, to add more target-speaker-related information in the generation pipeline. The aim is to generate output audio that could capture more detailed timbre and nuances of the target speaker, and reduce timbre leakage from the source speaker.</p>
+<p>To do this, we need to store a <strong>vector index</strong> for each speaker. During training, all HuBERT feature vectors corresponding to the same speaker are saved. As later during inference, we want to be able to quickly search for the nearest vectors, given the HuBERT feature vectors from the source audio, so that we can either (i) use these nearest vectors as substitutes, or (ii) fuse them linearly with the source feature vectors. Therefore, we need to store a vector index to facilitate approximate nearest neighbour (ANN) search. Here RVC chooses to store an <a href="https://faiss.ai/cpp_api/struct/structfaiss_1_1IndexIVF.html#structfaiss_1_1IndexIVF" target="_blank" rel="noopener">inverted index file</a> (IVF), which first requires partitioning the vectors (e.g. through clustering), and then create an index that maps each cluster (centroid) to the data points (vectors) that belong to that cluster. During ANN search, we first identify the cluster centroid, and only searches the vectors in the cluster - this normally gives us a good enough approximate candidate. ANN is a super interesting topic - kindly refer to <a href="https://github.com/facebookresearch/faiss/wiki" target="_blank" rel="noopener">faiss</a>‘s wiki if you are interested in other advanced indexing and search techniques, such as the popular <a href="https://www.pinecone.io/learn/series/faiss/product-quantization/" target="_blank" rel="noopener">IVF-PQ</a> and <a href="https://www.pinecone.io/learn/series/faiss/hnsw/" target="_blank" rel="noopener">HNSW</a> for large-scale vector search.</p>
+<h2 id="4-Inference"><a href="#4-Inference" class="headerlink" title="4 - Inference"></a>4 - Inference</h2><figure>
+  <img style="width:100%;" src="/img/rvc-infer.png" alt=""/>
+  <figcaption><br/>Figure 2: RVC for inference.</figcaption>
+</figure>
+<br/>
+
+<p>For inference, let’s first discuss the retrieval module. Given the source HuBERT feature vectors and a selected target speaker, we search for top-\(K\) vectors that are most similar to the source vectors (RVC chooses \(K = 8\)) from the vector index. RVC also introduces an <code>index_rate</code> parameter, \(\alpha\), which decides how much of the target speaker feature vectors should be linearly fused with the source vectors (refer to Figure 2). The intuition here is that, although ContentVec is supposed to output speaker-invariant source feature vectors, in practice it might still have some source speaker-related information, so swapping it out with the target speaker features should better reduce the “timbre leak” from the source speaker. You can refer to the authors’ notes on <a href="https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI/blob/3548b4f1a55336629955c0d51deeb24b6de9c46e/docs/en/faq_en.md#q11what-is-the-index-rate-for-and-how-to-adjust-it" target="_blank" rel="noopener">how to tune the index rate</a> - in most of the cases in RVC \(\alpha = 0.3\).</p>
+<p>The rest of the inference part in the VITS module is straightforward - a latent variable \(z_p\) is sampled from the prior encoder, which is conditioned on F0 and the (swapped) HuBERT features. As discussed, \(z_p\) is passed through an inverse flow \(f^{-1}\) to increase its distribution complexity, and it is fed into the NSF-HiFiGAN vocoder, together with the F0, to generate the output.</p>
+<h2 id="5-Related-Work"><a href="#5-Related-Work" class="headerlink" title="5 - Related Work"></a>5 - Related Work</h2><p>It’s truly an exciting time for singing voice conversion. First, there is a <a href="https://www.vc-challenge.org/" target="_blank" rel="noopener">singing voice conversion challenge</a> last year, and you can observe various new systems proposed with innovations on different content feature extractor, pitch extractor, and vocoder. Diffusion models, such as <a href="https://arxiv.org/pdf/2105.13871" target="_blank" rel="noopener">DiffSVC</a>, are a popular choice recently, which formulates the conversion task as a denoising task using denoising diffusion probabilitic models (DDPM), conditioned by content features, F0s and loudness. To further speed up the inference speed, which is a commonly known issue for DDPMs, there is already a recent work that uses <a href="https://arxiv.org/pdf/2401.01792" target="_blank" rel="noopener">consistency models</a>. There are also various attempts to make SVC fast and resource-efficient: <a href="https://www.dafx.de/paper-archive/2023/DAFx23_paper_21.pdf" target="_blank" rel="noopener">Nercessian et al. 2023</a> runs SVC as a plugin in real-time, <a href="https://arxiv.org/pdf/2011.05731" target="_blank" rel="noopener">FastSVC</a> achieves for a real-time factor of ~0.25 (1min to convert 4min of singing) on CPUs. </p>
+<p>For a quick summary of the recent singing voice conversion methods, I recommend you to check out <a href="https://medium.com/qosmo-lab/state-of-the-art-singing-voice-conversion-methods-12f01b35405b" target="_blank" rel="noopener">this awesome article</a> by Naotake Masuda from Neutone. Also, check out a <a href="https://arxiv.org/pdf/2310.05203" target="_blank" rel="noopener">comparative study paper</a> on the systems submitted to the recent singing voice conversion challenge.</p>
+<h2 id="6-Code-Implementation"><a href="#6-Code-Implementation" class="headerlink" title="6 - Code Implementation"></a>6 - Code Implementation</h2><p>Sharing a few code portals that point to the important modules in RVC:</p>
+<ul>
+<li><a href="https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI/blob/main/infer/modules/train/extract/extract_f0_rmvpe.py#L33" target="_blank" rel="noopener">Pitch extraction</a></li>
+<li><a href="https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI/blob/main/infer/modules/train/extract_feature_print.py#L80" target="_blank" rel="noopener">Content feature extraction</a></li>
+<li><a href="https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI/blob/3548b4f1a55336629955c0d51deeb24b6de9c46e/infer/lib/infer_pack/models.py#L621" target="_blank" rel="noopener">VITS module</a></li>
+<li><a href="https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI/blob/3548b4f1a55336629955c0d51deeb24b6de9c46e/infer/lib/infer_pack/models.py#L467" target="_blank" rel="noopener">NSF-HiFiGAN vocoder</a></li>
+<li>Retrieval module <a href="https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI/blob/3548b4f1a55336629955c0d51deeb24b6de9c46e/infer-web.py#L616" target="_blank" rel="noopener">indexing</a> and <a href="https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI/blob/3548b4f1a55336629955c0d51deeb24b6de9c46e/infer/modules/vc/pipeline.py#L235" target="_blank" rel="noopener">ANN retrieval</a></li>
+</ul>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+<script>
+    document.getElementsByClassName("index-left")[0].style.display = "none";
+    document.getElementsByClassName("index-middle")[0].style.maxWidth = "100%";
+
+</script>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        <li>
+            <a target="_blank" href="https://twitter.com/GoodGood014">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-twitter"></i>
+                            </span>
+            </a>
+        </li>
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/gudgud96">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://www.linkedin.com/in/tan-hao-hao">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-linkedin"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://open.spotify.com/artist/5r1eVjcLsMuIfGumOgmCQR?si=RbyQATOKQS--31-O4y8e7A">
+                <span class="fa-stack fa-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" x ="10px" viewBox="-150 -50 800 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path fill="#ffffff" d="M248 8C111.1 8 0 119.1 0 256s111.1 248 248 248 248-111.1 248-248S384.9 8 248 8zm100.7 364.9c-4.2 0-6.8-1.3-10.7-3.6-62.4-37.6-135-39.2-206.7-24.5-3.9 1-9 2.6-11.9 2.6-9.7 0-15.8-7.7-15.8-15.8 0-10.3 6.1-15.2 13.6-16.8 81.9-18.1 165.6-16.5 237 26.2 6.1 3.9 9.7 7.4 9.7 16.5s-7.1 15.4-15.2 15.4zm26.9-65.6c-5.2 0-8.7-2.3-12.3-4.2-62.5-37-155.7-51.9-238.6-29.4-4.8 1.3-7.4 2.6-11.9 2.6-10.7 0-19.4-8.7-19.4-19.4s5.2-17.8 15.5-20.7c27.8-7.8 56.2-13.6 97.8-13.6 64.9 0 127.6 16.1 177 45.5 8.1 4.8 11.3 11 11.3 19.7-.1 10.8-8.5 19.5-19.4 19.5zm31-76.2c-5.2 0-8.4-1.3-12.9-3.9-71.2-42.5-198.5-52.7-280.9-29.7-3.6 1-8.1 2.6-12.9 2.6-13.2 0-23.3-10.3-23.3-23.6 0-13.6 8.4-21.3 17.4-23.9 35.2-10.3 74.6-15.2 117.5-15.2 73 0 149.5 15.2 205.4 47.8 7.8 4.5 12.9 10.7 12.9 22.6 0 13.6-11 23.3-23.2 23.3z"/></svg>
+                </span>
+            </a>
+        </li>
+        
+
+        
+            <li>
+                <a target="_blank"  href="https://soundcloud.com/gasifymusic">
+                    <span class="fa-stack fa-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" x ="10px" viewBox="-90 -35 850 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path fill="#ffffff" d="M111.4 256.3l5.8 65-5.8 68.3c-.3 2.5-2.2 4.4-4.4 4.4s-4.2-1.9-4.2-4.4l-5.6-68.3 5.6-65c0-2.2 1.9-4.2 4.2-4.2 2.2 0 4.1 2 4.4 4.2zm21.4-45.6c-2.8 0-4.7 2.2-5 5l-5 105.6 5 68.3c.3 2.8 2.2 5 5 5 2.5 0 4.7-2.2 4.7-5l5.8-68.3-5.8-105.6c0-2.8-2.2-5-4.7-5zm25.5-24.1c-3.1 0-5.3 2.2-5.6 5.3l-4.4 130 4.4 67.8c.3 3.1 2.5 5.3 5.6 5.3 2.8 0 5.3-2.2 5.3-5.3l5.3-67.8-5.3-130c0-3.1-2.5-5.3-5.3-5.3zM7.2 283.2c-1.4 0-2.2 1.1-2.5 2.5L0 321.3l4.7 35c.3 1.4 1.1 2.5 2.5 2.5s2.2-1.1 2.5-2.5l5.6-35-5.6-35.6c-.3-1.4-1.1-2.5-2.5-2.5zm23.6-21.9c-1.4 0-2.5 1.1-2.5 2.5l-6.4 57.5 6.4 56.1c0 1.7 1.1 2.8 2.5 2.8s2.5-1.1 2.8-2.5l7.2-56.4-7.2-57.5c-.3-1.4-1.4-2.5-2.8-2.5zm25.3-11.4c-1.7 0-3.1 1.4-3.3 3.3L47 321.3l5.8 65.8c.3 1.7 1.7 3.1 3.3 3.1 1.7 0 3.1-1.4 3.1-3.1l6.9-65.8-6.9-68.1c0-1.9-1.4-3.3-3.1-3.3zm25.3-2.2c-1.9 0-3.6 1.4-3.6 3.6l-5.8 70 5.8 67.8c0 2.2 1.7 3.6 3.6 3.6s3.6-1.4 3.9-3.6l6.4-67.8-6.4-70c-.3-2.2-2-3.6-3.9-3.6zm241.4-110.9c-1.1-.8-2.8-1.4-4.2-1.4-2.2 0-4.2.8-5.6 1.9-1.9 1.7-3.1 4.2-3.3 6.7v.8l-3.3 176.7 1.7 32.5 1.7 31.7c.3 4.7 4.2 8.6 8.9 8.6s8.6-3.9 8.6-8.6l3.9-64.2-3.9-177.5c-.4-3-2-5.8-4.5-7.2zm-26.7 15.3c-1.4-.8-2.8-1.4-4.4-1.4s-3.1.6-4.4 1.4c-2.2 1.4-3.6 3.9-3.6 6.7l-.3 1.7-2.8 160.8s0 .3 3.1 65.6v.3c0 1.7.6 3.3 1.7 4.7 1.7 1.9 3.9 3.1 6.4 3.1 2.2 0 4.2-1.1 5.6-2.5 1.7-1.4 2.5-3.3 2.5-5.6l.3-6.7 3.1-58.6-3.3-162.8c-.3-2.8-1.7-5.3-3.9-6.7zm-111.4 22.5c-3.1 0-5.8 2.8-5.8 6.1l-4.4 140.6 4.4 67.2c.3 3.3 2.8 5.8 5.8 5.8 3.3 0 5.8-2.5 6.1-5.8l5-67.2-5-140.6c-.2-3.3-2.7-6.1-6.1-6.1zm376.7 62.8c-10.8 0-21.1 2.2-30.6 6.1-6.4-70.8-65.8-126.4-138.3-126.4-17.8 0-35 3.3-50.3 9.4-6.1 2.2-7.8 4.4-7.8 9.2v249.7c0 5 3.9 8.6 8.6 9.2h218.3c43.3 0 78.6-35 78.6-78.3.1-43.6-35.2-78.9-78.5-78.9zm-296.7-60.3c-4.2 0-7.5 3.3-7.8 7.8l-3.3 136.7 3.3 65.6c.3 4.2 3.6 7.5 7.8 7.5 4.2 0 7.5-3.3 7.5-7.5l3.9-65.6-3.9-136.7c-.3-4.5-3.3-7.8-7.5-7.8zm-53.6-7.8c-3.3 0-6.4 3.1-6.4 6.7l-3.9 145.3 3.9 66.9c.3 3.6 3.1 6.4 6.4 6.4 3.6 0 6.4-2.8 6.7-6.4l4.4-66.9-4.4-145.3c-.3-3.6-3.1-6.7-6.7-6.7zm26.7 3.4c-3.9 0-6.9 3.1-6.9 6.9L227 321.3l3.9 66.4c.3 3.9 3.1 6.9 6.9 6.9s6.9-3.1 6.9-6.9l4.2-66.4-4.2-141.7c0-3.9-3-6.9-6.9-6.9z"/></svg>
+                    </span>
+                </a>
+            </li>
+            
+
+    </ul>
+    
+    <p>
+        <!-- <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span> -->
+        All Rights Reserved @ gudgud96. Created By <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud" target="_blank" rel="noopener">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://gudgud96-github-io.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-73R1BRY143"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-73R1BRY143');
+</script>
+</html>
