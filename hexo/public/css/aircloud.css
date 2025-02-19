@@ -1,6 +1,6 @@
 /*varibles*/
 * {
-  font-family: -apple-system,BlinkMacSystemFont,segoe ui,Roboto,Oxygen,Ubuntu,Cantarell,open sans,helvetica neue,sans-serif;
+  font-family: "Lora", serif;
 }
 body,
 html {
@@ -91,7 +91,7 @@ body {
 }
 .nav {
   position: relative;
-  padding-top: 50px;
+  /* padding-top: 50px; */
   color: #000000;
   width: 100%;
   display: flex;
@@ -355,8 +355,8 @@ body {
   cursor: pointer;
   margin-top: 0;
   margin-bottom: 5px;
-  color: #101010;
-  font-size: 18px;
+  color: #000000;
+  font-size: 20px;
   font-weight: 300;
   transition: color 0.4s;
 }
@@ -374,6 +374,7 @@ body {
   text-decoration: none;
 }
 .post-preview-container {
+  margin-top: 32px;
   min-height: 420px;
 }
 .pager {
@@ -643,7 +644,7 @@ body {
 }
 .post-content p {
   color: #000000;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 30px;
   text-indent: 2em;
   letter-spacing: 1px;
