@@ -6,6 +6,15 @@ comments: true
 ---
 ## Publications / Talks
 
+<h3><mark style="background-color: rgba(39,243,106,0.15);">🗣️ A Gentle Introduction to Music Content Identification</mark></h3>
+<i>NUS Hackers Talk, October 2024</i>
+<div class="page-tags">
+    <a class="item" href="https://docs.google.com/presentation/d/1mcDlhuILZtzZqOhu-UPyyZB7WYstHHCqvbU2CQ2avWk/edit?usp=sharing
+    ">SLIDES</a>
+</div>
+<br/>
+
+
 <h3><mark style="background-color: rgba(39,243,106,0.15);">📄 MR-MT3: Memory Retaining Multi-Track Music Transcription to Mitigate Instrument Leakage</mark></h3>
 <ins>Hao Hao Tan</ins>, Kin Wai Cheuk, Taemin Cho, Wei-Hsiang Liao, Yuki Mitsufuji.<br/>
 <i>Preprint, under review</i>
@@ -16,7 +25,7 @@ comments: true
 <br/>
 
 <h3><mark style="background-color: rgba(39,243,106,0.15);">🗣️ Exciting Trends in Music Technology with Deep Learning</mark></h3>
-<i>NUS Hackers Talk 2024</i>
+<i>NUS Hackers Talk, March 2024</i>
 <div class="page-tags">
     <a class="item" href="https://www.youtube.com/watch?v=j_RL7m0n1_I&t=286s&ab_channel=NUSHackers">VIDEO</a>
     <a class="item" href="https://docs.google.com/presentation/d/1c1S5GmVecDmIlEQiO2acMa2VjQKzUmUgdaE2WxndJMM/edit?usp=sharing">SLIDES</a>
