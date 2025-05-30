@@ -33,6 +33,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
     <!-- <script src="https://kit.fontawesome.com/a602a7dedc.js""></script> -->
     <!-- ga & ba script hoook -->
     <script></script>
@@ -195,7 +196,7 @@
 <li>A <strong>retrieval module</strong> newly introduced by RVC. Here, RVC stores all content features of the same speaker into a vector index, which can be used later for similarity search during inference. With this, since the content features are from the training set instead of being extracted solely from the source audio, it could introduce more information about the target speaker, further helping the reconstruction to sound more like the target speaker.</li>
 </ul>
 <figure>
-  <img style="width:100%;" src="/img/rvc-train.png" alt=""/>
+  <img style="width:100%; margin-top:30px;" src="/img/rvc-train.png" alt=""/>
   <figcaption><br/>Figure 1: The architecture of RVC for training.</figcaption>
 </figure>
 <br/>
@@ -208,7 +209,7 @@
 <li>During masked label prediction, feed speaker info as condition to the student network to remove any need for further encoding speaker info. </li>
 </ul>
 <figure>
-  <img style="width:100%;" src="/img/contentvec.png" alt=""/>
+  <img style="width:100%; margin-top:30px;" src="/img/contentvec.png" alt=""/>
   <figcaption><br/>Figure 2: ContentVec training, diagram from the <a href="https://arxiv.org/pdf/2106.06103" target="_blank" rel="noopener">original paper.</a></figcaption>
 </figure>
 <br/>
@@ -227,7 +228,7 @@
 </ul>
 <p>A little more about the decoder used (or more commonly known as <strong>vocoder</strong> here), it is the <a href="">NSF-HiFiGAN</a> from DiffSinger. Instead of using mel-spectrogram as input like HiFi-GAN, <a href="https://arxiv.org/pdf/1810.11946">NSF</a> (neural source-filter) takes in the learnt “spectral” features \(z\) and F0. The F0 is used to generate the excitation signal using a harmonic + noise <em>source module</em>. After that, the excitation signal and \(z\) are passed through the <em>neural filter module</em>, which consists of a series of convolutional layers and residual blocks across several upsampling resolutions, to “filter” the excitation signal in order to obtain the output audio. For the detailed implementation, kindly refer to the source code <a href="https://github.com/openvpi/DiffSinger/blob/refactor/modules/nsf_hifigan/models.py#L253" target="_blank" rel="noopener">here</a>.</p>
 <figure>
-  <img style="width:100%;" src="/img/nsf.png" alt=""/>
+  <img style="width:100%; margin-top:30px; margin-top:30px; margin-top:30px;" src="/img/nsf.png" alt=""/>
   <figcaption><br/>Figure 3: Neural source filter model, diagram from ths <a href="https://arxiv.org/pdf/1810.11946" target="_blank" rel="noopener">NSF paper.</a> (exact details might differ from DiffSinger's implementation)</figcaption>
 </figure>
 <br/>
@@ -236,7 +237,7 @@
 <h2 id="3-4-Retrieval-Module"><a href="#3-4-Retrieval-Module" class="headerlink" title="3.4 - Retrieval Module"></a>3.4 - Retrieval Module</h2><p>The above sections should cover most of the high-level details in So-VITS. So, what’s new in RVC? The key idea is to store the ContentVec features for each speaker during training, hoping that they can be reused during inference, to add more target-speaker-related information in the generation pipeline. The aim is to generate output audio that could capture more detailed timbre and nuances of the target speaker, and reduce timbre leakage from the source speaker.</p>
 <p>To do this, we need to store a <strong>vector index</strong> for each speaker. During training, all HuBERT feature vectors corresponding to the same speaker are saved. As later during inference, we want to be able to quickly search for the nearest vectors, given the HuBERT feature vectors from the source audio, so that we can either (i) use these nearest vectors as substitutes, or (ii) fuse them linearly with the source feature vectors. Therefore, we need to store a vector index to facilitate approximate nearest neighbour (ANN) search. Here RVC chooses to store an <a href="https://faiss.ai/cpp_api/struct/structfaiss_1_1IndexIVF.html#structfaiss_1_1IndexIVF" target="_blank" rel="noopener">inverted index file</a> (IVF), which first requires partitioning the vectors (e.g. through clustering), and then create an index that maps each cluster (centroid) to the data points (vectors) that belong to that cluster. During ANN search, we first identify the cluster centroid, and only searches the vectors in the cluster - this normally gives us a good enough approximate candidate. ANN is a super interesting topic - kindly refer to <a href="https://github.com/facebookresearch/faiss/wiki" target="_blank" rel="noopener">faiss</a>‘s wiki if you are interested in other advanced indexing and search techniques, such as the popular <a href="https://www.pinecone.io/learn/series/faiss/product-quantization/" target="_blank" rel="noopener">IVF-PQ</a> and <a href="https://www.pinecone.io/learn/series/faiss/hnsw/" target="_blank" rel="noopener">HNSW</a> for large-scale vector search.</p>
 <h2 id="4-Inference"><a href="#4-Inference" class="headerlink" title="4 - Inference"></a>4 - Inference</h2><figure>
-  <img style="width:100%;" src="/img/rvc-infer.png" alt=""/>
+  <img style="width:100%; margin-top:30px;" src="/img/rvc-infer.png" alt=""/>
   <figcaption><br/>Figure 2: RVC for inference.</figcaption>
 </figure>
 <br/>

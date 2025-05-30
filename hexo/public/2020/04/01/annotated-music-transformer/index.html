@@ -33,6 +33,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
     <!-- <script src="https://kit.fontawesome.com/a602a7dedc.js""></script> -->
     <!-- ga & ba script hoook -->
     <script></script>
@@ -180,7 +181,7 @@
 <p>In <a href="https://arxiv.org/pdf/1803.02155.pdf" target="_blank" rel="noopener">Shaw et al.</a>, the concept of <strong>relative attention</strong> is proposed. The idea is to represent <strong>relative position representations</strong> more efficiently, to allow attention to be informed by how far two positions are apart in a sequence. This is an important factor in music as learning relative position representations help to capture structure information such as repeated motifs, call-and-response, and also scales and arpeggio patterns. Shaw et al. modified the attention equation as below:<br>$$Attention(Q, K, V) = softmax(\frac{QK^T + S^{rel}}{\sqrt{d}})V$$</p>
 <p>The difference is to learn an additional tensor \(S^{rel}\) of shape \((l, l)\). From the shape itself, we can see that the values \(v_{ij}\) in \(S^{rel}\) must be related to the relative distance of position \(i\) and \(j\) in length \(l\).<br>In fact, we can also view a sequence as a <strong>fully connected graph</strong> of its elements, hence \(S^{rel}\) can be seen as a tensor representing information about the <strong>edges</strong> in the graph.  </p>
 <figure>
-  <img style="width:100%;" src="/img/relative-attention-2.png" alt=""/>
+  <img style="width:100%; margin-top:30px;" src="/img/relative-attention-2.png" alt=""/>
   <figcaption><br/>Figure 1: Relative attention in <a src="https://arxiv.org/pdf/1803.02155.pdf">Shaw et al.</a>. A sequence of 3 tokens is represented as a fully connected, backward directed graph, because commonly each node only attends the current steps and before.</figcaption>
 </figure>
 <br/>
@@ -191,7 +192,7 @@
 <h2 id="4-Relative-Global-Attention"><a href="#4-Relative-Global-Attention" class="headerlink" title="4 - Relative Global Attention"></a>4 - Relative Global Attention</h2><p>In Music Transformer, the number of unique embeddings in \(E^r\) is assumed to be fixed. They used \(l\) unique embeddings, ranging from the embedding for the furthest distance (which is \(l - 1\), from first position to the \(l^{th}\) position), to the embedding for the shortest distance (which is 0). Hence, the embedding for the “edge” between 1st and 3rd element, is the same as the embedding for the “edge” between 2nd and 4th element. </p>
 <p>If we follow the assumptions made above, we can observe that the desired \(S_{rel}\) can actually be calculated from multiplying \(Q{E^{r}}^T\), only that further steps of processing are needed. From Figure 2 we can see that via some position rearrangement, we can get values of \(S_{rel}\) from \(Q{E^{r}}^T\).</p>
 <figure>
-  <img style="width:100%;" src="/img/new-relative-attention.png" alt=""/>
+  <img style="width:100%; margin-top:30px;" src="/img/new-relative-attention.png" alt=""/>
   <figcaption><br/>Figure 2: Relative attention procedure by Music Transformer.</figcaption>
 </figure>
 
@@ -200,21 +201,21 @@
 <h2 id="4-Relative-Local-Attention"><a href="#4-Relative-Local-Attention" class="headerlink" title="4 - Relative Local Attention"></a>4 - Relative Local Attention</h2><p><strong>Local attention</strong>, first coined in <a href="https://arxiv.org/pdf/1508.04025" target="_blank" rel="noopener">Luong et al</a> and <a href="https://arxiv.org/pdf/1802.05751.pdf" target="_blank" rel="noopener">Image Transformer</a>, means that instead of attending to every single token (which can be time costly and inefficient for extremely long sequences), the model only attends to tokens <em>nearby</em> at each time step. One way of implementation adopted in Image Transformer, which is also similar to the method discussed in Music Transformer, is the following: firstly, we divide the input sequence into several <em>non-overlapping</em> blocks. Then, each block can only attent to itself, and the block exactly before the current block (in Image Transformer, each block can attent to a <em>memory</em> block which includes the current block and a finite number of tokens before the block).</p>
 <p>For simplicity, let’s start with an example of dividing the input sequence of 6 tokens into 2 blocks – Block 1 \([x_1, x_2, x_3]\), and Block 2 \([x_4, x_5, x_6]\). Hence, the attention components include: Block 1 \(\leftrightarrow\) Block 1, Block 2 \(\leftrightarrow\) Block 1, and Block 2 \(\leftrightarrow\) Block 2, as shown in Figure 2.</p>
 <figure>
-  <img style="width:100%;" src="/img/relative-local-attention-2.png" alt=""/>
+  <img style="width:100%; margin-top:30px;" src="/img/relative-local-attention-2.png" alt=""/>
   <figcaption><br/>Figure 2: Relative local attention for a 6-token sequence, divided into 2 blocks .</figcaption>
 </figure>
 
 <p>The difference as compared to global attention can be observed when we have 3 blocks (and more). Then, if we set the local window to only include the current block and the previous block, then we no longer attent Block 3 \(\leftrightarrow\) Block 1 as in global attention.</p>
 <p>So, how can relative attention be introduced in local attention? Similarly, we want to include a matrix \(S_{rel}\) which can capture relative position information, which similarly we can obtain the values from \(Q{E^r}^T\) only with several different operations. To understand how should the operations be changed, we first see how does the desired \(S_{rel}\) look like for 2 blocks:</p>
 <figure>
-  <img style="width:40%; display: block; margin-left: auto; margin-right: auto;" src="/img/relative-local-attention-srel.png" alt=""/>
+  <img style="width:40%; margin-top: 20px; display: block; margin-left: auto; margin-right: auto;" src="/img/relative-local-attention-srel.png" alt=""/>
   <figcaption><br/>Figure 3: Desired relative position matrix .</figcaption>
 </figure>
 
 <p>From the above figure, we can analyze it according to 4 different factions of divided blocks. We can see that \(S_{rel}\) output for Block 1 \(\leftrightarrow\) Block 1, and Block 2 \(\leftrightarrow\) Block 2 yields similar matrix as in relative global attention, hence the same reshaping and “skewing” procedure can be used. The only thing we need to change is the unmasked \(S_{rel}\) output for Block 2 \(\leftrightarrow\) Block 1, which will be the focus of discussion below.</p>
 <br/>
 <figure>
-  <img style="width:100%;" src="/img/relative-local-attention-unmasked.png" alt=""/>
+  <img style="width:100%; margin-top:30px;" src="/img/relative-local-attention-unmasked.png" alt=""/>
   <figcaption><br/>Figure 4: "Skewing" procedure for the unmasked part.</figcaption>
 </figure>
 
@@ -223,7 +224,7 @@
 <p>Note that this technique can be extended to larger numbers of divided blocks – generally, self-attending blocks can used the “skewing” procedure from relative global attention; non-self-attending blocks should use the latter unmasked “skewing” procedure. By this, we can succesfully compute \(QK^T + S_{rel}\), with both shapes \((N, N)\), for each local attention procedure.</p>
 <h2 id="5-Results"><a href="#5-Results" class="headerlink" title="5 - Results"></a>5 - Results</h2><p>Finally, we take a quick glance on the results and comparisons made by the paper.</p>
 <figure>
-  <img style="width:70%; display: block; margin-left: auto; margin-right: auto;" src="/img/music-transformer-results.png" alt=""/>
+  <img style="width:70%; margin-top:30px; display: block; margin-left: auto; margin-right: auto;" src="/img/music-transformer-results.png" alt=""/>
   <figcaption><br/>Figure 5: Results in Music Transformer.</figcaption>
 </figure>
 

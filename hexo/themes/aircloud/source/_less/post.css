@@ -1,15 +1,16 @@
 /*varibles*/
 .post-container {
-  width: 100%;
+  width: 780px;
   height: max-content;
   display: flex;
   flex-direction: column;
+  margin: auto;
 }
 .post-container .post-title {
   width: 100%;
   text-align: center;
   line-height: 38px;
-  margin-top: 32px;
+  margin-top: 64px;
   margin-bottom: 16px;
   color: #000000;
   font-size: 38px;
@@ -65,7 +66,7 @@
 }
 .post-content p {
   color: #404040;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 30px;
   text-indent: 2em;
   letter-spacing: 1px;
@@ -81,7 +82,7 @@
 .post-content ol li {
   list-style: none;
   color: #404040;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 30px;
   text-indent: 2em;
   letter-spacing: 1px;
@@ -106,7 +107,7 @@
 }
 .post-content h2 {
   color: #000000;
-  margin-top: 20px;
+  margin-top: 50px;
   margin-bottom: 20px;
 }
 .post-content h3 {

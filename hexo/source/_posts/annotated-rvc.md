@@ -52,7 +52,7 @@ We can break-down RVC into the following modules:
 - A **retrieval module** newly introduced by RVC. Here, RVC stores all content features of the same speaker into a vector index, which can be used later for similarity search during inference. With this, since the content features are from the training set instead of being extracted solely from the source audio, it could introduce more information about the target speaker, further helping the reconstruction to sound more like the target speaker.
 
 <figure>
-  <img style="width:100%;" src="/img/rvc-train.png" alt=""/>
+  <img style="width:100%; margin-top:30px;" src="/img/rvc-train.png" alt=""/>
   <figcaption><br/>Figure 1: The architecture of RVC for training.</figcaption>
 </figure>
 <br/>
@@ -67,7 +67,7 @@ Both RVC and So-VITS uses the same [hubert-base](https://huggingface.co/lj1995/V
 - During masked label prediction, feed speaker info as condition to the student network to remove any need for further encoding speaker info. 
 
 <figure>
-  <img style="width:100%;" src="/img/contentvec.png" alt=""/>
+  <img style="width:100%; margin-top:30px;" src="/img/contentvec.png" alt=""/>
   <figcaption><br/>Figure 2: ContentVec training, diagram from the <a href="https://arxiv.org/pdf/2106.06103">original paper.</a></figcaption>
 </figure>
 <br/>
@@ -97,7 +97,7 @@ Lastly, as seen in most of the literature on high-fidelity singing voice synthes
 A little more about the decoder used (or more commonly known as **vocoder** here), it is the [NSF-HiFiGAN]() from DiffSinger. Instead of using mel-spectrogram as input like HiFi-GAN, [NSF](https://arxiv.org/pdf/1810.11946) (neural source-filter) takes in the learnt "spectral" features \\(z\\) and F0. The F0 is used to generate the excitation signal using a harmonic + noise *source module*. After that, the excitation signal and \\(z\\) are passed through the *neural filter module*, which consists of a series of convolutional layers and residual blocks across several upsampling resolutions, to "filter" the excitation signal in order to obtain the output audio. For the detailed implementation, kindly refer to the source code [here](https://github.com/openvpi/DiffSinger/blob/refactor/modules/nsf_hifigan/models.py#L253).
 
 <figure>
-  <img style="width:100%;" src="/img/nsf.png" alt=""/>
+  <img style="width:100%; margin-top:30px; margin-top:30px; margin-top:30px;" src="/img/nsf.png" alt=""/>
   <figcaption><br/>Figure 3: Neural source filter model, diagram from ths <a href="https://arxiv.org/pdf/1810.11946">NSF paper.</a> (exact details might differ from DiffSinger's implementation)</figcaption>
 </figure>
 <br/>
@@ -113,7 +113,7 @@ To do this, we need to store a **vector index** for each speaker. During trainin
 ## 4 - Inference 
 
 <figure>
-  <img style="width:100%;" src="/img/rvc-infer.png" alt=""/>
+  <img style="width:100%; margin-top:30px;" src="/img/rvc-infer.png" alt=""/>
   <figcaption><br/>Figure 2: RVC for inference.</figcaption>
 </figure>
 <br/>

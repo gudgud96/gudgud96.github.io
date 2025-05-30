@@ -12,7 +12,7 @@ In this post, we will look at how \\(2^x\\), or the `exp2` function, can be appr
 
 $$x^y = 2^{y \cdot \log_{2}{x}} = f(y \cdot \log_{2}{x})$$
 
-### Initial ideas
+## Initial ideas
 
 A straightforward approach is to truncate the **Taylor series** of \\(2^x\\) up to the \\(n\\)-th term. One can get the Taylor series of \\(2^x\\) as:
 
@@ -24,7 +24,7 @@ Another idea from Dexed is to [use a finite-range lookup table and fixed-point a
 
 To get a more precise and efficient implementation in floating point, we need to first understand the floating point representation.
 
-### Separating the integer and decimal part
+## Separating the integer and decimal part
 
 Let's say we want to implement an `exp-2` approximation for a single-precision (32-bit) floating point system. According to [IEEE-754 floating point representation](https://www.geeksforgeeks.org/ieee-standard-754-floating-point-numbers/), it consists of 1 sign bit, 8 exponent bits, and 32 mantissa (or fractional) bits, as depicted in the diagram:
 
@@ -40,7 +40,7 @@ This gives us an idea of how we can tackle the approximation separately, given a
 - for the decimal part  \\(x - \lfloor x \rfloor \\), use a rational approximation;
 - multiply the output of both parts \\(2^{x} = 2^{\lfloor x \rfloor} \cdot 2^{x - \lfloor x \rfloor}\\) (in C++, we can use `ldexp`)
 
-### Rational approximation of `exp2f`
+## Rational approximation of `exp2f`
 
 Depending on the [rounding mode](https://en.wikipedia.org/wiki/Rounding) used to extract the integer part, the range of the decimal part would either be within \\([-0.5, 0.5]\\) or \\([0, 1)\\). With this, we only need an approximation precise enough within this range, which is more achievable.
 
@@ -66,7 +66,7 @@ From [a blog post by Paul Mineiro](http://www.machinedlearnings.com/2011/06/fast
 
 $$ 2^{x} \approx 1 + \frac{27.7280233}{4.84252568 - x} − 0.49012907x − 5.7259425, \quad x \in [0, 1)$$
 
-### Timing and Accuracy
+## Timing and Accuracy
 
 We report the absolute error of each approximation method within a given input range. [Test script here](https://gist.github.com/gudgud96/ec369cd017b10fb1376300fa325f9321).
 
@@ -98,7 +98,7 @@ We also measure the total time taken to run on 10000 sample points, averaged acr
 We can see Cephes provides the best accuracy, while 3rd-order polynomial approximation provides the best speed. Mineiro's method keeps the absolute error within the order of magnitude \\(10^{-5}\\), while using only ~20% of the time needed by Cephes.
 
 
-### Code example in SIMD
+## Code example in SIMD
 
 SIMD is commonly used to provide further computation speedup on CPU. The aim of of this post is also to find an efficient SIMD implementation for `exp2`, which is still lacking in common SIMD operation sets. Below we will look at an example of `exp2` approximation implemented using SSE3. We use the 3rd-order polynomial approximation below:
 
@@ -145,7 +145,7 @@ Some notes to discuss:
 
 - Padé approximant can be used by replacing lines 16-21, and would require the division operator `_mm_div_ps`.
 
-### References
+## References
 
 1. [Creating a Compiler Optimized Inlineable Implementation of Intel Svml Simd Intrinsics](http://ijeais.org/wp-content/uploads/2018/07/IJAER180702.pdf)
 

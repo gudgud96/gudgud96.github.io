@@ -46,7 +46,7 @@ The difference is to learn an additional tensor \\(S^{rel}\\) of shape \\((l, l)
 In fact, we can also view a sequence as a **fully connected graph** of its elements, hence \\(S^{rel}\\) can be seen as a tensor representing information about the **edges** in the graph.  
 
 <figure>
-  <img style="width:100%;" src="/img/relative-attention-2.png" alt=""/>
+  <img style="width:100%; margin-top:30px;" src="/img/relative-attention-2.png" alt=""/>
   <figcaption><br/>Figure 1: Relative attention in <a src="https://arxiv.org/pdf/1803.02155.pdf">Shaw et al.</a>. A sequence of 3 tokens is represented as a fully connected, backward directed graph, because commonly each node only attends the current steps and before.</figcaption>
 </figure>
 <br/>
@@ -64,7 +64,7 @@ In Music Transformer, the number of unique embeddings in \\(E^r\\) is assumed to
 If we follow the assumptions made above, we can observe that the desired \\(S_{rel}\\) can actually be calculated from multiplying \\(Q{E^{r}}^T\\), only that further steps of processing are needed. From Figure 2 we can see that via some position rearrangement, we can get values of \\(S_{rel}\\) from \\(Q{E^{r}}^T\\).
 
 <figure>
-  <img style="width:100%;" src="/img/new-relative-attention.png" alt=""/>
+  <img style="width:100%; margin-top:30px;" src="/img/new-relative-attention.png" alt=""/>
   <figcaption><br/>Figure 2: Relative attention procedure by Music Transformer.</figcaption>
 </figure>
 
@@ -79,7 +79,7 @@ Hence, without using the gigantic \\(R\\) tensor, and following the abovestated 
 For simplicity, let's start with an example of dividing the input sequence of 6 tokens into 2 blocks -- Block 1 \\([x_1, x_2, x_3]\\), and Block 2 \\([x_4, x_5, x_6]\\). Hence, the attention components include: Block 1 \\(\leftrightarrow\\) Block 1, Block 2 \\(\leftrightarrow\\) Block 1, and Block 2 \\(\leftrightarrow\\) Block 2, as shown in Figure 2.
 
 <figure>
-  <img style="width:100%;" src="/img/relative-local-attention-2.png" alt=""/>
+  <img style="width:100%; margin-top:30px;" src="/img/relative-local-attention-2.png" alt=""/>
   <figcaption><br/>Figure 2: Relative local attention for a 6-token sequence, divided into 2 blocks .</figcaption>
 </figure>
 
@@ -88,7 +88,7 @@ The difference as compared to global attention can be observed when we have 3 bl
 So, how can relative attention be introduced in local attention? Similarly, we want to include a matrix \\(S_{rel}\\) which can capture relative position information, which similarly we can obtain the values from \\(Q{E^r}^T\\) only with several different operations. To understand how should the operations be changed, we first see how does the desired \\(S_{rel}\\) look like for 2 blocks:
 
 <figure>
-  <img style="width:40%; display: block; margin-left: auto; margin-right: auto;" src="/img/relative-local-attention-srel.png" alt=""/>
+  <img style="width:40%; margin-top: 20px; display: block; margin-left: auto; margin-right: auto;" src="/img/relative-local-attention-srel.png" alt=""/>
   <figcaption><br/>Figure 3: Desired relative position matrix .</figcaption>
 </figure>
 
@@ -96,7 +96,7 @@ From the above figure, we can analyze it according to 4 different factions of di
 
 <br/>
 <figure>
-  <img style="width:100%;" src="/img/relative-local-attention-unmasked.png" alt=""/>
+  <img style="width:100%; margin-top:30px;" src="/img/relative-local-attention-unmasked.png" alt=""/>
   <figcaption><br/>Figure 4: "Skewing" procedure for the unmasked part.</figcaption>
 </figure>
 
@@ -111,7 +111,7 @@ Note that this technique can be extended to larger numbers of divided blocks -- 
 Finally, we take a quick glance on the results and comparisons made by the paper.
 
 <figure>
-  <img style="width:70%; display: block; margin-left: auto; margin-right: auto;" src="/img/music-transformer-results.png" alt=""/>
+  <img style="width:70%; margin-top:30px; display: block; margin-left: auto; margin-right: auto;" src="/img/music-transformer-results.png" alt=""/>
   <figcaption><br/>Figure 5: Results in Music Transformer.</figcaption>
 </figure>
 
