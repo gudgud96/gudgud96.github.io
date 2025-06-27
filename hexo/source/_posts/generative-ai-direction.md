@@ -3,6 +3,7 @@ title: On The Generative AI Boom
 date: 2023-04-24 16:52:50
 tags:
     - General Thoughts
+estimatedReadTime: ~12 minutes
 ---
 
 In 2018, I wrote [my first blog post](/2018/09/24/ai-music-direction/) when I first worked on AI music generation. It was a snapshot of what I personally think to be the right positoning of AI music generation at the time. 

@@ -579,7 +579,7 @@ body {
   }
 }
 .post-container {
-  width: 780px;
+  width: 100%;
   height: max-content;
   display: flex;
   flex-direction: column;
@@ -592,7 +592,7 @@ body {
   margin-top: 64px;
   margin-bottom: 16px;
   color: #000000;
-  font-size: 38px;
+  font-size: 32px;
   font-weight: 300;
 }
 .post-container .post-meta {
@@ -645,8 +645,8 @@ body {
 }
 .post-content p {
   color: #000000;
-  font-size: 16px;
-  line-height: 30px;
+  font-size: 15px;
+  line-height: 28px;
   text-indent: 2em;
   letter-spacing: 1px;
 }
@@ -661,7 +661,7 @@ body {
 .post-content ol li {
   list-style: none;
   color: #000000;
-  font-size: 16px;
+  font-size: 15px;
   line-height: 30px;
   text-indent: 2em;
   letter-spacing: 1px;
@@ -686,6 +686,7 @@ body {
 }
 .post-content h2 {
   color: #000000;
+  font-size: 22px;
   margin-top: 50px;
   margin-bottom: 20px;
 }
@@ -711,6 +712,16 @@ body {
 }
 .post-content figcaption {
   text-align: center;
+}
+.post-table-of-contents {
+  outline: 2px #100100 round; 
+  border-radius: 25px;
+  background: #eafaff;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  width: 40%;
 }
 #comment-container {
   text-indent: 0;
@@ -742,14 +753,14 @@ body {
   justify-content: center;
   height: max-content;
   position: relative;
-  width: 1024px;
+  width: 820px;
   margin: auto;
   display: flex;
   flex-direction: row;
   background-color: white;
 }
 .index-container .index-left {
-  width: 240px;
+  width: 220px;
 }
 .index-container .index-middle {
   max-width: 784px;
@@ -760,13 +771,16 @@ body {
 }
 @media screen and (max-width: 1180px) {
   .index-container {
-    left: 0;
+    justify-content: center;
+    height: max-content;
+    position: relative;
+    max-width: 600px;
     width: 100%;
-    box-sizing: border-box;
     margin: auto;
-    padding: 0 40px 0 10px;
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
+    background-color: white;
   }
   .index-container .index-left {
     width: 180px;
@@ -775,12 +789,15 @@ body {
     flex: 1;
     max-width: calc(100% - 180px);
   }
+  .post-table-of-contents {
+    width: 80%;
+  }
 }
 @media screen and (max-width: 680px) {
   .index-container {
     width: 100%;
-    box-sizing: border-box;
     margin: auto;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     padding: 0 25px 0 25px;
@@ -808,6 +825,12 @@ body {
     font-family: "italic" !important;
     font-weight: 300;
     color: #444444;
+  }
+  .post-container .post-title {
+    font-size: 28px;
+  };
+  .post-table-of-contents {
+    width: 80%;
   }
 }
 .donate-container {

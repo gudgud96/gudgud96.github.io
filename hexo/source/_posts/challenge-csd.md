@@ -4,6 +4,7 @@ date: 2021-02-25 19:12:09
 tags:
     - Music Signal Processing
     - ML in Production
+estimatedReadTime: ~12 minutes
 ---
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 

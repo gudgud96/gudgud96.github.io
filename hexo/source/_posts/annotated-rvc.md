@@ -4,6 +4,7 @@ date: 2024-09-26 22:53:51
 tags:
     - Music Signal Processing
     - Deep Learning
+estimatedReadTime: ~15 minutes
 ---
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
@@ -12,13 +13,7 @@ TLDR: This blog will discuss:
 2 - Individual modules, such as VITS, RMVPE, HuBERT
 3 - The `top-k` retrieval module, and how does it improve generation quality
 
-<div style="outline: 2px #100100 round; border-radius: 25px;
-    background: #eafaff;
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-top: 10px;
-    padding-bottom: 20px;
-    width: 40%">
+<div class="post-table-of-contents">
     <h3>Table of Contents</h3>
     <a href="#">1 - Introduction</a><br/>
     <a href="#">2 - Architecture</a><br/>

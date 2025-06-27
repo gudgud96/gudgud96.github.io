@@ -3,6 +3,7 @@ title: Approximation of The Power Function
 date: 2024-01-02 14:33:21
 tags:
     - Music Signal Processing
+estimatedReadTime: ~10 minutes
 ---
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 

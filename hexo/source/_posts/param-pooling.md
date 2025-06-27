@@ -4,6 +4,7 @@ date: 2020-11-25 10:24:37
 tags:
     - Music Signal Processing
     - Deep Learning
+estimatedReadTime: ~8 minutes
 ---
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 

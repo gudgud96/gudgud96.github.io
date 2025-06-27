@@ -3,6 +3,7 @@ title: MIR Papers 2020 (and ISMIR)
 date: 2020-10-17 09:10:42
 tags:
     - Music Information Retrieval
+estimatedReadTime: ~20 minutes
 ---
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 

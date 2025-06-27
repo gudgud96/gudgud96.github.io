@@ -3,6 +3,7 @@ title: Spectrogram Conversion with CNNs
 date: 2020-07-24 18:20:39
 tags:
     - Music Signal Processing
+estimatedReadTime: ~8 minutes
 ---
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 

@@ -4,6 +4,7 @@ date: 2020-04-01 17:54:50
 tags:
     - Transformer
     - Symbolic Music
+estimatedReadTime: ~20 minutes
 ---
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
