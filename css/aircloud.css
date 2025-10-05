@@ -1,6 +1,6 @@
 /*varibles*/
 * {
-  font-family: "STIX Two Text", serif;
+  font-family: "et-book", serif;
 }
 body,
 html {
@@ -592,7 +592,7 @@ body {
   margin-top: 64px;
   margin-bottom: 16px;
   color: #000000;
-  font-size: 32px;
+  font-size: 42px;
   font-weight: 300;
 }
 .post-container .post-meta {
@@ -645,10 +645,12 @@ body {
 }
 .post-content p {
   color: #000000;
-  font-size: 15px;
+  font-size: 1rem;
   line-height: 28px;
   text-indent: 2em;
   letter-spacing: 1px;
+  margin-top: 1.6rem;
+  margin-bottom: 1.6rem;
 }
 .post-content p img {
   width: 80%;
@@ -661,7 +663,7 @@ body {
 .post-content ol li {
   list-style: none;
   color: #000000;
-  font-size: 15px;
+  font-size: 1rem;
   line-height: 30px;
   text-indent: 2em;
   letter-spacing: 1px;
@@ -686,7 +688,7 @@ body {
 }
 .post-content h2 {
   color: #000000;
-  font-size: 22px;
+  font-size: 1.6rem;
   margin-top: 50px;
   margin-bottom: 20px;
 }
