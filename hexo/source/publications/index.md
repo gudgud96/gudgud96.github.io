@@ -6,6 +6,13 @@ comments: true
 ---
 ## Publications / Talks
 
+<h3><mark style="background-color: rgba(39,243,106,0.15);">📄 Modulation Discovery with Differentiable Digital Signal Processing</mark></h3>
+Christopher Mitcheltree, <ins>Hao Hao Tan</ins>, Joshua D. Reiss<br/>
+<i>WASPAA 2025</i>
+<div class="page-tags">
+    <a class="item" href="">arXiv</a>
+</div>
+
 <h3><mark style="background-color: rgba(39,243,106,0.15);">🗣️ A Gentle Introduction to Music Content Identification</mark></h3>
 <i>NUS Hackers Talk, October 2024</i>
 <div class="page-tags">
