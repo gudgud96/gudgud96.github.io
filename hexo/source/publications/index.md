@@ -6,6 +6,15 @@ comments: true
 ---
 ## Publications / Talks
 
+<h3><mark style="background-color: rgba(39,243,106,0.15);">📄 Single-step Controllable Music Bandwidth Extension With Flow Matching</mark></h3>
+Carlos Hernandez-Olivan, Hendrik Vincent Koops, <ins>Hao Hao Tan</ins>, Elio Quinton<br/>
+<i>ICASSP 2026</i>
+<div class="page-tags">
+    <a class="item" href="https://arxiv.org/abs/2601.14356">arXiv</a>
+</div>
+
+<br/>
+
 <h3><mark style="background-color: rgba(39,243,106,0.15);">📄 Modulation Discovery with Differentiable Digital Signal Processing</mark></h3>
 Christopher Mitcheltree, <ins>Hao Hao Tan</ins>, Joshua D. Reiss<br/>
 <i>WASPAA 2025</i>
